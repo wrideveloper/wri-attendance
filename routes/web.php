@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/user/edit-profil', fn () => view('user.edit_profil'));
+Route::get('/kadiv/edit-profil', fn () => view('kadiv.edit_profil'));
+Route::get('/admin/edit-profil', fn () => view('admin.edit_profil'));
+Route::get('/admin/add-user', fn () => view('admin.add_user'));
