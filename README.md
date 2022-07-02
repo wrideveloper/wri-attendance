@@ -1,4 +1,4 @@
-<h1 style="text-align:center; font-weight:bolder;">Catatan Sebelum Melakukan Kloning Job Calling</h1>
+<h1 style="text-align:center; font-weight:bolder;">Catatan Saat Melakukan Clone Repository WRI Attendance</h1>
 
 ## Beberapa Catatan Terkait Penggunaan Repository Ini
 1. Silahkan melakukan kloning pada repository ini dengan meng-copy url repository
