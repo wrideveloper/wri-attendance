@@ -118,37 +118,37 @@ h2 {
 
 h1 {
     font-size: 96px;
-    line-height: -1.5px;
+    /* line-height: -1.5px; */
 }
 
 h2 {
     font-size: 60px;
-    line-height: -0.5px;
+    /* line-height: -0.5px; */
 }
 
 h3 {
     font-size: 48px;
-    line-height: 0;
+    /* line-height: 0; */
 }
 
 h4 {
     font-size: 34px;
-    line-height: 0.25px;
+    /* line-height: 0.25px; */
 }
 
 h5 {
     font-size: 24px;
-    line-height: 0;
+    /* line-height: 0; */
 }
 
 h6 {
     font-size: 20px;
     font-weight: bold;
-    line-height: 0.15px;
+    /* line-height: 0.15px; */
 }
 
 button {
     font-size: 12px;
-    line-height: 1.25px;
+    /* line-height: 1.25px; */
     font-weight: bold;
 }

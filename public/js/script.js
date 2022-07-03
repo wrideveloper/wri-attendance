@@ -12,3 +12,12 @@ const toggleInputIcon = (element, type) => {
         type === "password" ? "fa-solid fa-eye-slash" : "fa-solid fa-eye";
     $(element).children("i").removeClass().addClass(icon);
 };
+
+$("form.edit-profil").submit((e) => {
+    e.preventDefault();
+    new bootstrap.Modal("#konfirmasi", null).show();
+    const elementTerkonfirmasi = new bootstrap.Modal("#terkonfirmasi", null);
+    $("#terkonfirmasi").on("shown.bs.modal", (e) =>
+        setTimeout(() => elementTerkonfirmasi.hide(), 2200)
+    );
+});
