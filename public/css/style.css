@@ -152,3 +152,7 @@ button {
     /* line-height: 1.25px; */
     font-weight: bold;
 }
+
+.shadow-cs {
+    box-shadow: 0rem .6rem 1rem 0.1rem rgba(0, 0, 0, 0.04);
+}

@@ -21,3 +21,6 @@ $("form.edit-profil").submit((e) => {
         setTimeout(() => elementTerkonfirmasi.hide(), 2200)
     );
 });
+
+if ($("div").hasClass("dashboard"))
+    $("body").css({ backgroundColor: "#F9F9F9" });
