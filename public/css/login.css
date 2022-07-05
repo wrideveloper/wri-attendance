@@ -10,9 +10,13 @@
     margin-left: 40px;
   }
 
+  #box {
+    padding: 2rem; 
+  }
+
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 768px) and (max-width: 1920px) {
     #circle3 {
         width: 100%;
     }
@@ -20,4 +24,43 @@
     #ml_left {
          margin-left: 120px;
     }
+
+    #box{ 
+        padding: 4rem 8rem;
+    }
+}
+
+
+input {
+  border: 2px solid #F7B217 !important; 
+  width: 256px !important; 
+  height: 48px !important;
+  margin-top: 27px !important;
+}
+
+#box {
+  background-color: #FFFFFF;
+}
+
+a {
+  list-style: none;
+  text-decoration: none;
+}
+
+
+::placeholder {
+  color: #000 !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  line-height: 16px !important;
+  letter-spacing: 0.0125em !important; 
+}
+
+button {
+  margin-top: 54px !important;
+}
+
+#garisVector {
+  margin-top: -38rem !important;
+  margin-right: -34rem !important;
 }
