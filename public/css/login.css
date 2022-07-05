@@ -1,0 +1,23 @@
+/* media 768 */
+
+@media (max-width: 768px) {
+
+  #circle3 {
+    width: 60%;
+  }
+
+  #ml_left {
+    margin-left: 40px;
+  }
+
+}
+
+@media (min-width: 1440px) {
+    #circle3 {
+        width: 100%;
+    }
+
+    #ml_left {
+         margin-left: 120px;
+    }
+}
