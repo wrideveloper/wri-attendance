@@ -9,49 +9,76 @@
         <h6 class="mb-0 me-3 fw-bold fs-6 text-secondary">Nama Pengguna</h6>
         <i class="fa-solid fa-circle-user fs-2 text-warning"></i>
     </div>
-    <div class="col-12">
-        <h4 class="fw-normal mt-5 mb-5 mb-lg-0  d-none d-md-block">Prosentase Kehadiran</h4>
-        <div class="container">
-            <div class="row justify-content-between align-items-center flex-xs-column flex-md-row d-none d-md-flex">
-                <div class="col-sm-8 col-md-4 col-lg-2 "><canvas id="pieKehadiran"></canvas></div>
-                <div class="col-sm-12 col-md-8 col-lg-8"><canvas id="barKehadiran"></canvas></div>
+    <h4 class="fw-normal mt-5 mb-0">Prosentase Kehadiran</h4>
+    <div class="col-12 mt-4">
+        <div class="row align-items-center justify-content-between flex-column flex-lg-row">
+            <div class="col-12 d-flex align-items-center flex-column flex-md-row shadow-cs p-3">
+                <div class="col-8 col-md-3 col-lg-2">
+                    <canvas id="pieKehadiran"></canvas>
+                </div>
+                <div class="mt-4 mt-lg-0 col-12 col-md-9 col-lg-10">
+                    <div class="col-12 d-flex justify-content-around align-items-center mb-2">
+                        <p class="m-0 ms-md-5 d-inline col-2 p-0 ps-lg-5">Hadir</p>
+                        <div class="progress col-8" style="height: .8rem">
+                            <div class="progress-bar bg-teal" role="progressbar" style="width: 50%" aria-valuenow="50"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="m-0 d-inline col-2 text-end text-md-center">50%</p>
+                    </div>
+                    <div class="col-12 d-flex justify-content-around align-items-center mb-2">
+                        <p class="m-0 ms-md-5 d-inline col-2 p-0 ps-lg-5">Izin</p>
+                        <div class="progress col-8" style="height: .8rem">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 35%"
+                                aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="m-0 d-inline col-2 text-end text-md-center">30%</p>
+                    </div>
+                    <div class="col-12 d-flex justify-content-around align-items-center">
+                        <p class="m-0 ms-md-5 d-inline col-2 p-0 ps-lg-5">Sakit</p>
+                        <div class="progress col-8" style="height: .8rem">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 15%"
+                                aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="m-0 d-inline col-2 text-end text-md-center">15%</p>
+                    </div>
+                </div>
             </div>
         </div>
-
-
-        <div class="row">
-            <h4 class="p-0 fw-normal mt-4">List Absensi Pertemuan</h4>
-            <table class="table mt-3">
-                <tr>
-                    <th>Pertemuan</th>
-                    <th>Tanggal</th>
-                    <th>Topik</th>
-                    <th class="text-center">Aksi</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2021-05-26</td>
-                    <td>UI Design</td>
-                    <td class="d-flex">
-                        <button class="btn btn-warning text-light me-3">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </button>
-                        <button class="btn w-100 btn-primary text-light">Detail</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>2021-05-28</td>
-                    <td>UI Design</td>
-                    <td class="d-flex">
-                        <button class="btn btn-warning text-light me-3">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </button>
-                        <button class="btn w-100 btn-primary text-light">Detail</button>
-                    </td>
-                </tr>
-            </table>
-            <a class="my-3 link-secondary text-decoration-none text-center" href="">Lihat Semua</a>
+        <div class="row mt-5 shadow-cs">
+            <h4 class="fw-normal">List Absensi Pertemuan</h4>
+            <div class="table-responsive">
+                <table class="table mt-3 table-borderless">
+                    <tr class="border-bottom border-dark mb-3">
+                        <th class="py-3">Pertemuan</th>
+                        <th class="py-3">Tanggal</th>
+                        <th class="py-3">Topik</th>
+                        <th class="py-3 text-center">Aksi</th>
+                    </tr>
+                    <tr class="align-middle">
+                        <td>1</td>
+                        <td>2021-05-26</td>
+                        <td class="col-1 text-truncate">Belajar Laravel</td>
+                        <td class="d-flex justify-content-center">
+                            <button class="btn btn-warning text-light">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                            <button class="ms-3 col-md-7 btn btn-primary text-light">Detail</button>
+                        </td>
+                    </tr>
+                    <tr class="align-middle">
+                        <td>2</td>
+                        <td>2021-05-28</td>
+                        <td class="col-1 text-truncate">Belajar UI Design</td>
+                        <td class="d-flex justify-content-center">
+                            <button class="btn btn-warning text-light">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                            <button class="ms-3 col-md-7 btn btn-primary text-light">Detail</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <a class="mt-3 link-secondary text-decoration-none text-center" href="">Lihat Semua</a>
         </div>
     </div>
 </div>
@@ -60,9 +87,8 @@
 
 @section('overrideScript')
 <script>
-    const labels = ["Hadir", "Izin", "Sakit"];
     const data = {
-        labels: labels,
+        labels: ["Hadir", "Izin", "Sakit"],
         datasets: [
             {
                 backgroundColor: [
@@ -78,45 +104,8 @@
     const pieKehadiran = new Chart(document.getElementById("pieKehadiran"), {
         type: "doughnut",
         data: data,
-        options: { responsive: true,maintainAspectRatio: true, cutout: 60, layout: { padding: {} },plugins: { legend: { display: false } } },
+        options: { cutout: 60, borderWidth: 0, plugins: { legend: { display: false } } },
+        
     });
-
-    const barKehadiran = new Chart(document.getElementById("barKehadiran"), {
-        type: "bar",
-        data: data,
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            layout: {
-                padding: {
-                    top: 80,
-                    bottom: 80,
-                },
-            },
-            barThickness: 12,
-            borderRadius: 10,
-            indexAxis: "y",
-            plugins: {
-                legend: { display: false },
-                title: {
-                    display: false,
-                },
-            },
-            scales: {
-                y: {
-                    grid: {
-                        display: false,
-                    },
-                },
-                x: {
-                    display: false,
-                    grid: {
-                        display: false,
-                    },
-                },
-            },
-        },
-    });
-
 </script>
 @endsection
