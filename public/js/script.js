@@ -22,5 +22,4 @@ $("form.edit-profil").submit((e) => {
     );
 });
 
-if ($("div").hasClass("dashboard"))
-    $("body").css({ backgroundColor: "#F9F9F9" });
+$("div").hasClass("dashboard") && $("body").css({ backgroundColor: "#F9F9F9" });
