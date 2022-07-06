@@ -41,7 +41,8 @@
                         </div>
                         <p class="m-0 d-inline col-2 text-end text-md-center">15%</p>
                     </div>
-                </div><div class="mt-4 mt-lg-0 col-12  col-md-8">
+                </div>
+                <div class="mt-4 mt-lg-0 col-12  col-md-8">
                     <div class="col-12 d-flex justify-content-around align-items-center mb-2">
                         <p class="m-0 ms-md-5 d-inline col-2">Hadir</p>
                         <div class="progress col-8" style="height: .8rem">
@@ -131,6 +132,8 @@
 
 @section('overrideScript')
 <script>
+    subtleBodyBackground()
+
     const data = {
         labels: ["Hadir", "Izin", "Sakit"],
         datasets: [
