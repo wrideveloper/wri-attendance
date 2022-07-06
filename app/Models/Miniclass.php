@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Miniclass extends Model
 {
-    use HasFactory; 
-
+    use HasFactory;
     protected $fillable = ['miniclass_name'];
 
     public function user()

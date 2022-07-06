@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Miniclass;
 use Illuminate\Database\Seeder;
+use App\Models\Miniclass;
 
 class DatabaseSeeder extends Seeder
 {
