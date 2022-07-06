@@ -87,6 +87,8 @@
 
 @section('overrideScript')
 <script>
+    subtleBodyBackground()
+
     const data = {
         labels: ["Hadir", "Izin", "Sakit"],
         datasets: [

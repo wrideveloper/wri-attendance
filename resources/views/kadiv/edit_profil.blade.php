@@ -31,4 +31,11 @@
     </div>
 </div>
 
+@section('overrideScript')
+<script>
+    togglePasswordVisibility()
+    confirmModal()
+</script>
+@endsection
+
 @endsection

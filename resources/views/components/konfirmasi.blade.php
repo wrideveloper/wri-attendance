@@ -5,12 +5,12 @@
                 <div class="col-8 mx-auto mb-4">
                     <h6 class="text-secondary fw-normal">{{$text}}</h6>
                 </div>
-                <div class="d-flex justify-content-around pt-2">
-                    <div class="col-3">
+                <div class="d-flex justify-content-start justify-content-sm-around pt-2">
+                    <div class="col col-xs-3 col-md-3">
                         <button type="button" class="btn btn-default border border-secondary w-100 py-2"
                             data-bs-dismiss="modal">Tidak</button>
                     </div>
-                    <div class="col-3">
+                    <div class="col col-xs-3 col-md-3 col-lg-3">
                         <button type="button" class="btn btn-teal text-light w-100 py-2" data-bs-toggle="modal"
                             data-bs-target="#terkonfirmasi">Lanjutkan</button>
                     </div>
