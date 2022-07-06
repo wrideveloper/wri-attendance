@@ -42,32 +42,6 @@
                         <p class="m-0 d-inline col-2 text-end text-md-center">15%</p>
                     </div>
                 </div>
-                <div class="mt-4 mt-lg-0 col-12  col-md-8">
-                    <div class="col-12 d-flex justify-content-around align-items-center mb-2">
-                        <p class="m-0 ms-md-5 d-inline col-2">Hadir</p>
-                        <div class="progress col-8" style="height: .8rem">
-                            <div class="progress-bar bg-teal" role="progressbar" style="width: 50%" aria-valuenow="50"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <p class="m-0 d-inline col-2 text-end text-md-center">50%</p>
-                    </div>
-                    <div class="col-12 d-flex justify-content-around align-items-center mb-2">
-                        <p class="m-0 ms-md-5 d-inline col-2">Izin</p>
-                        <div class="progress col-8" style="height: .8rem">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 35%"
-                                aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <p class="m-0 d-inline col-2 text-end text-md-center">30%</p>
-                    </div>
-                    <div class="col-12 d-flex justify-content-around align-items-center">
-                        <p class="m-0 ms-md-5 d-inline col-2">Sakit</p>
-                        <div class="progress col-8" style="height: .8rem">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 15%"
-                                aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <p class="m-0 d-inline col-2 text-end text-md-center">15%</p>
-                    </div>
-                </div>
             </div>
             <div class="col-12 col-md-12 col-lg-4 shadow-cs p-3">
                 <p class="text-secondary">Timeline</p>
