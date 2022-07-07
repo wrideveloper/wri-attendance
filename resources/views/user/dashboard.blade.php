@@ -110,7 +110,7 @@
 
 @section('overrideScript')
 <script>
-    subtleBodyBackground()
+    controlBodyBackgroundColor()
 
     const data = {
         labels: ["Hadir", "Izin", "Sakit"],

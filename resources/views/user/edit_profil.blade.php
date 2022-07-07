@@ -55,9 +55,9 @@
 
 @section('overrideScript')
 <script>
-    subtleBodyBackground()
-    togglePasswordVisibility()
-    confirmModal()
+    controlBodyBackgroundColor()
+    controlPasswordVisibility()
+    controlConfirmationModal()
 </script>
 @endsection
 
