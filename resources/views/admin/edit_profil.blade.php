@@ -8,7 +8,7 @@
 <div class="container p-5 d-flex justify-content-center">
     <div class="col-md-8">
         <h5 class="mb-5 ">Edit Profile</h5>
-        <form class="edit-profil form ms-5">
+        <form class="edit-profil form rounded bg-light pb-5 px-5">
             <div class="form-group mb-3">
                 <label for="nama" class="form-label fs-5">Nama</label>
                 <input id="nama" type="text" class="form-control" placeholder="Input your name">
@@ -55,8 +55,9 @@
 
 @section('overrideScript')
 <script>
-    togglePasswordVisibility()
-    confirmModal()
+    controlBodyBackgroundColor()
+    controlPasswordVisibility()
+    controlConfirmationModal()
 </script>
 @endsection
 
