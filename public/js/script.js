@@ -1,34 +1,27 @@
-const togglePasswordVisibility = () => {
+const controlPasswordVisibility = () => {
+    const hideInputIconClass = "fa-solid fa-eye-slash";
+    const showInputIconClass = "fa-solid fa-eye";
     $("button[cs-show-password]").each(function () {
-        const dest = $(`input#${$(this).attr("cs-show-password")}`);
-        $(this).click((e) => {
-            type = dest.attr("type", toggleInputType(dest.attr("type")));
-            toggleInputIcon($(this), dest.attr("type"));
-        });
+        const elementPassword = $(`input#${$(this).attr("cs-show-password")}`);
+        $(this).click(() => toggleInput(this, elementPassword));
     });
 
-    const toggleInputType = (type) =>
-        type === "password" ? "text" : "password";
-    const toggleInputIcon = (element, type) => {
-        const icon =
-            type === "password" ? "fa-solid fa-eye-slash" : "fa-solid fa-eye";
-        $(element).children("i").removeClass().addClass(icon);
-    };
+    const toggleInput = (element, dest) => {toggleInputAttr(dest); toggleInputIcon(element, dest)}
+    const toggleInputAttr = dest => dest.attr("type", toggleInputType(dest.attr("type")));
+    const toggleInputType = type => type === "password" ? "text" : "password";
+    const toggleInputIconClass = type => type === "password" ? hideInputIconClass : showInputIconClass;
+    const toggleInputIcon = (element, dest) => $(element).children("i").removeClass().addClass(toggleInputIconClass(dest.attr("type")));
 };
 
-const confirmModal = () => {
+const controlConfirmationModal = () => {
+    const elementKonfirmasi = new bootstrap.Modal("#konfirmasi", null);
+    const elementTerkonfirmasi = new bootstrap.Modal( "#terkonfirmasi", null );
     $("form.edit-profil").submit((e) => {
         e.preventDefault();
-        new bootstrap.Modal("#konfirmasi", null).show();
-        const elementTerkonfirmasi = new bootstrap.Modal(
-            "#terkonfirmasi",
-            null
-        );
-        $("#terkonfirmasi").on("shown.bs.modal", (e) =>
-            setTimeout(() => elementTerkonfirmasi.hide(), 2200)
-        );
+        elementKonfirmasi.show();
+        $("#terkonfirmasi").on("shown.bs.modal", (e) => setTimeout(() => elementTerkonfirmasi.hide(), 2200));
     });
-};
+}
 
-const subtleBodyBackground = () =>
-    $("body").css({ backgroundColor: "#F9F9F9" });
+const controlBodyBackgroundColor = (color = "#F9F9F9") => $("body").css({ backgroundColor: color });
+    

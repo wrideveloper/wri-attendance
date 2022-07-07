@@ -47,7 +47,9 @@
                 <p class="text-secondary">Timeline</p>
                 <div class="col-12 d-flex">
                     <div class="col-8 d-flex flex-column">
-                        <p class="fw-bold">Pertemuan 4</p>
+                        <a href="{{url('/')}}" class="fw-bold text-dark text-decoration-none mb-3">
+                            Pertemuan 4
+                        </a>
                         <p>Mengenal UI Design</p>
                     </div>
                     <div class="col-4 d-flex flex-column text-end">
@@ -57,7 +59,9 @@
                 </div>
                 <div class="col-12 d-flex">
                     <div class="col-8 d-flex flex-column">
-                        <p class="fw-bold">Pertemuan 5</p>
+                        <a href="{{url('/')}}" class="fw-bold text-dark text-decoration-none mb-3">
+                            Pertemuan 5
+                        </a>
                         <p>Pemaparan materi laravel</p>
                     </div>
                     <div class="col-4 d-flex flex-column text-end">
@@ -106,7 +110,7 @@
 
 @section('overrideScript')
 <script>
-    subtleBodyBackground()
+    controlBodyBackgroundColor()
 
     const data = {
         labels: ["Hadir", "Izin", "Sakit"],
