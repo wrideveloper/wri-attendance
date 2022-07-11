@@ -16,7 +16,7 @@ class CreateMiniclassesTable extends Migration
         Schema::create('miniclasses', function (Blueprint $table) {
             $table->id();
             $table->string('miniclass_name', 50);
-            $table->foreignId('member_id');
+            $table->foreignId('user_id');
             $table->foreignId('meeting_id');
             $table->timestamps();
         });

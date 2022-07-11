@@ -77,7 +77,7 @@ class MiniclassController extends Controller
         'miniclass_name' => 'required|max:255',
         ]);
 
-        Miniclass::where('id', $miniclass->id)->update($validatedData);
+        Miniclass::where('miniclass_name', $miniclass->miniclass_name)->update($validatedData);
     }
 
     /**
