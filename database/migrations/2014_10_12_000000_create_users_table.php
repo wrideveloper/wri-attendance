@@ -13,8 +13,8 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('members', function (Blueprint $table) {
-            $table->id('member_id');
+        Schema::create('users', function (Blueprint $table) {
+            $table->id('user_id');
             $table->foreignId('miniclass_id')->constrained();
             $table->foreignId('roles_id')->constrained();
             $table->foreignId('generations_id')->constrained();
