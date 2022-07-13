@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Presence;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\PresenceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +25,5 @@ Route::get('/kadiv/edit-profil', fn () => view('kadiv.edit_profil'));
 Route::get('/kadiv', fn () => view('kadiv.dashboard'));
 Route::get('/admin/edit-profil', fn () => view('admin.edit_profil'));
 Route::get('/admin/add-user', fn () => view('admin.add_user'));
+
+Route::resource('/presence', PresenceController::class);
