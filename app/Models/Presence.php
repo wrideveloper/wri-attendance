@@ -19,7 +19,7 @@ class Presence extends Model {
     ];
 
     protected $with = [
-        'miniclass_meetings',
+        'meetings',
         'user'
     ];
 
@@ -27,11 +27,11 @@ class Presence extends Model {
         return 'nim';
     }
 
-    public function miniclass_meetings() {
-        return $this->belongsTo('App\Models\MiniclassMeeting');
+    public function meetings() {
+        return $this->belongsTo(Meetings::class);
     }
 
     public function user() {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
 }

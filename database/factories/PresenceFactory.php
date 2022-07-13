@@ -11,10 +11,9 @@ class PresenceFactory extends Factory
      *
      * @return array
      */
-    public function definition()
-    {
+    public function definition() {
         return [
-            'miniclass_meetings_id' => $this->faker->numberBetween(1, 10),
+            'meetings_id' => $this->faker->numberBetween(1, 10),
             'user_id' => $this->faker->numberBetween(1, 10),
             'presence_date' => $this->faker->dateTimeBetween('-1 hours', 'now'),
             'status' => $this->faker->randomElement(['Hadir', 'Sakit', 'Izin', 'Alpha']),

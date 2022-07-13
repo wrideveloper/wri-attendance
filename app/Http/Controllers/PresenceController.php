@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Presence;
-use App\Http\Requests\StorePresenceRequest;
+use App\Http\Requests\PresenceRequest;
+use Illuminate\Support\Facades\Request;
 use App\Http\Requests\UpdatePresenceRequest;
 
 class PresenceController extends Controller {
@@ -13,7 +14,7 @@ class PresenceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-
+        return view('presence.index');
     }
 
     /**
@@ -21,9 +22,8 @@ class PresenceController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        return view('presence.create');
     }
 
     /**
@@ -32,9 +32,16 @@ class PresenceController extends Controller {
      * @param  \App\Http\Requests\StorePresenceRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePresenceRequest $request)
-    {
-        //
+    public function store(Request $request) {
+        $presence = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'presence_date' => 'required|date',
+            'status' => 'required|',
+            'ket' => 'sometimes|string|max:255',
+            'feedback' => 'required|string|max:1000',
+        ]);
+        Presence::create($presence);
+        return redirect()->route('presence.index')->with('success', 'Presence created successfully.');
     }
 
     /**
@@ -43,9 +50,10 @@ class PresenceController extends Controller {
      * @param  \App\Models\Presence  $presence
      * @return \Illuminate\Http\Response
      */
-    public function show(Presence $presence)
-    {
-        //
+    public function show(Presence $presence){
+        return view('presence.show', [
+            'presence' => $presence
+        ]);
     }
 
     /**
@@ -54,9 +62,10 @@ class PresenceController extends Controller {
      * @param  \App\Models\Presence  $presence
      * @return \Illuminate\Http\Response
      */
-    public function edit(Presence $presence)
-    {
-        //
+    public function edit(Presence $presence){
+        return view('presence.edit', [
+            'presence' => $presence
+        ]);
     }
 
     /**
@@ -66,9 +75,17 @@ class PresenceController extends Controller {
      * @param  \App\Models\Presence  $presence
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePresenceRequest $request, Presence $presence)
-    {
-        //
+    public function update(Request $request, Presence $presence) {
+        $rule = [
+            'user_id' => 'required|exists:users,id',
+            'presence_date' => 'required|date',
+            'status' => 'required|',
+            'ket' => 'sometimes|string|max:255',
+            'feedback' => 'required|string|max:1000',
+        ];
+        $validated = $request->validate($rule);
+        Presence::where('id', $presence->id)->update($validated);
+        return redirect()->route('presence.index')->with('success', 'Presence updated successfully.');
     }
 
     /**
@@ -77,8 +94,8 @@ class PresenceController extends Controller {
      * @param  \App\Models\Presence  $presence
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Presence $presence)
-    {
-        //
+    public function destroy(Presence $presence) {
+        Presence::destroy($presence->id);
+        return redirect()->route('presence.index')->with('success', 'Presence deleted successfully.');
     }
 }
