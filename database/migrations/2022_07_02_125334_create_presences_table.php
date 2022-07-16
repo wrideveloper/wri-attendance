@@ -11,8 +11,7 @@ class CreatePresencesTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('presences', function (Blueprint $table) {
             $table->id();
             $table->foreignId('meetings_id')->constrained();
@@ -20,6 +19,7 @@ class CreatePresencesTable extends Migration
             $table->date('presence_date');
             $table->string('status');
             $table->string('ket');
+            $table->string('token', 10);
             $table->text('feedback');
             $table->timestamps();
         });

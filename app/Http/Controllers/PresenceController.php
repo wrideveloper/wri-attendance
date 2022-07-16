@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Meetings;
 use App\Models\Presence;
 use App\Http\Requests\PresenceRequest;
 use Illuminate\Support\Facades\Request;
@@ -39,9 +40,16 @@ class PresenceController extends Controller {
             'status' => 'required|',
             'ket' => 'sometimes|string|max:255',
             'feedback' => 'required|string|max:1000',
+            'token' => 'required|string|max:10|exists:meetings,token',
         ]);
-        Presence::create($presence);
-        return redirect()->route('presence.index')->with('success', 'Presence created successfully.');
+        $cekToken = Meetings::where('token', $request->token)->firstOrFail();
+
+        if($cekToken) {
+            Presence::create($presence);
+            return redirect()->route('presence.index')->with('success', 'Presensi berhasil');
+        } else {
+            return redirect()->back()->with('error', 'Presensi gagal, cek kembali token');
+        }
     }
 
     /**
@@ -82,6 +90,7 @@ class PresenceController extends Controller {
             'status' => 'required|',
             'ket' => 'sometimes|string|max:255',
             'feedback' => 'required|string|max:1000',
+            'token' => 'required|string|max:10|exists:meetings,token',
         ];
         $validated = $request->validate($rule);
         Presence::where('id', $presence->id)->update($validated);
