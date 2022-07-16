@@ -1,0 +1,62 @@
+/* tools card */
+.card-rounded {
+    border: none;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 15px 0;
+}
+/* tools card */
+
+.px-custom-20px {
+    padding: 20px 0;
+}
+
+/* card statistic */
+.card-statistic-1 {
+    border: none;
+    border-radius: 10px;
+    padding: 10px 40px;
+    margin: 15px 0;
+}
+
+.card-statistic-1 .card-body .card-body-icon {
+    font-size: 48px;
+    color: #3366ff;
+    text-align: center;
+}
+
+.card-statistic-1 .card-body .card-body-desc {
+    font-size: 30px;
+    font-weight: 700;
+    color: #30445c;
+}
+
+.card-statistic-1 .card-body .card-body-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #8f95b2;
+    margin-bottom: 0;
+}
+/* statistic */
+
+/* tools color */
+.color-success-bold {
+    color: #4fbeab;
+    font-weight: bold;
+}
+.color-info-bold {
+    color: #3366ff;
+    font-weight: bold;
+}
+.color-warning-bold {
+    color: #ffb020;
+    font-weight: bold;
+}
+
+/* responsive */
+@media (max-width: 767.98px) {
+    .py-xs-20px {
+        padding: 20px 0;
+    }
+}
+/* responsive */
