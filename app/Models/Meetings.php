@@ -20,14 +20,14 @@ class Meetings extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'miniclass_id',
+        'miniclasses_id',
         'topik',
-        'start-time',
-        'end-time',
+        'start_time',
+        'end_time',
         'pertemuan',
         'token'
     ];
-    protected $with = 'Miniclass';
+    protected $with = 'miniclass';
 
     public function presence()
     {
