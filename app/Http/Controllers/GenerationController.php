@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Generation;
 
 class GenerationController extends Controller
 {
@@ -13,7 +14,10 @@ class GenerationController extends Controller
      */
     public function index()
     {
-        //
+        $data = Generation::all();
+        return view('generation.index',[
+            'datas' => $data
+        ]);
     }
 
     /**
@@ -23,7 +27,7 @@ class GenerationController extends Controller
      */
     public function create()
     {
-        //
+        return view('generation.create');
     }
 
     /**
@@ -34,7 +38,12 @@ class GenerationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $this->validate($request, [
+            'crew_name' => 'required|max:255',
+        ]);
+    
+        Generation::create($validatedData);
+        return redirect()->route('generation.index');
     }
 
     /**
@@ -43,9 +52,12 @@ class GenerationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($crew_name)
     {
-        //
+        $data=Generation::where('crew_name',$crew_name)->get();
+        return view('generation.show',[
+            'datas' => $data
+        ]);
     }
 
     /**
@@ -56,7 +68,10 @@ class GenerationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Generation::find($id);
+        return view('generation.edit',[
+            'datas' => $data
+        ]);
     }
 
     /**
@@ -68,7 +83,15 @@ class GenerationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $this->validate($request, [
+            'crew_name' => 'required|max:255',
+        ]);
+    
+        $data = Generation::find($id);
+        $data->update([
+            'crew_name'=>$validated["crew_name"]
+        ]);
+        return redirect()->route('generation.index');
     }
 
     /**
@@ -79,6 +102,8 @@ class GenerationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Generation::find($id);
+        $data->delete();
+        return redirect()->route('generation.index');
     }
 }
