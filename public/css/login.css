@@ -1,19 +1,27 @@
-/* media 768 */
+#loginBackground {
+    background-color: #f7b217;
+    z-index: -1;
+}
+
+@media (min-width: 375px) and (max-width: 812px) {
+    #garisVector {
+        display: none;
+    }
+}
 
 @media (max-width: 768px) {
+    #circle3 {
+        width: 60%;
+    }
 
-  #circle3 {
-    width: 60%;
-  }
+    #ml_left {
+        margin-left: 40px;
+    }
 
-  #ml_left {
-    margin-left: 40px;
-  }
-
-  #box {
-    padding: 2rem; 
-  }
-
+    #box {
+        padding: 2rem;
+        max-width: 24rem;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1920px) {
@@ -22,45 +30,49 @@
     }
 
     #ml_left {
-         margin-left: 120px;
+        margin-left: 120px;
     }
 
-    #box{ 
+    #box {
         padding: 4rem 8rem;
+        max-width: 36rem;
     }
 }
 
-
-input {
-  border: 2px solid #F7B217 !important; 
-  width: 256px !important; 
-  height: 48px !important;
-  margin-top: 27px !important;
+.input-login {
+    border: 2px solid #f7b217 !important;
+    /* width: 256px !important; */
+    height: 48px !important;
+    margin-top: 27px !important;
 }
 
 #box {
-  background-color: #FFFFFF;
+    background-color: #ffffff;
 }
 
 a {
-  list-style: none;
-  text-decoration: none;
+    list-style: none;
+    text-decoration: none;
 }
-
 
 ::placeholder {
-  color: #000 !important;
-  font-weight: 500 !important;
-  font-size: 16px !important;
-  line-height: 16px !important;
-  letter-spacing: 0.0125em !important; 
+    color: #000 !important;
+    font-weight: 500 !important;
+    font-size: 16px !important;
+    line-height: 16px !important;
+    letter-spacing: 0.0125em !important;
 }
 
-button {
-  margin-top: 54px !important;
+.btn-login {
+    margin-top: 1rem !important;
 }
 
 #garisVector {
-  margin-top: -38rem !important;
-  margin-right: -34rem !important;
+    margin-top: -39rem !important;
+    margin-right: -38rem !important;
+}
+
+.verif_input {
+    border: 2px solid #f7b217 !important;
+    border-radius: 8px;
 }
