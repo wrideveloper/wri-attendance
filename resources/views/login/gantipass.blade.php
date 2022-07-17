@@ -1,12 +1,12 @@
 @extends('layouts.background')
 
-@section('content')
+@section('login-content')
 <div class="d-flex justify-content-center align-items-center vh-100 vw-100 position-relative">
     <div id="box" class="rounded-4" style="width: 36rem;">
         <div class="container">
             <div class="col-12">
             <div class="row d-flex justify-content-center mb-2">
-                <img style="width: 50%;" src="../../../public/img/image 1.png" alt="">
+                <img style="width: 50%;" src="{{ asset('img/image 1.png') }}" alt="">
             </div>
             <div class="row">
                 <h5 class=" align-content-center d-flex justify-content-center">
@@ -31,7 +31,7 @@
         </div>
     </div>
     <div id="garisVector" class="position-absolute">
-        <img src="../../../public/svg/line.svg" alt="">
+        <img src="{{ asset('svg/line.svg') }}" alt="">
     </div>
 </div>
 @endsection

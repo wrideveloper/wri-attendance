@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/input-absensi.css') }}">
-    <title>WRI Absensi | @yield('title')</title>
+    <title>WRI Attendance | Sistem Absensi Miniclass</title>
 </head>
 
 <body>
