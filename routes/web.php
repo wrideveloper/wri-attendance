@@ -37,6 +37,7 @@ Route::get('/user/input_absensi', fn () => view('user.input_absensi'));
 
 Route::get('/kadiv', fn () => view('kadiv.dashboard'));
 Route::get('/kadiv/edit-profil', fn () => view('kadiv.edit_profil'));
+Route::get('/kadiv/update-jadwal', fn () => view('kadiv.update_jadwal'));
 
 Route::get('/admin/add-user', fn () => view('admin.add_user'));
 Route::get('/admin/edit-profil', fn () => view('admin.edit_profil'));
@@ -45,8 +46,8 @@ Route::get('/admin/edit-profil', fn () => view('admin.edit_profil'));
 Route::resource('/presence', PresenceController::class);
 
 // Configurasi Meetings dan Presence dari sisi Admin
-Route::controller(ConfigMeetingController::class)->group(function() {
-    Route::prefix('/dashboard')->group(function() {
+Route::controller(ConfigMeetingController::class)->group(function () {
+    Route::prefix('/dashboard')->group(function () {
         Route::get('/config-meeting', 'listMeetings')->name('list-meetings');
         Route::get('/check-presence/{presence}', 'checkPresence')->name('check-presence');
         Route::get('/check-presence/{presence}/detail', 'detailPresence')->name('detail-presence');

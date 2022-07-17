@@ -17,7 +17,7 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
-Route::resource('/presence', PresenceController::class);
+// Route::resource('/presence', PresenceController::class);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
