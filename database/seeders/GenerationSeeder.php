@@ -12,8 +12,7 @@ class GenerationSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         Generation::create([
             'crew_name'=>'WRI 7'
         ]);
