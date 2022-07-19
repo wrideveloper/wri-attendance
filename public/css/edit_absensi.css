@@ -1,30 +1,15 @@
-body{
-    background-color:#F8F8F8;
-    font-family: 'Roboto', sans-serif;
-}
-
-p{
-    font-family: 'Roboto', sans-serif;
-    color: #73787E;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 26px;
-    letter-spacing: 0.005em;
-}
-
-#atas{
-    margin-left: 66px;
+#atas {
     margin-bottom: 14px;
 }
 
-#pertemuan{
+#pertemuan {
     font-weight: 400;
     font-size: 24px;
     margin-top: 14px;
     color: rgb(0, 0, 0);
 }
 
-#nama{
+#nama {
     color: rgb(0, 0, 0);
     font-style: normal;
     font-weight: 400;
@@ -34,15 +19,15 @@ p{
     margin-bottom: 14px;
 }
 
-#back{
-    color: #9FA4A9;
+#back {
+    color: #9fa4a9;
     font-style: normal;
     font-size: x-large;
     line-height: 46px;
     margin-left: 5px;
 }
 
-#bgback{
+#bgback {
     background-color: #fff;
     background-size: 46px;
     border-radius: 15px;
@@ -51,95 +36,93 @@ p{
     margin-right: 11px;
 }
 
-#content{
-    background-color:#ffff; 
-    margin-left: 68px; 
+#content {
+    background-color: #ffff;
     border-radius: 15px;
     box-shadow: 0px 16px 40px rgba(0, 0, 0, 0.03);
 }
 
-#content #nama{
-    margin-bottom:25px;
+#content #nama {
+    margin-bottom: 25px;
 }
 
-
-#line{
-    margin-bottom:47px;
-    width:100%
+#line {
+    margin-bottom: 47px;
+    width: 100%;
 }
 
-#content h5{
-    color: #73787E;
-    margin-bottom:57px;
+#content h5 {
+    color: #73787e;
+    margin-bottom: 57px;
 }
 
-#content p{
-    margin-bottom:45px;
+#content p {
+    margin-bottom: 45px;
 }
 
-#isidataanggota p{
-    color:#000000;
+#isidataanggota p {
+    color: #000000;
 }
 
-#isidataanggota #Email{
-    color: #3366FF;
+#isidataanggota #Email {
+    color: #3366ff;
 }
 
-#NomorHP{
-    margin-top:45px;
+#NomorHP {
+    margin-top: 45px;
 }
 
-#NIM{
-    margin-bottom:50px;
+#NIM {
+    margin-bottom: 50px;
 }
 
-#isiabsen p{
-    color:#000000;
+#isiabsen p {
+    color: #000000;
 }
 
-#isiabsen #WaktuAbsen{
-    margin-bottom:40px;
+#isiabsen #WaktuAbsen {
+    margin-bottom: 40px;
 }
 
-#isiabsen #status{
-    margin-bottom:38px;
+#isiabsen #status {
+    margin-bottom: 38px;
 }
 
-#isiabsen #status #pilih{
-    color: #73787E;
+#isiabsen #status #pilih {
+    color: #73787e;
 }
 
-#isiabsen #status #hadir{
-    color: #4FBEAB;
+#isiabsen #status #hadir {
+    color: #4fbeab;
 }
 
-#isiabsen #status #izin{
-    color: #3366FF;
+#isiabsen #status #izin {
+    color: #3366ff;
 }
 
-#isiabsen #status #sakit{
-    color: #FFB020;
+#isiabsen #status #sakit {
+    color: #ffb020;
 }
 
-#isiabsen #Feedback{
-    margin-bottom:144px;
+#isiabsen #Feedback {
+    margin-bottom: 144px;
 }
 
-#backbutton{
-    color:black; 
-    border: 1px solid #ACA8CC; 
-    border-radius: 8px; 
-    margin-right:24px; 
-    margin-left:12px; 
-    background-color: #FFFF; 
+#backbutton {
+    color: black;
+    border: 1px solid #aca8cc;
+    border-radius: 8px;
+    margin-right: 24px;
+    margin-left: 12px;
+    background-color: #ffff;
     width: 147px;
     height: 46px;
     padding-top: 8px;
 }
 
-#updatebutton{
-    color:white; 
-    border-radius: 8px; 
+#updatebutton {
+    color: white;
+    border-radius: 8px;
     width: 147px;
     height: 46px;
     padding-bottom: 8px;

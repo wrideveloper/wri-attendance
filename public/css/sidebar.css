@@ -1,0 +1,130 @@
+#wrapper {
+    overflow-x: hidden;
+}
+
+#sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    transition: margin 0.25s linear;
+    background-color: #201e3d;
+}
+
+#sidebar-wrapper .list-group {
+    width: 15rem;
+}
+
+#page-content-wrapper {
+    min-width: 100vw;
+    background-color: #f9f9f9;
+}
+
+body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+    margin-left: 0;
+}
+
+#sidebar-wrapper .btn-sidebar {
+    font-size: 22px;
+    color: #201e3d;
+}
+
+.sidebar-brand {
+    padding: 30px 20px 50px;
+}
+
+.list-group-item {
+    background-color: #201e3d;
+    color: white;
+    padding: 16px 20px;
+    font-weight: 700;
+    border: 0;
+}
+
+.list-group-item:hover {
+    background-color: #3f3d56;
+    color: #f7b217;
+    border-right: 8px solid #f7b217 !important;
+    border-bottom: 0;
+    border-top: 0;
+    border-left: 0;
+}
+
+.list-group-item.active {
+    background-color: #3f3d56;
+    color: #f7b217;
+    border-right: 8px solid #f7b217;
+    border-bottom: 0;
+    border-top: 0;
+    border-left: 0;
+}
+
+.list-group-item i {
+    padding-right: 15px;
+}
+
+.text-hover-red:hover {
+    color: #ff6159 !important;
+}
+.text-red {
+    color: #ff6159 !important;
+}
+
+#page-content-wrapper .dropdown-menu {
+    padding: 0;
+    border-radius: 10px;
+}
+
+#page-content-wrapper .dropdown-menu .dropdown-item {
+    padding: 10px;
+    background-color: #3f3d56;
+    color: #fff;
+    border-radius: 10px;
+    border-right: 6px solid #f7b217;
+}
+
+.btn-bar {
+    font-size: 25px;
+    color: #201e3d;
+    cursor: pointer;
+}
+
+/* tools card */
+.card-rounded {
+    border: none;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 15px 0;
+}
+/* tools card */
+
+.nav-item {
+    font-size: 14px;
+    font-weight: 700;
+}
+.item-users {
+    padding: 10px 13px;
+    background-color: #f7b217;
+    border-radius: 100px;
+    margin-left: 10px;
+}
+
+/* responsive */
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+
+    body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+        margin-left: -15rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .text-sm-hidden {
+        display: none;
+    }
+}

@@ -17,14 +17,14 @@ use App\Http\Controllers\ConfigMeetingController;
 */
 
 Route::get('/', function () {
-    return view('login.login');
+    return view('auth.login');
 });
 Route::get('/forgot-password', function () {
-    return view('login.forgotpassword');
+    return view('auth.forgotpassword');
 })->name('forgot-password');
 
 Route::get('/reset-password', function () {
-    return view('login.gantipass');
+    return view('auth.gantipass');
 })->name('reset-password');
 
 Route::get('/post-absensi', function () {
@@ -40,6 +40,7 @@ Route::get('/kadiv/edit-profil', fn () => view('kadiv.edit_profil'));
 Route::get('/kadiv/update-jadwal', fn () => view('kadiv.update_jadwal'));
 
 Route::get('/admin/add-user', fn () => view('admin.add_user'));
+Route::get('/admin/edit-absensi', fn () => view('admin.edit_absensi'));
 Route::get('/admin/edit-profil', fn () => view('admin.edit_profil'));
 
 // Sisi User
