@@ -18,6 +18,7 @@ class PresenceFactory extends Factory
             'presence_date' => $this->faker->dateTimeBetween('-1 hours', 'now'),
             'status' => $this->faker->randomElement(['Hadir', 'Sakit', 'Izin', 'Alpha']),
             'ket' => $this->faker->sentence,
+            'token' => $this->faker->bothify('???????'),
             'feedback' => $this->faker->text,
         ];
     }

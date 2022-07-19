@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Meetings;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class MeetingsSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class MeetingsSeeder extends Seeder
      * @return void
      */
     public function run() {
-        Meetings::factory(20)->create();
+        User::factory(70)->create();
     }
 }

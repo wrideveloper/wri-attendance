@@ -14,12 +14,13 @@ class MeetingsFactory extends Factory
     public function definition()
     {
         return [
-            'miniclasses_id' => $this->faker()->numberBetween(1, 10),
-            'topik' => $this->faker()->sentence(),
-            'start_time' => $this->faker()->time(),
-            'end_time' => $this->faker()->time(),
-            'pertemuan' => $this->faker()->randomDigit(),
-            'token' => $this->faker()->randomNumber(5, true)
+            'miniclass_id' => $this->faker->numberBetween(1, 5),
+            'topik' => $this->faker->sentence(),
+            'tanggal' => $this->faker->dateTimeBetween('-3 months', 'now')->format('Y-m-d'),
+            'start_time' => $this->faker->time(),
+            'end_time' => $this->faker->time(),
+            'pertemuan' => $this->faker->randomDigit(),
+            'token' => $this->faker->bothify('???????')
         ];
     }
 }
