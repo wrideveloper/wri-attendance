@@ -1,48 +1,47 @@
 @extends('layouts.master')
 
 @section('content')
-
-<div class="container mt-5">
-
-    <div class="container-fluid">
-        <div class="d-flex justify-content-between mb-3">
-            <div class="p-2">
-                <h5 class="">Data Anggota User</h5>
-            </div>
-            <div class="p-2">
-                <button type="button" class="btn btn-teal text-light" data-bs-toggle="modal" data-bs-target="#addUser">
-                    <i class="fa-regular fa-plus"></i> Tambah Data
-                </button>
+    <div class="container py-5 px-4">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between mb-3">
+                <div class="p-2">
+                    <h5 class="">Data Anggota User</h5>
+                </div>
+                <div class="p-2">
+                    <button type="button" class="btn btn-teal text-light" data-bs-toggle="modal" data-bs-target="#addUser">
+                        <i class="fa-regular fa-plus"></i> Tambah Data
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">No</th>
-            <th scope="col">Nama</th>
-            <th scope="col">Angkatan</th>
-            <th scope="col">Miniclass</th>
-            <th scope="col">Aksi</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1.</th>
-            <td>Muhammad Eren Yeager</td>
-            <td>8</td>
-            <td>Web</td>
-            <td>
-                <a type="button" href="/admin/edit-profil" class="btn btn-primary btn-sm px-3 me-2">Edit</a>
-                <button type="button" class="btn btn-danger btn-sm px-3" data-bs-toggle="modal" data-bs-target="#confirmdelete">Hapus</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
 
-</div>
-        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Angkatan</th>
+                    <th scope="col">Miniclass</th>
+                    <th scope="col">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1.</th>
+                    <td>Muhammad Eren Yeager</td>
+                    <td>8</td>
+                    <td>Web</td>
+                    <td>
+                        <a type="button" href="/admin/edit-profil" class="btn btn-primary btn-sm px-3 me-2">Edit</a>
+                        <button type="button" class="btn btn-danger btn-sm px-3" data-bs-toggle="modal"
+                            data-bs-target="#confirmdelete">Hapus</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
 
     {{-- modal add user --}}
     <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
@@ -111,25 +110,23 @@
         </div>
     </div>
 
-{{-- Modal confirm delete --}}
-<div class="modal fade" id="confirmdelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered  modal-sm">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="container-fluid d-flex justify-content-center">
-            <i class="fa fa-exclamation-circle" style="font-size: 5rem; color:red;"></i>
-          </div><br>
-          <div class="container-fluid d-flex justify-content-center">
-            <h5>Yakin hapus deck?</h5>
-          </div><br>
-          <div class="container-fluid d-flex justify-content-center">
-            <button type="button" class="btn btn-primary me-3">Hapus</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-          </div>
+    {{-- Modal confirm delete --}}
+    <div class="modal fade" id="confirmdelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered  modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container-fluid d-flex justify-content-center">
+                        <i class="fa fa-exclamation-circle" style="font-size: 5rem; color:red;"></i>
+                    </div><br>
+                    <div class="container-fluid d-flex justify-content-center">
+                        <h5>Yakin hapus deck?</h5>
+                    </div><br>
+                    <div class="container-fluid d-flex justify-content-center">
+                        <button type="button" class="btn btn-primary me-3">Hapus</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-
-
 @endsection

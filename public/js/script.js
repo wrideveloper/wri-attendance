@@ -6,7 +6,7 @@ const controlPasswordVisibility = () => {
         $(this).click(() => toggleInput(this, elementPassword));
     });
 
-    const toggleInput = (element, dest) => {toggleInputAttr(dest); toggleInputIcon(element, dest)}
+    const toggleInput = (element, dest) => { toggleInputAttr(dest); toggleInputIcon(element, dest) }
     const toggleInputAttr = dest => dest.attr("type", toggleInputType(dest.attr("type")));
     const toggleInputType = type => type === "password" ? "text" : "password";
     const toggleInputIconClass = type => type === "password" ? hideInputIconClass : showInputIconClass;
@@ -15,7 +15,7 @@ const controlPasswordVisibility = () => {
 
 const controlConfirmationModal = () => {
     const elementKonfirmasi = new bootstrap.Modal("#konfirmasi", null);
-    const elementTerkonfirmasi = new bootstrap.Modal( "#terkonfirmasi", null );
+    const elementTerkonfirmasi = new bootstrap.Modal("#terkonfirmasi", null);
     $("form.edit-profil").submit((e) => {
         e.preventDefault();
         elementKonfirmasi.show();
@@ -24,4 +24,19 @@ const controlConfirmationModal = () => {
 }
 
 const controlBodyBackgroundColor = (color = "#F9F9F9") => $("body").css({ backgroundColor: color });
-    
+
+
+
+// script sidebar
+window.addEventListener('DOMContentLoaded', event => {
+    const sidebarToggle = document.body.querySelector('#sidebarToggle');
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', event => {
+            event.preventDefault();
+            document.body.classList.toggle('sb-sidenav-toggled');
+            localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+        });
+    }
+
+});
+// end script sidebar
