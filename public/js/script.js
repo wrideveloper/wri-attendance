@@ -25,7 +25,7 @@ const controlConfirmationModal = () => {
 
 const controlBodyBackgroundColor = (color = "#F9F9F9") => $("body").css({ backgroundColor: color });
 
-
+const controlProgressBarPercentage = (totalPresence, presence) => parseInt((presence / totalPresence) * 100)
 
 // script sidebar
 window.addEventListener('DOMContentLoaded', event => {

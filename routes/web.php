@@ -4,6 +4,8 @@ use App\Models\Presence;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PresenceController;
 use App\Http\Controllers\ConfigMeetingController;
+use App\Http\Controllers\RegisterController;
+use App\Models\Meetings;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,11 +33,11 @@ Route::get('/post-absensi', function () {
     return view('user.input_absensi');
 })->name('post-absensi');
 
-Route::get('/user', fn () => view('user.dashboard'));
+Route::get('/user', fn () => view('user.dashboard', ['presences' => Presence::all()->load(['user', 'meetings'])->where('user_id', 1)->sortByDesc("meetings.pertemuan")])); // issue : user_id 1 kemungkinan tidak memiliki role member
 Route::get('/user/edit-profil', fn () => view('user.edit_profil'));
 Route::get('/user/input_absensi', fn () => view('user.input_absensi'));
 
-Route::get('/kadiv', fn () => view('kadiv.dashboard'));
+Route::get('/kadiv', fn () => view('kadiv.dashboard', ['presences' => Presence::all()->load(['user', 'meetings'])->where('user_id', 2)->sortByDesc("meetings.pertemuan")])); // issue : user_id 2 kemungkinan tidak memiliki role kadiv
 Route::get('/kadiv/edit-profil', fn () => view('kadiv.edit_profil'));
 Route::get('/kadiv/update-jadwal', fn () => view('kadiv.update_jadwal'));
 
