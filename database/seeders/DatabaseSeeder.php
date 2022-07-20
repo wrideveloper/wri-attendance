@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             MiniclassSeeder::class,
             GenerationSeeder::class,
-            UserSeeder::class,
-            MeetingsSeeder::class,
+            // UserSeeder::class,
+            // MeetingsSeeder::class,
             PresenceSeeder::class,
         ]);
     }
