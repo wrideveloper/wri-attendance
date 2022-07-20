@@ -38,6 +38,7 @@ Route::get('/user/input_absensi', fn () => view('user.input_absensi'));
 Route::get('/kadiv', fn () => view('kadiv.dashboard'));
 Route::get('/kadiv/edit-profil', fn () => view('kadiv.edit_profil'));
 Route::get('/kadiv/update-jadwal', fn () => view('kadiv.update_jadwal'));
+Route::get('/kadiv/attendance-list', fn () => view('kadiv.attendance_list'));
 
 Route::get('/admin/add-user', fn () => view('admin.add_user'));
 Route::get('/admin/edit-absensi', fn () => view('admin.edit_absensi'));
