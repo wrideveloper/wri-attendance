@@ -4,6 +4,7 @@ use App\Models\Presence;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PresenceController;
 use App\Http\Controllers\ConfigMeetingController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegisterController;
 use App\Models\Meetings;
 
@@ -33,6 +34,8 @@ Route::get('/post-absensi', function () {
     return view('user.input_absensi');
 })->name('post-absensi');
 
+Route::get('/dashboard', [DashboardController::class, 'index']);
+
 Route::get('/user', fn () => view('user.dashboard', ['presences' => Presence::all()->load(['user', 'meetings'])->where('user_id', 1)->sortByDesc("meetings.pertemuan")])); // issue : user_id 1 kemungkinan tidak memiliki role member
 Route::get('/user/edit-profil', fn () => view('user.edit_profil'));
 Route::get('/user/input_absensi', fn () => view('user.input_absensi'));
@@ -51,7 +54,6 @@ Route::get('/admin/edit-profil', fn () => view('admin.edit_profil'));
 
 // Sisi User
 Route::resource('/presence', PresenceController::class);
-
 // Configurasi Meetings dan Presence dari sisi Admin
 Route::controller(ConfigMeetingController::class)->group(function () {
     Route::prefix('/dashboard')->group(function () {
@@ -76,4 +78,3 @@ Route::controller(ConfigMeetingController::class)->group(function () {
         Route::delete('/check-presence/{presence}/edit', 'deletePresence')->name('delete-presence');
     });
 });
-

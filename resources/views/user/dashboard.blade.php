@@ -14,24 +14,21 @@
                     <div class="col-12 d-flex justify-content-around align-items-center mb-2">
                         <p class="m-0 ms-md-5 d-inline col-2">Hadir</p>
                         <div class="progress col-8" style="height: .8rem">
-                            <div class="progress-bar bg-teal rounded" role="progressbar" style="width: 50%" aria-valuenow="50"
-                                aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-teal rounded" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <p class="m-0 d-inline col-2 text-end text-md-center">50%</p>
                     </div>
                     <div class="col-12 d-flex justify-content-around align-items-center mb-2">
                         <p class="m-0 ms-md-5 d-inline col-2">Izin</p>
                         <div class="progress col-8" style="height: .8rem">
-                            <div class="progress-bar bg-primary rounded" role="progressbar" style="width: 35%"
-                                aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-primary rounded" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <p class="m-0 d-inline col-2 text-end text-md-center">30%</p>
                     </div>
                     <div class="col-12 d-flex justify-content-around align-items-center">
                         <p class="m-0 ms-md-5 d-inline col-2">Sakit</p>
                         <div class="progress col-8" style="height: .8rem">
-                            <div class="progress-bar bg-warning rounded" role="progressbar" style="width: 15%"
-                                aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-warning rounded" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <p class="m-0 d-inline col-2 text-end text-md-center">15%</p>
                     </div>
@@ -50,7 +47,8 @@
                     <div class="col-4 d-flex flex-column text-end">
                         <p class="text-secondary">{{date('d F Y', strtotime($item->meetings->tanggal)) }}</p>
                         <p class="text-secondary">{{date('H:i', strtotime($item->meetings->start_time))}} -
-                            {{date('H:i', strtotime($item->meetings->end_time))}}</p>
+                            {{date('H:i', strtotime($item->meetings->end_time))}}
+                        </p>
                     </div>
                 </div>
                 @endforeach
@@ -95,40 +93,27 @@
 @section('overrideScript')
 <script>
     controlBodyBackgroundColor()
-    const dataSource = {!! json_encode($presences, JSON_HEX_TAG) !!};
-    let totalPresensi = hadir = izin = alpha = 0;
-    for (const data in dataSource) {
-        if (Object.hasOwnProperty.call(dataSource, data)) {
-            const {status} = dataSource[data];
-            totalPresensi++;
-            if (status === "Hadir") hadir++;
-            else if(status === "Izin") izin++;
-            else if(status === "Alpha") alpha++;
-        }
-    }
+
     const data = {
         labels: ["Hadir", "Izin", "Sakit"],
         datasets: [{
-            backgroundColor: [ "rgb(32, 201, 151)", "rgb(13,110,253)", "rgb(255, 205, 86)" ],
-            data: [hadir, izin, alpha],
+            backgroundColor: ["rgb(32, 201, 151)", "rgb(13,110,253)", "rgb(255, 205, 86)"],
+            data: @json($data_pie_kehadiran),
         }, ],
     };
-    const progressBarHadir = $('.progress-bar')[0]
-    const progressBarIzin = $('.progress-bar')[1]
-    const progressBarAlpha = $('.progress-bar')[2]
-    const persentaseHadir = controlProgressBarPercentage(totalPresensi,hadir) + "%"
-    const persentaseIzin = controlProgressBarPercentage(totalPresensi,izin) + "%"
-    const persentaseAlpha = controlProgressBarPercentage(totalPresensi,alpha) + "%"
-    $(progressBarHadir).attr({ valuenow: hadir,style: `width: ${persentaseHadir}` })
-    $(progressBarIzin).attr({ valuenow: izin, style: `width: ${persentaseIzin}` })
-    $(progressBarAlpha).attr({ valuenow: alpha, style: `width: ${persentaseAlpha}` })
-    $('div.progress + p')[0].innerText = persentaseHadir
-    $('div.progress + p')[1].innerText = persentaseIzin
-    $('div.progress + p')[2].innerText = persentaseAlpha
+
     const pieKehadiran = new Chart(document.getElementById("pieKehadiran"), {
         type: "doughnut",
         data: data,
-        options: { cutout: 60, borderWidth: 0, plugins: { legend: { display: false } } },
+        options: {
+            cutout: 60,
+            borderWidth: 0,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        },
     });
 </script>
 @endsection
