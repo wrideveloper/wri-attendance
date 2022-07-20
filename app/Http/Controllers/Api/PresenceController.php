@@ -25,7 +25,7 @@ class PresenceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        //
+        // Tidak digunakan dalam bentuk data API
     }
 
     /**
@@ -49,8 +49,9 @@ class PresenceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show(Presence $presence) {
+        $presences = Presence::find($presence->nim);
         return response()->json([
-            'response' => $presence
+            'response' => $presences,
         ]);
     }
 
@@ -73,11 +74,11 @@ class PresenceController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Presence $presence) {
+    public function update(PresenceRequest $request, Presence $presence) {
         $rule = $request->validated();
-        Presence::where('id', $presence->id)->update($rule);
+        $updatedPresence = Presence::where('nim', $presence->nim)->update($rule);
         return response()->json([
-            'response' => $presence
+            'response' => $updatedPresence
         ]);
     }
 
@@ -88,7 +89,7 @@ class PresenceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy(Presence $presence) {
-        Presence::destroy($presence->id);
+        Presence::destroy($presence->nim);
         return response()->json([
             'response' => 'success'
         ]);
