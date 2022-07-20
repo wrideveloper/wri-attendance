@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Presence;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PresenceRequest;
 
 class PresenceController extends Controller {
     /**
@@ -33,8 +34,12 @@ class PresenceController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        //
+    public function store(PresenceRequest $request) {
+        $request->validated();
+        $presence = Presence::create($request->all());
+        return response()->json([
+            'response' => $presence
+        ]);
     }
 
     /**
@@ -43,8 +48,10 @@ class PresenceController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
-        //
+    public function show(Presence $presence) {
+        return response()->json([
+            'response' => $presence
+        ]);
     }
 
     /**
@@ -53,8 +60,10 @@ class PresenceController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
-        //
+    public function edit(Presence $presence) {
+        return response()->json([
+            'response' => $presence
+        ]);
     }
 
     /**
@@ -64,8 +73,12 @@ class PresenceController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
-        //
+    public function update(Request $request, Presence $presence) {
+        $rule = $request->validated();
+        Presence::where('id', $presence->id)->update($rule);
+        return response()->json([
+            'response' => $presence
+        ]);
     }
 
     /**
@@ -74,7 +87,10 @@ class PresenceController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
-        //
+    public function destroy(Presence $presence) {
+        Presence::destroy($presence->id);
+        return response()->json([
+            'response' => 'success'
+        ]);
     }
 }

@@ -17,6 +17,11 @@ class Miniclass extends Model
 
     public function meeting()
     {
-        return $this->hasMany(Meeting::class);
+        return $this->hasMany(Meetings::class);
+    }
+
+    public function presence()
+    {
+        return $this->hasManyThrough(Presence::class, Meetings::class);
     }
 }

@@ -35,7 +35,11 @@ class MiniclassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $this->validate($request, [
+        'miniclass_name' => 'required|max:255',
+        ]);
+
+        Miniclass::create($validatedData);
     }
 
     /**
@@ -69,7 +73,11 @@ class MiniclassController extends Controller
      */
     public function update(Request $request, Miniclass $miniclass)
     {
-        //
+        $validatedData = $this->validate($request, [
+        'miniclass_name' => 'required|max:255',
+        ]);
+
+        Miniclass::where('miniclass_name', $miniclass->miniclass_name)->update($validatedData);
     }
 
     /**

@@ -1,0 +1,129 @@
+#atas {
+    margin-bottom: 14px;
+}
+
+#pertemuan {
+    font-weight: 400;
+    font-size: 24px;
+    margin-top: 14px;
+    color: rgb(0, 0, 0);
+}
+
+#nama {
+    color: rgb(0, 0, 0);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
+
+#back {
+    color: #9fa4a9;
+    font-style: normal;
+    font-size: x-large;
+    line-height: 46px;
+    margin-left: 5px;
+}
+
+#bgback {
+    background-color: #fff;
+    background-size: 46px;
+    border-radius: 15px;
+    width: 46px;
+    height: 46px;
+    margin-right: 11px;
+}
+
+#content {
+    background-color: #ffff;
+    border-radius: 15px;
+    box-shadow: 0px 16px 40px rgba(0, 0, 0, 0.03);
+}
+
+#content #nama {
+    margin-bottom: 25px;
+}
+
+#line {
+    margin-bottom: 47px;
+    width: 100%;
+}
+
+#content h5 {
+    color: #73787e;
+    margin-bottom: 57px;
+}
+
+#content p {
+    margin-bottom: 45px;
+}
+
+#isidataanggota p {
+    color: #000000;
+}
+
+#isidataanggota #Email {
+    color: #3366ff;
+}
+
+#NomorHP {
+    margin-top: 45px;
+}
+
+#NIM {
+    margin-bottom: 50px;
+}
+
+#isiabsen p {
+    color: #000000;
+}
+
+#isiabsen #WaktuAbsen {
+    margin-bottom: 40px;
+}
+
+#isiabsen #status {
+    margin-bottom: 38px;
+}
+
+#isiabsen #status #pilih {
+    color: #73787e;
+}
+
+#isiabsen #status #hadir {
+    color: #4fbeab;
+}
+
+#isiabsen #status #izin {
+    color: #3366ff;
+}
+
+#isiabsen #status #sakit {
+    color: #ffb020;
+}
+
+#isiabsen #Feedback {
+    margin-bottom: 144px;
+}
+
+#backbutton {
+    color: black;
+    border: 1px solid #aca8cc;
+    border-radius: 8px;
+    margin-right: 24px;
+    margin-left: 12px;
+    background-color: #ffff;
+    width: 147px;
+    height: 46px;
+    padding-top: 8px;
+}
+
+#updatebutton {
+    color: white;
+    border-radius: 8px;
+    width: 147px;
+    height: 46px;
+    padding-bottom: 8px;
+}

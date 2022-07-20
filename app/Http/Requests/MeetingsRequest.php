@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePresenceRequest extends FormRequest
+class MeetingsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class StorePresenceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class StorePresenceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'miniclasses_id' => 'required|exists:Miniclasses,id',
+            'topik' => 'required|string|max:255',
+            'tanggal' => 'required|date',
+            'start_time' => 'required|time',
+            'end_time' => 'required|time',
+            'pertemuan' => 'required|integer',
+            'token' => 'required|string'
         ];
     }
 }

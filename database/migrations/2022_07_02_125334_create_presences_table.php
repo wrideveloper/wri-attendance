@@ -11,15 +11,15 @@ class CreatePresencesTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('presences', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('miniclass_meetings_id')->constrained();
+            $table->foreignId('meetings_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->date('presence_date');
             $table->string('status');
             $table->string('ket');
+            $table->string('token', 10);
             $table->text('feedback');
             $table->timestamps();
         });

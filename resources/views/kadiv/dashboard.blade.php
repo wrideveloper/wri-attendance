@@ -1,15 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="position-absolute h-100 d-flex align-items-center px-5">
-    Sidebar
-</div>
-<div class="dashboard container">
-    <div class="col-12 d-flex justify-content-end align-items-center pt-3">
-        <h6 class="mb-0 me-3 fw-bold fs-6 text-secondary">Nama Pengguna</h6>
-        <i class="fa-solid fa-circle-user fs-2 text-warning"></i>
-    </div>
-    <h4 class="fw-normal mt-5 mb-0">Prosentase Kehadiran</h4>
+
+<div class="container pb-5 px-4">
+    <h4 class="fw-normal mb-0">Prosentase Kehadiran</h4>
     <div class="col-12 mt-4">
         <div class="row align-items-center justify-content-between flex-column flex-lg-row">
             <div class="col-12 d-flex align-items-center flex-column flex-md-row shadow-cs p-3">
@@ -54,10 +48,11 @@
                         <th class="py-3">Topik</th>
                         <th class="py-3 text-center">Aksi</th>
                     </tr>
+                    @foreach($presences->take(3) as $presence)
                     <tr class="align-middle">
-                        <td>1</td>
-                        <td>2021-05-26</td>
-                        <td class="col-1 text-truncate">Belajar Laravel</td>
+                        <td>{{$presence->meetings->pertemuan}}</td>
+                        <td>{{$presence->meetings->tanggal}}</td>
+                        <td class="col-1 text-truncate">{{$presence->meetings->topik}}</td>
                         <td class="d-flex justify-content-center">
                             <button class="btn btn-warning text-light">
                                 <i class="fa-solid fa-pen-to-square"></i>
@@ -65,49 +60,52 @@
                             <button class="ms-3 col-md-7 btn btn-primary text-light">Detail</button>
                         </td>
                     </tr>
-                    <tr class="align-middle">
-                        <td>2</td>
-                        <td>2021-05-28</td>
-                        <td class="col-1 text-truncate">Belajar UI Design</td>
-                        <td class="d-flex justify-content-center">
-                            <button class="btn btn-warning text-light">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            <button class="ms-3 col-md-7 btn btn-primary text-light">Detail</button>
-                        </td>
-                    </tr>
+                    @endforeach
                 </table>
             </div>
             <a class="mt-3 link-secondary text-decoration-none text-center" href="">Lihat Semua</a>
         </div>
     </div>
 </div>
-
 @endsection
 
 @section('overrideScript')
 <script>
     controlBodyBackgroundColor()
-
+    const dataSource = {!! json_encode($presences, JSON_HEX_TAG) !!};
+    let totalPresensi = hadir = izin = alpha = 0;
+    for (const data in dataSource) {
+        if (Object.hasOwnProperty.call(dataSource, data)) {
+            const {status} = dataSource[data];
+            totalPresensi++;
+            if (status === "Hadir") hadir++;
+            else if(status === "Izin") izin++;
+            else if(status === "Alpha") alpha++;
+        }
+    }
     const data = {
         labels: ["Hadir", "Izin", "Sakit"],
-        datasets: [
-            {
-                backgroundColor: [
-                    "rgb(32, 201, 151)",
-                    "rgb(13,110,253)",
-                    "rgb(255, 205, 86)",
-                ],
-                data: [50, 35, 15],
-            },
-        ],
+        datasets: [{
+            backgroundColor: [ "rgb(32, 201, 151)", "rgb(13,110,253)", "rgb(255, 205, 86)" ],
+            data: [hadir, izin, alpha],
+        }, ],
     };
-
+    const progressBarHadir = $('.progress-bar')[0]
+    const progressBarIzin = $('.progress-bar')[1]
+    const progressBarAlpha = $('.progress-bar')[2]
+    const persentaseHadir = controlProgressBarPercentage(totalPresensi,hadir) + "%"
+    const persentaseIzin = controlProgressBarPercentage(totalPresensi,izin) + "%"
+    const persentaseAlpha = controlProgressBarPercentage(totalPresensi,alpha) + "%"
+    $(progressBarHadir).attr({ valuenow: hadir,style: `width: ${persentaseHadir}` })
+    $(progressBarIzin).attr({ valuenow: izin, style: `width: ${persentaseIzin}` })
+    $(progressBarAlpha).attr({ valuenow: alpha, style: `width: ${persentaseAlpha}` })
+    $('div.progress + p')[0].innerText = persentaseHadir
+    $('div.progress + p')[1].innerText = persentaseIzin
+    $('div.progress + p')[2].innerText = persentaseAlpha
     const pieKehadiran = new Chart(document.getElementById("pieKehadiran"), {
         type: "doughnut",
         data: data,
-        options: { cutout: 60, borderWidth: 0, plugins: { legend: { display: false } } },
-        
+        options: { cutout: 70, borderWidth: 0, plugins: { legend: { display: false } } },
     });
 </script>
 @endsection

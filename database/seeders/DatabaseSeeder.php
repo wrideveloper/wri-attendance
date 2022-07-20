@@ -12,27 +12,15 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         // \App\Models\User::factory(10)->create();
-        Miniclass::create([
-            'miniclass_name' => 'Web'
-        ]);
-
-        Miniclass::create([
-            'miniclass_name' => 'Mobile'
-        ]);
-
-        Miniclass::create([
-            'miniclass_name' => 'UI/UX'
-        ]);
-
-        Miniclass::create([
-            'miniclass_name' => 'Game'
-        ]);
-
-        Miniclass::create([
-            'miniclass_name' => 'IoT'
+        $this->call([
+            RoleSeeder::class,
+            MiniclassSeeder::class,
+            GenerationSeeder::class,
+            UserSeeder::class,
+            MeetingsSeeder::class,
+            PresenceSeeder::class,
         ]);
     }
 }
