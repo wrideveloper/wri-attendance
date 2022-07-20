@@ -43,6 +43,9 @@ Route::get('/kadiv/update-jadwal', fn () => view('kadiv.update_jadwal'));
 Route::get('/kadiv/attendance-list', fn () => view('kadiv.attendance_list'));
 
 Route::get('/admin/add-user', fn () => view('admin.add_user'));
+
+Route::get('/admin', fn () => view('admin.dashboard'));
+
 Route::get('/admin/edit-absensi', fn () => view('admin.edit_absensi'));
 Route::get('/admin/edit-profil', fn () => view('admin.edit_profil'));
 
@@ -73,3 +76,4 @@ Route::controller(ConfigMeetingController::class)->group(function () {
         Route::delete('/check-presence/{presence}/edit', 'deletePresence')->name('delete-presence');
     });
 });
+
