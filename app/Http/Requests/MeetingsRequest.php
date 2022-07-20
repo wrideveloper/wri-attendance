@@ -30,7 +30,7 @@ class MeetingsRequest extends FormRequest
             'start_time' => 'required|time',
             'end_time' => 'required|time',
             'pertemuan' => 'required|integer',
-            'token' => 'required|string'
+            'token' => 'required|string|max:7'
         ];
     }
 }

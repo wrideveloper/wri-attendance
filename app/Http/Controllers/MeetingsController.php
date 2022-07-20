@@ -16,7 +16,7 @@ class MeetingsController extends Controller
      */
     public function index()
     {
-        $datas -> Meetings::all;
+        $datas = Meetings::all();
         return view('Meetings.index', compact([
             'datas' => $datas
         ]));
@@ -34,9 +34,7 @@ class MeetingsController extends Controller
      */
     public function store(MeetingsRequest $request)
     {
-        $data = $request->validate([
-            all()
-        ]);
+        $data = $request->validate();
         Meetings::create($data);
         return redirect()->route('Meetings.index');
     }
@@ -63,13 +61,8 @@ class MeetingsController extends Controller
      */
     public function edit(MeetingsResponse $request, $id)
     {
-        $newData = $request->validate([
-            all()
-        ]);
-        $data = Meetings::where('id', $id)->get();
-        $data->update([
-            all() => $newData[all()]
-        ]);
+        $newData = $request->validate();
+        $data = Meetings::where('id', $id)->update($newData);
         return redirect()->route('Meetings.index');
     }
 
@@ -80,9 +73,7 @@ class MeetingsController extends Controller
      */
     public function destroy($id)
     {
-        $datas = collect(Meetings::all)->forget($id);
-        return redirect()->route('Meetings.index', compact([
-            'datas' => $data
-        ]));
+        Meetings::destroy($id);
+        return redirect()->route('Meetings.index');
     }
 }
