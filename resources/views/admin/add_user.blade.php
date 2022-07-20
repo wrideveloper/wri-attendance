@@ -3,7 +3,7 @@
 @section('content')
 <div class="container py-5 px-4">
     <div class="container-fluid">
-        <div class="d-flex justify-content-between mb-3">
+        <div class="d-flex justify-content-between mb-3 flex-column flex-md-row">
             <div class="p-2">
                 <h5 class="">Data Anggota User</h5>
             </div>
@@ -15,30 +15,32 @@
         </div>
     </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">No</th>
-                <th scope="col">Nama</th>
-                <th scope="col">Angkatan</th>
-                <th scope="col">Miniclass</th>
-                <th scope="col">Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1.</th>
-                <td>Muhammad Eren Yeager</td>
-                <td>8</td>
-                <td>Web</td>
-                <td>
-                    <a type="button" href="/admin/edit-profil" class="btn btn-primary btn-sm px-3 me-2">Edit</a>
-                    <button type="button" class="btn btn-danger btn-sm px-3" data-bs-toggle="modal"
-                        data-bs-target="#confirmdelete">Hapus</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Angkatan</th>
+                    <th scope="col">Miniclass</th>
+                    <th scope="col">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1.</th>
+                    <td>Muhammad Eren Yeager</td>
+                    <td>8</td>
+                    <td>Web</td>
+                    <td>
+                        <a type="button" href="/admin/edit-profil" class="btn btn-primary btn-sm px-3 me-2">Edit</a>
+                        <button type="button" class="btn btn-danger btn-sm px-3" data-bs-toggle="modal"
+                            data-bs-target="#confirmdelete">Hapus</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 </div>
 
@@ -71,7 +73,7 @@
                     </div>
                     <div class="col-12">
                         <div class="row">
-                            <div class="form-group mb-3 col-6">
+                            <div class="form-group mb-3 col-12 col-md-6">
                                 <label for="angkatan" class="form-label fs-5">Angkatan</label>
                                 <select name="angkatan" id="angkatan" class="form-control">
                                     <option selected disabled>Pilih Angkatan</option>
@@ -80,7 +82,7 @@
                                     <option value="9">WRI9</option>
                                 </select>
                             </div>
-                            <div class="form-group mb-3 col-6">
+                            <div class="form-group mb-3 col-12 col-md-6">
                                 <label for="miniclass" class="form-label fs-5">Miniclass</label>
                                 <select name="miniclass" id="miniclass" class="form-control">
                                     <option selected disabled>Pilih Miniclass</option>
@@ -98,8 +100,8 @@
                     </div>
                     <div class="col-12 px-2">
                         <div class="row justify-content-between">
-                            <button class="col-5 btn btn-danger text-light px-5">Batal</button>
-                            <button class="col-5 btn btn-teal text-light px-5">Simpan</button>
+                            <button class="col-5 btn btn-danger text-light px-2 px-md-5">Batal</button>
+                            <button class="col-5 btn btn-teal text-light px-2 px-md-5">Simpan</button>
                         </div>
                     </div>
                 </form>

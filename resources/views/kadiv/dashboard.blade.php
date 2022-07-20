@@ -14,7 +14,7 @@
                     <div class="col-12 d-flex justify-content-around align-items-center mb-2">
                         <p class="m-0 ms-md-5 d-inline col-2 p-0 ps-lg-5">Hadir</p>
                         <div class="progress col-8" style="height: .8rem">
-                            <div class="progress-bar bg-teal" role="progressbar" style="width: 50%" aria-valuenow="50"
+                            <div class="progress-bar bg-teal rounded" role="progressbar" style="width: 50%" aria-valuenow="50"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <p class="m-0 d-inline col-2 text-end text-md-center">50%</p>
@@ -22,7 +22,7 @@
                     <div class="col-12 d-flex justify-content-around align-items-center mb-2">
                         <p class="m-0 ms-md-5 d-inline col-2 p-0 ps-lg-5">Izin</p>
                         <div class="progress col-8" style="height: .8rem">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 35%"
+                            <div class="progress-bar bg-primary rounded" role="progressbar" style="width: 35%"
                                 aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <p class="m-0 d-inline col-2 text-end text-md-center">30%</p>
@@ -30,7 +30,7 @@
                     <div class="col-12 d-flex justify-content-around align-items-center">
                         <p class="m-0 ms-md-5 d-inline col-2 p-0 ps-lg-5">Sakit</p>
                         <div class="progress col-8" style="height: .8rem">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 15%"
+                            <div class="progress-bar bg-warning rounded" role="progressbar" style="width: 15%"
                                 aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <p class="m-0 d-inline col-2 text-end text-md-center">15%</p>
@@ -105,7 +105,7 @@
     const pieKehadiran = new Chart(document.getElementById("pieKehadiran"), {
         type: "doughnut",
         data: data,
-        options: { cutout: 70, borderWidth: 0, plugins: { legend: { display: false } } },
+        options: { cutout: 60, borderWidth: 0, plugins: { legend: { display: false } } },
     });
 </script>
 @endsection
