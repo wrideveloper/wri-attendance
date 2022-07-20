@@ -5,7 +5,7 @@
 <div class="container pb-5 px-4 d-flex flex-column justify-content-center">
     <h5 class="mb-4 mb-md-5">Edit Profile</h5>
     <div class="col-md-12">
-        <form class="edit-profil form rounded bg-light pb-5 px-0 px-md-5 bg-white py-0 py-md-2">
+        <form class="edit-profil form rounded bg-light py-4 px-5 px-md-5 bg-white py-0 py-md-2">
             <div class="form-group mb-3">
                 <label for="name" class="form-label fs-5">Nama</label>
                 <input id="name" type="text" class="form-control" placeholder="Input your name">
