@@ -15,7 +15,7 @@ class PresenceFactory extends Factory
      */
     public function definition() {
         return [
-            'meetings_id' => Meetings::factory()->create()->id,
+            'meetings_id' => rand(1, Meetings::count()),
             'nim' => User::factory()->create()->nim,
             'presence_date' => $this->faker->dateTimeBetween('-1 hours', 'now'),
             'status' => $this->faker->randomElement(['Hadir', 'Sakit', 'Izin', 'Alpha']),
