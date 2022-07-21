@@ -14,40 +14,40 @@
                     <div class="col-12 d-flex justify-content-around align-items-center mb-2">
                         <p class="m-0 ms-md-5 d-inline col-2">Hadir</p>
                         <div class="progress col-8" style="height: .8rem">
-                            <div class="progress-bar bg-teal rounded" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-teal rounded" role="progressbar" style="width: {{ $prosentase_hadir }}%" aria-valuenow="{{ $prosentase_hadir }}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <p class="m-0 d-inline col-2 text-end text-md-center">50%</p>
+                        <p class="m-0 d-inline col-2 text-end text-md-center">{{ $prosentase_hadir }}%</p>
                     </div>
                     <div class="col-12 d-flex justify-content-around align-items-center mb-2">
                         <p class="m-0 ms-md-5 d-inline col-2">Izin</p>
                         <div class="progress col-8" style="height: .8rem">
-                            <div class="progress-bar bg-primary rounded" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-primary rounded" role="progressbar" style="width: {{ $prosentase_izin }}%" aria-valuenow="{{ $prosentase_izin }}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <p class="m-0 d-inline col-2 text-end text-md-center">30%</p>
+                        <p class="m-0 d-inline col-2 text-end text-md-center">{{ $prosentase_izin }}%</p>
                     </div>
                     <div class="col-12 d-flex justify-content-around align-items-center">
                         <p class="m-0 ms-md-5 d-inline col-2">Sakit</p>
                         <div class="progress col-8" style="height: .8rem">
-                            <div class="progress-bar bg-warning rounded" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-warning rounded" role="progressbar" style="width: {{ $prosentase_sakit }}%" aria-valuenow="{{ $prosentase_sakit }}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <p class="m-0 d-inline col-2 text-end text-md-center">15%</p>
+                        <p class="m-0 d-inline col-2 text-end text-md-center">{{ $prosentase_sakit }}%</p>
                     </div>
                 </div>
             </div>
             <div class="col-12 col-md-12 col-lg-4 shadow-cs p-3">
                 <p class="text-secondary">Timeline</p>
-                @foreach ($presences->take(2) as $item)
+                @foreach ($timeline as $item)
                 <div class="col-12 d-flex">
                     <div class="col-8 d-flex flex-column">
                         <a href="{{ url('/') }}" class="fw-bold text-dark text-decoration-none mb-3">
-                            Pertemuan {{$item->meetings->pertemuan}}
+                            Pertemuan {{$item->pertemuan}}
                         </a>
-                        <p>{{$item->meetings->topik}}</p>
+                        <p>{{$item->topik}}</p>
                     </div>
                     <div class="col-4 d-flex flex-column text-end">
-                        <p class="text-secondary">{{date('d F Y', strtotime($item->meetings->tanggal)) }}</p>
-                        <p class="text-secondary">{{date('H:i', strtotime($item->meetings->start_time))}} -
-                            {{date('H:i', strtotime($item->meetings->end_time))}}
+                        <p class="text-secondary">{{date('d F Y', strtotime($item->tanggal)) }}</p>
+                        <p class="text-secondary">{{date('H:i', strtotime($item->start_time))}} -
+                            {{date('H:i', strtotime($item->end_time))}}
                         </p>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                         <th class="py-3">Status</th>
                         <th class="py-3">Keterangan</th>
                     </tr>
-                    @foreach ($presences->take(5) as $item)
+                    @foreach ($daftar_kehadiran as $item)
                     @php
                     $statusColor = "";
                     if($item->status === "Hadir") $statusColor = "text-info";

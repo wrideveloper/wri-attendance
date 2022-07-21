@@ -34,20 +34,17 @@ Route::get('/post-absensi', function () {
     return view('user.input_absensi');
 })->name('post-absensi');
 
+// home route after login
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
-Route::get('/user', fn () => view('user.dashboard', ['presences' => Presence::all()->load(['user', 'meetings'])->where('user_id', 1)->sortByDesc("meetings.pertemuan")])); // issue : user_id 1 kemungkinan tidak memiliki role member
 Route::get('/user/edit-profil', fn () => view('user.edit_profil'));
 Route::get('/user/input_absensi', fn () => view('user.input_absensi'));
 
-Route::get('/kadiv', fn () => view('kadiv.dashboard', ['presences' => Presence::all()->load(['user', 'meetings'])->where('user_id', 2)->sortByDesc("meetings.pertemuan")])); // issue : user_id 2 kemungkinan tidak memiliki role kadiv
 Route::get('/kadiv/edit-profil', fn () => view('kadiv.edit_profil'));
 Route::get('/kadiv/update-jadwal', fn () => view('kadiv.update_jadwal'));
 Route::get('/kadiv/attendance-list', fn () => view('kadiv.attendance_list'));
 
 Route::get('/admin/add-user', fn () => view('admin.add_user'));
-
-Route::get('/admin', fn () => view('admin.dashboard'));
 
 Route::get('/admin/edit-absensi', fn () => view('admin.edit_absensi'));
 Route::get('/admin/edit-profil', fn () => view('admin.edit_profil'));

@@ -14,21 +14,21 @@
                     <div class="col-12 d-flex justify-content-around align-items-center mb-2">
                         <p class="m-0 ms-md-5 d-inline col-2 p-0 ps-lg-5">Hadir</p>
                         <div class="progress col-8" style="height: .8rem">
-                            <div class="progress-bar bg-teal rounded" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-teal rounded" role="progressbar" style="width: {{ $prosentase_hadir }}%" aria-valuenow="{{ $prosentase_hadir }}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <p class="m-0 d-inline col-2 text-end text-md-center">{{ $prosentase_hadir }}%</p>
                     </div>
                     <div class="col-12 d-flex justify-content-around align-items-center mb-2">
                         <p class="m-0 ms-md-5 d-inline col-2 p-0 ps-lg-5">Izin</p>
                         <div class="progress col-8" style="height: .8rem">
-                            <div class="progress-bar bg-primary rounded" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-primary rounded" role="progressbar" style="width: {{ $prosentase_izin }}%" aria-valuenow="{{ $prosentase_izin }}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <p class="m-0 d-inline col-2 text-end text-md-center">{{ $prosentase_izin }}%</p>
                     </div>
                     <div class="col-12 d-flex justify-content-around align-items-center">
                         <p class="m-0 ms-md-5 d-inline col-2 p-0 ps-lg-5">Sakit</p>
                         <div class="progress col-8" style="height: .8rem">
-                            <div class="progress-bar bg-warning rounded" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-warning rounded" role="progressbar" style="width: {{ $prosentase_sakit }}%" aria-valuenow="{{ $prosentase_sakit }}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <p class="m-0 d-inline col-2 text-end text-md-center">{{ $prosentase_sakit }}%</p>
                     </div>
