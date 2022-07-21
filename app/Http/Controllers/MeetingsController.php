@@ -65,10 +65,10 @@ class MeetingsController extends Controller
      *
      * 
      */
-    public function update(MeetingsResponse $request, $id)
+    public function update(MeetingsResponse $request, Meetings $meeting)
     {
         $newData = $request->validate();
-        $data = Meetings::where('id', $id)->update($newData);
+        $data = Meetings::where('id', $meeting->id)->update($newData);
         return redirect()->route('Meetings.index');
     }
 
