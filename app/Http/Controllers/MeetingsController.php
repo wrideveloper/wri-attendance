@@ -30,7 +30,7 @@ class MeetingsController extends Controller
     public function edit(Meetings $meeting)
     {
         return view('Meetings.edit',[
-            'Meetings'=> $ meeting
+            'Meetings'=> $meeting
         ]);
     }
 
