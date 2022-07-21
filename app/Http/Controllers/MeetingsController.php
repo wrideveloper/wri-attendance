@@ -16,7 +16,7 @@ class MeetingsController extends Controller
      */
     public function index()
     {
-        $datas -> Meetings::all;
+        $datas = Meetings::all();
         return view('Meetings.index', compact([
             'datas' => $datas
         ]));
@@ -26,6 +26,13 @@ class MeetingsController extends Controller
     {
         return view('Meetings.create');
     }
+    
+    public function edit(Meetings $meeting)
+    {
+        return view('Meetings.edit',[
+            'Meetings'=> $meeting
+        ]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -34,9 +41,7 @@ class MeetingsController extends Controller
      */
     public function store(MeetingsRequest $request)
     {
-        $data = $request->validate([
-            all()
-        ]);
+        $data = $request->validate();
         Meetings::create($data);
         return redirect()->route('Meetings.index');
     }
@@ -48,11 +53,10 @@ class MeetingsController extends Controller
      *
      *
      */
-    public function show($id)
+    public function show(Meetings $meeting)
     {
-        $data = Meetings::where('id', $id)->get();
         return view('Meetings.show', [
-            'data' => $data
+            'Meetings' => $meeting
         ]);
     }
 
@@ -61,15 +65,10 @@ class MeetingsController extends Controller
      *
      * 
      */
-    public function edit(MeetingsResponse $request, $id)
+    public function update(MeetingsResponse $request, Meetings $meeting)
     {
-        $newData = $request->validate([
-            all()
-        ]);
-        $data = Meetings::where('id', $id)->get();
-        $data->update([
-            all() => $newData[all()]
-        ]);
+        $newData = $request->validate();
+        $data = Meetings::where('id', $meeting->id)->update($newData);
         return redirect()->route('Meetings.index');
     }
 
@@ -78,11 +77,9 @@ class MeetingsController extends Controller
      *
      *
      */
-    public function destroy($id)
+    public function destroy(Meetings $meeting)
     {
-        $datas = collect(Meetings::all)->forget($id);
-        return redirect()->route('Meetings.index', compact([
-            'datas' => $data
-        ]));
+        Meetings::destroy($meeting->id);
+        return redirect()->route('Meetings.index');
     }
 }
