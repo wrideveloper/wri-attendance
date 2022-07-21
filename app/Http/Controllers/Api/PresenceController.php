@@ -49,9 +49,9 @@ class PresenceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show(Presence $presence) {
-        $presences = Presence::find($presence->nim);
+        // $presences = Presence::where('nim', $presence->nim);
         return response()->json([
-            'response' => $presences,
+            'response' => $presence,
         ]);
     }
 
@@ -89,7 +89,7 @@ class PresenceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy(Presence $presence) {
-        Presence::destroy($presence->nim);
+        Presence::where('nim', $presence->nim)->delete();
         return response()->json([
             'response' => 'success'
         ]);
