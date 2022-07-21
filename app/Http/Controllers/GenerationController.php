@@ -88,9 +88,7 @@ class GenerationController extends Controller
         ]);
     
         $data = Generation::find($id);
-        $data->update([
-            'crew_name'=>$validated["crew_name"]
-        ]);
+        $data->update($validatedData);
         return redirect()->route('generation.index');
     }
 
