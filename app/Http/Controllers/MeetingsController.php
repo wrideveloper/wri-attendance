@@ -26,6 +26,13 @@ class MeetingsController extends Controller
     {
         return view('Meetings.create');
     }
+    
+    public function edit(Meetings $meeting)
+    {
+        return view('Meetings.edit',[
+            'Meetings'=> $ meeting
+        ]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -46,11 +53,10 @@ class MeetingsController extends Controller
      *
      *
      */
-    public function show($id)
+    public function show(Meetings $meeting)
     {
-        $data = Meetings::where('id', $id)->get();
         return view('Meetings.show', [
-            'data' => $data
+            'Meetings' => $meeting
         ]);
     }
 
@@ -59,7 +65,7 @@ class MeetingsController extends Controller
      *
      * 
      */
-    public function edit(MeetingsResponse $request, $id)
+    public function update(MeetingsResponse $request, $id)
     {
         $newData = $request->validate();
         $data = Meetings::where('id', $id)->update($newData);
@@ -71,9 +77,9 @@ class MeetingsController extends Controller
      *
      *
      */
-    public function destroy($id)
+    public function destroy(Meetings $meeting)
     {
-        Meetings::destroy($id);
+        Meetings::destroy($meeting->id);
         return redirect()->route('Meetings.index');
     }
 }
