@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use \App\Http\Requests\MeetingsRequest;
 use \App\Models\Meetings;
 use \Illuminate\Http\Response;
-use App\Http\Controller;
+use App\Http\Controllers\Controller;
 
 class MeetingsController extends Controller
 {
@@ -60,7 +60,7 @@ class MeetingsController extends Controller
      *
      * 
      */
-    public function update(MeetingsResponse $request, Meetings $meeting)
+    public function update(MeetingsRequest $request, Meetings $meeting)
     {
         $newData = $request->validate();
         $data = Meetings::where('id', $meeting->id)->update($newData);
