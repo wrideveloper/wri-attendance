@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PresenceController;
 use App\Http\Controllers\ConfigMeetingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MiniclassController;
 use App\Http\Controllers\RegisterController;
 use App\Models\Meetings;
 
@@ -48,6 +49,8 @@ Route::get('/admin/add-user', fn () => view('admin.add_user'));
 
 Route::get('/admin/edit-absensi', fn () => view('admin.edit_absensi'));
 Route::get('/admin/edit-profil', fn () => view('admin.edit_profil'));
+
+Route::resource('/miniclass', MiniclassController::class);
 
 // Sisi User
 Route::resource('/presence', PresenceController::class);

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Miniclass;
 use Illuminate\Http\Request;
 
@@ -39,16 +40,19 @@ class MiniclassController extends Controller
             'miniclass_name' => 'required|max:255',
         ]);
 
-        Miniclass::create($validatedData);
+        $miniclass = Miniclass::create($validatedData);
+        return response()->json([
+            'response' => $miniclass
+        ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Miniclass  $miniclass
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Miniclass $miniclass)
+    public function show($id)
     {
         //
     }
@@ -56,10 +60,10 @@ class MiniclassController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Miniclass  $miniclass
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Miniclass $miniclass)
+    public function edit($id)
     {
         //
     }
@@ -68,7 +72,7 @@ class MiniclassController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Miniclass  $miniclass
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Miniclass $miniclass)
@@ -77,16 +81,19 @@ class MiniclassController extends Controller
             'miniclass_name' => 'required|max:255',
         ]);
 
-        Miniclass::where('miniclass_name', $miniclass->miniclass_name)->update($validatedData);
+        $updatedMiniclass = Miniclass::where('miniclass_name', $miniclass->miniclass_name)->update($validatedData);
+        return response()->json([
+            'response' => $updatedMiniclass
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Miniclass  $miniclass
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Miniclass $miniclass)
+    public function destroy($id)
     {
         //
     }
