@@ -35,7 +35,7 @@ class MeetingsController extends Controller
      */
     public function store(MeetingsRequest $request)
     {
-        $data = $request->validate();
+        $data = $request->validated();
         Meetings::create($data);
         return response()->json([
             'response' => $data
@@ -62,10 +62,10 @@ class MeetingsController extends Controller
      */
     public function update(MeetingsRequest $request, Meetings $meeting)
     {
-        $newData = $request->validate();
+        $newData = $request->validated();
         $data = Meetings::where('id', $meeting->id)->update($newData);
         return response()->json([
-            'response' => $newData
+            'response' => $data
         ]);
     }
 
