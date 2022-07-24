@@ -17,10 +17,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
+    protected $guarded = [
+        'id',
     ];
 
     /**
@@ -41,4 +39,34 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function roles()
+    {
+        return $this->belongsTo(Roles::class);
+    }
+
+    public function presence()
+    {
+        return $this->hasMany(Presence::class, 'nim', 'nim');
+    }
+
+    public function hadir()
+    {
+        return $this->presence()->where('status', 'Hadir')->orderBy('id', 'desc');
+    }
+
+    public function izin()
+    {
+        return $this->presence()->where('status', 'Izin')->orderBy('id', 'desc');
+    }
+
+    public function sakit()
+    {
+        return $this->presence()->where('status', 'Sakit')->orderBy('id', 'desc');
+    }
+
+    public function alpha()
+    {
+        return $this->presence()->where('status', 'Alpha')->orderBy('id', 'desc');
+    }
 }

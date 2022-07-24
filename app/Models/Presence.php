@@ -9,13 +9,15 @@ class Presence extends Model {
     use HasFactory;
 
     protected $table = 'presences';
+    protected $guarded = ['id'];
     protected $fillable = [
-        'miniclass_meetings_id',
-        'user_id',
+        'meetings_id',
+        'nim',
         'presence_date',
         'status',
         'ket',
-        'feedback'
+        'feedback',
+        'token',
     ];
 
     protected $with = [
@@ -32,6 +34,6 @@ class Presence extends Model {
     }
 
     public function user() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'nim');
     }
 }

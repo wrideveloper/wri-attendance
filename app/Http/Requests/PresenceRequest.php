@@ -28,20 +28,24 @@ class PresenceRequest extends FormRequest
         switch($this->method()){
             case 'POST': {
                 return [
-                    'user_id' => 'required|exists:users,id',
+                    'nim' => 'required|exists:users,nim',
+                    'meetings_id' => 'required|exists:meetings,id',
                     'presence_date' => 'required|date',
                     'status' => 'required|in:hadir,izin,sakit,alfa',
                     'ket' => 'nullable|string|max:255',
                     'feedback' => 'nullable|string|max:1000',
+                    'token' => 'required|string|max:10|exists:meetings,token'
                 ];
             } break;
             case 'PUT' : {
                 return [
-                    'user_id' => 'required|exists:users,id',
+                    'nim' => 'required|exists:users,nim',
+                    'meetings_id' => 'required|exists:meetings,id',
                     'presence_date' => 'sometimes|date',
                     'status' => 'sometimes|in:hadir,izin,sakit,alfa',
                     'ket' => 'sometimes|string|max:255',
                     'feedback' => 'sometimes|string|max:1000',
+                    'token' => 'required|string|max:10|exists:meetings,token'
                 ];
             } break;
         }

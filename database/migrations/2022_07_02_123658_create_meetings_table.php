@@ -19,7 +19,7 @@ class CreateMeetingsTable extends Migration {
             $table->time('start_time');
             $table->time('end_time');
             $table->integer('pertemuan');
-            $table->integer('token');
+            $table->string('token', 10);
             $table->timestamps();
         });
     }

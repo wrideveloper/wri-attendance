@@ -15,13 +15,15 @@ class CreatePresencesTable extends Migration
         Schema::create('presences', function (Blueprint $table) {
             $table->id();
             $table->foreignId('meetings_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->string('nim', 10);
             $table->date('presence_date');
             $table->string('status');
-            $table->string('ket');
+            $table->string('ket')->nullable();
             $table->string('token', 10);
-            $table->text('feedback');
+            $table->text('feedback')->nullable();
             $table->timestamps();
+
+            $table->foreign('nim')->references('nim')->on('users')->onDelete('cascade');
         });
     }
 
