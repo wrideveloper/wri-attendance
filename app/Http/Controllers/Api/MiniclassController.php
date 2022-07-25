@@ -15,7 +15,9 @@ class MiniclassController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json([
+            'response' => Miniclass::all()
+        ]);
     }
 
     /**
@@ -52,9 +54,11 @@ class MiniclassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Miniclass $miniclass)
     {
-        //
+        return response()->json([
+            'response' => $miniclass,
+        ]);
     }
 
     /**
@@ -63,9 +67,11 @@ class MiniclassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Miniclass $miniclass)
     {
-        //
+        return response()->json([
+            'response' => $miniclass
+        ]);
     }
 
     /**
@@ -93,8 +99,11 @@ class MiniclassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Miniclass $miniclass)
     {
-        //
+        Miniclass::where('miniclass_name', $miniclass->miniclass_name)->delete();
+        return response()->json([
+            'response' => 'success'
+        ]);
     }
 }
