@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PresenceController;
 use App\Http\Controllers\ConfigMeetingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MiniclassController;
 use App\Http\Controllers\RegisterController;
 use App\Models\Meetings;
@@ -23,6 +24,16 @@ use App\Models\Meetings;
 Route::get('/', function () {
     return view('auth.login');
 });
+
+Route::get('/login-page', function () {
+    return view('auth.login');
+});
+
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
+
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
 Route::get('/forgot-password', function () {
     return view('auth.forgotpassword');
 })->name('forgot-password');
@@ -32,11 +43,13 @@ Route::get('/reset-password', function () {
 })->name('reset-password');
 
 Route::get('/post-absensi', function () {
-    return view('user.input_absensi');
+    return view('user.input_absensi', [
+        'title' => 'Sistem Absensi Miniclass',
+    ]);
 })->name('post-absensi');
 
 // home route after login
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 Route::get('/user/edit-profil', fn () => view('user.edit_profil'));
 Route::get('/user/input_absensi', fn () => view('user.input_absensi'));

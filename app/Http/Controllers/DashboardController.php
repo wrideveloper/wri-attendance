@@ -13,7 +13,7 @@ class DashboardController extends Controller
     public function index()
     {
         // next menggunakan Auth::user()
-        $user = User::find(20);
+        $user = User::find(auth()->user()->id);
         $role = $user->roles->roles_name;
         // ini kan data precense auto generate ketika kadiv membuat miniclas meeting baru, default status e apa?
         if ($role == 'Admin') {
