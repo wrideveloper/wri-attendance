@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\PresenceController;
 use App\Http\Controllers\Api\MeetingsController;
+use App\Http\Controllers\Api\MiniclassController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -33,5 +34,7 @@ Route::post('register', [RegisterController::class, 'store']);
 
 // Sisi User
 Route::resource('/presence', PresenceController::class);
+
+Route::resource('/miniclass', MiniclassController::class);
 
 Route::apiResource('/meetings', MeetingsController::class);
