@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             MiniclassSeeder::class,
             GenerationSeeder::class,
-            // UserSeeder::class,
+            UserSeeder::class,
             MeetingsSeeder::class,
             PresenceSeeder::class,
         ]);

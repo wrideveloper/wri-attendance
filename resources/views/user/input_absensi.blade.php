@@ -1,4 +1,8 @@
 @extends('layouts.master')
+@section('title')
+Sistem Absensi WRI
+@endsection
+
 @section('content')
     <div class="container-fluid pb-5 px-4">
         <h1 class="h5 mb-4">Absen</h1>
@@ -30,6 +34,7 @@
         </form>
     </div>
 @endsection
+
 @section('overrideScript')
     <script src="{{ asset('js/showing-input.js') }}"></script>
 @endsection
