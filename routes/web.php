@@ -55,15 +55,29 @@ Route::get('/user/edit-profil', fn () => view('user.edit_profil'));
 Route::get('/user/input_absensi', fn () => view('user.input_absensi'));
 
 Route::get('/kadiv/edit-profil', fn () => view('kadiv.edit_profil'));
-Route::get('/kadiv/update-jadwal', fn () => view('kadiv.update_jadwal'));
 Route::get('/kadiv/attendance-list', fn () => view('kadiv.attendance_list'));
 
 Route::get('/admin/add-user', fn () => view('admin.add_user'));
-Route::get('/admin/dashboard', fn () => view('admin.dashboard'));
+Route::get('/admin/dashboard', fn () => view('admin.dashboard', [
+    'title' => 'Dashboard',
+]));
 Route::get('/admin/edit-absensi', fn () => view('admin.edit_absensi'));
 Route::get('/admin/edit-profil', fn () => view('admin.edit_profil'));
 
 Route::resource('/miniclass', MiniclassController::class);
+
+Route::prefix('/kadiv')->group(function() {
+    Route::get('/config-presensi', fn () => view('kadiv.config-presensi', [
+        'title' => 'Config Presensi',
+    ]));
+    Route::get('/edit-presensi', fn () => view('kadiv.config-presensi', [
+        'title' => 'Config Presensi',
+    ]));
+    Route::get('/check-presence/detail/{presence}/pertemuan-{presence}', [ConfigMeetingController::class, 'detailPresence'])->name('detail-presence');
+
+    // Delete Meetings
+    Route::delete('/delete-meetings/{meetings}', [ConfigMeetingController::class, 'deleteMeetings'])->name('delete-meetings');
+});
 
 // Sisi User
 Route::resource('/presence', PresenceController::class);
@@ -72,7 +86,7 @@ Route::controller(ConfigMeetingController::class)->group(function () {
     Route::prefix('/dashboard')->group(function () {
         Route::get('/config-meeting', 'listMeetings')->name('list-meetings');
         Route::get('/check-presence/{presence}', 'checkPresence')->name('check-presence');
-        Route::get('/check-presence/{presence}/detail', 'detailPresence')->name('detail-presence');
+        //Route::get('/check-presence/{presence}/detail', 'detailPresence')->name('detail-presence');
         Route::get('/config-meeting/create', 'createMeetings')->name('create-meetings');
 
         // Update Meetings
@@ -80,9 +94,6 @@ Route::controller(ConfigMeetingController::class)->group(function () {
 
         // Add Meetings
         Route::post('/config-meeting/post', 'postPresence')->name('post-presence');
-
-        // Delete Meetings
-        Route::delete('/check-meetings/{presence}', 'deleteMeetings')->name('delete-meetings');
 
         // Update Presence
         Route::put('/check-presence/{presence}/edit', 'updatePresence')->name('update-presence');

@@ -40,21 +40,27 @@
             <div class="table-responsive">
                 <table class="table mt-3 table-borderless">
                     <tr class="border-bottom border-dark mb-3">
-                        <th class="py-3">Pertemuan</th>
+                        <th class="py-3">No</th>
+                        <th class="py-3">Pertemuan Ke</th>
                         <th class="py-3">Tanggal</th>
                         <th class="py-3">Topik</th>
                         <th class="py-3 text-center">Aksi</th>
                     </tr>
                     @foreach($daftar_kehadiran as $p)
                     <tr class="align-middle">
+                        <td>{{$loop->iteration}}</td>
                         <td>{{$p->pertemuan}}</td>
-                        <td>{{$p->tanggal}}</td>
+                        <td>{{\Carbon\Carbon::parse($p->tanggal)->format('d M Y')}}</td>
                         <td class="col-1 text-truncate">{{$p->topik}}</td>
                         <td class="d-flex justify-content-center">
-                            <button class="btn btn-warning text-light">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            <button class="ms-3 col-md-7 btn btn-primary text-light">Detail</button>
+                            <a class="ms-3 col-md-7 btn btn-primary text-light" href="/check-presence/detail/{{ strtolower($p->miniclass->miniclass_name) }}/pertemuan-{{ $p->pertemuan }}">Detail</a>
+                            <form action="/kadiv/delete-meetings/{{ $p->topik }}" method="POST">
+                                @method('delete')
+                                @csrf
+                                <button onclick="return confirm('Anda yakin akan menghapus meetings ini?')" class="btn btn-danger text-light mx-1">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach

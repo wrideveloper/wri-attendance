@@ -1,9 +1,4 @@
-@section('content')
 @extends('layouts.master')
-@section('title')
-Dashboard Admin
-@endsection
-
 @section('content')
 <div class="container pe-0">
     <div class="container-fluid pt-3 d-flex justify-content-start pe-0">

@@ -28,7 +28,7 @@ class Meetings extends Model
         'pertemuan',
         'token'
     ];
-    protected $with = 'Miniclass';
+    protected $with = 'miniclass';
 
     public function presence()
     {

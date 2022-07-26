@@ -52,9 +52,10 @@ class ConfigMeetingController extends Controller {
     }
 
     // Hapus pertemuan
-    public function deleteMeetings(Presence $presence) {
-        Meetings::where('id', $presence->id)->delete();
-        return redirect()->route('dashboard.list-meetings')->with('success', 'Meetings deleted successfully.');
+    public function deleteMeetings(Meetings $meetings) {
+        $data = Meetings::where('topik', 'LIKE','%'.$meetings->topik.'%')->get();
+        $data->delete();
+        return redirect('/dashboard')->with('success', 'Meetings deleted successfully.');
     }
 
     // Berisi list presence dari mahasiswa pada miniclass yang dipilih
