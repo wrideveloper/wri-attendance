@@ -63,13 +63,25 @@
                         </h5>
                     </div>
                     <div class="row">
-                        <input type="text" class="form-control p-2" id="username" placeholder="Username">
+                        <input type="text" class="input-login form-control p-2 is-invalid" id="username"
+                            placeholder="Username">
+                        {{-- @error('email') --}}
+                        <span class="invalid-feedback" role="alert">
+                            <strong>salah</strong>
+                        </span>
+                        {{-- @enderror --}}
                     </div>
                     <div class="row">
-                        <input type="password" class="form-control p-2" id="password" placeholder="Password">
+                        <input type="password" class="input-login form-control p-2 is-invalid" id="password"
+                            placeholder="Password">
+                        {{-- @error('email') --}}
+                        <span class="invalid-feedback" role="alert">
+                            <strong>salah</strong>
+                        </span>
+                        {{-- @enderror --}}
                     </div>
                     <div class="d-flex justify-content-end">
-                        <div class="fw-semibold mt-2">
+                        <div class="fw-semibold my-2">
                             <a href="{{ route('forgot-password') }}" class="text-black">
                                 Lupa Password
                             </a>
