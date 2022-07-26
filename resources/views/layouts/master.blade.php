@@ -10,15 +10,13 @@
 
     <link rel="stylesheet" href="{{ asset('css/style.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>@yield('title')</title>
+    <title>WRI Attendance | @yield('title')</title>
 
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/input-absensi.css') }}">
     <link rel="stylesheet" href="{{ asset('css/edit_absensi.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
-    <title>WRI Attendance | Sistem Absensi Miniclass</title>
-
 </head>
 
 <body>
@@ -52,14 +50,21 @@
                         <li class="nav-item dropdown ">
                             <a class="nav-link position-relative" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="text-sm-hidden">Dikhi Achmad Dani</span> <span class="item-users"><i
+                                <span class="text-sm-hidden">{{ Auth::user()->name }}</span> <span class="item-users"><i
                                         class="fa-solid fa-user"></i></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end my-2 position-absolute"
                                 aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item text-hover-red" href=""><i
-                                            class="fa-solid fa-arrow-right-from-bracket text-red"
-                                            style="padding-right: 10px;"></i>Logout</a> </li>
+                                <li>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item text-hover-red">
+                                            <i class="fa-solid fa-arrow-right-from-bracket text-red"
+                                            style="padding-right: 10px;">
+                                            </i>Logout
+                                        </button>
+                                    </form>
+                                </li>
                             </ul>
                         </li>
                     </ul>
