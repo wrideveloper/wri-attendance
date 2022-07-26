@@ -46,7 +46,7 @@ Route::get('/kadiv/update-jadwal', fn () => view('kadiv.update_jadwal'));
 Route::get('/kadiv/attendance-list', fn () => view('kadiv.attendance_list'));
 
 Route::get('/admin/add-user', fn () => view('admin.add_user'));
-
+Route::get('/admin/dashboard', fn () => view('admin.dashboard'));
 Route::get('/admin/edit-absensi', fn () => view('admin.edit_absensi'));
 Route::get('/admin/edit-profil', fn () => view('admin.edit_profil'));
 
