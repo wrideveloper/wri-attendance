@@ -36,13 +36,19 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = $request->validate([
+            'id' => 'required|exists:users,id',
+            'miniclas_id' => 'required|exists:miniclass,id',
+            'roles_id' => 'required|exists:roles,id',
+            'generation_id' => 'required|exists:generation,id',
             'name' => 'required|exists:users,name',
             'email' => 'required|exists:users,email',
+            'phone' => 'required|exists:users,phone',
+            'nim' => 'required|exists:users,nim',
             'password' => 'required|exists:users,password',
-            'remember_token' => 'required|exists:users,remember_token',
         ]);
+        User::create($user);
+            return redirect()->route('user.index')->with('success', 'Presensi data Tersimpan');
     }
-
     /**
      * Display the specified resource.
      *
