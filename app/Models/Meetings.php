@@ -30,6 +30,10 @@ class Meetings extends Model
     ];
     protected $with = 'miniclass';
 
+    public function getRouteKeyName() {
+        return 'token';
+    }
+
     public function presence()
     {
         return $this->hasMany(Presence::class);

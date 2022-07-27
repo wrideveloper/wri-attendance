@@ -107,7 +107,7 @@
             data: @json($data_pie_kehadiran),
         }, ],
     };
-    
+
     if(data.datasets[0].data.every((v) => v === 0 )) {
         data.datasets[0].data = [0.1,0,0]
         data.datasets[0].backgroundColor = ["rgb(192,192,192)","rgb(192,192,192)","rgb(192,192,192)"]

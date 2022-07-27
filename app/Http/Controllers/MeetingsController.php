@@ -5,14 +5,12 @@ namespace App\Http\Controllers;
 use \App\Http\Requests\MeetingsRequest;
 use \App\Models\Meetings;
 use \Illuminate\Http\Response;
-use App\Http\Controller;
 
-class MeetingsController extends Controller
-{
+class MeetingsController extends Controller {
         /**
      * Display a listing of the resource.
      *
-     * 
+     *
      */
     public function index()
     {
@@ -26,7 +24,7 @@ class MeetingsController extends Controller
     {
         return view('Meetings.create');
     }
-    
+
     public function edit(Meetings $meeting)
     {
         return view('Meetings.edit',[
@@ -63,7 +61,7 @@ class MeetingsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * 
+     *
      */
     public function update(MeetingsRequest $request, Meetings $meeting)
     {

@@ -10,33 +10,33 @@
                         style="width: 46px; height: 46px; background-color: white">
                         <i class="fas fa-chevron-left text-muted"></i>
                     </div>
-                    <h5>Pertemuan 1</h5>
+                    <h5>Pertemuan ke {{ $meetings->pertemuan }} - Miniclass {{ $meetings->miniclass->miniclass_name }}</h5>
                 </div>
                 <form class="update-jadwal form rounded p-5" style="background-color: white">
                     <h5 class="">Pertemuan 1</h5>
                     <div class="form-group mb-5">
                         <label for="topik" class="form-label fs-6">Topik</label>
-                        <input type="text" class="form-control" placeholder="Input Your Text in here" name="topik">
+                        <input value="{{ $meetings->topik }}" type="text" class="form-control" placeholder="Input Your Text in here" name="topik">
                     </div>
                     <div class="form-group mb-5">
                         <label for="tanggal" class="form-label fs-6">Tanggal</label>
-                        <input type="date" class="form-control" placeholder="YYYY/MM/DD" name="tanggal">
+                        <input type="date" value="{{ $meetings->tanggal }}" class="form-control" placeholder="YYYY/MM/DD" name="tanggal">
                     </div>
                     <div class="col-12">
                         <div class="row">
                             <div class="form-group mb-5 col-4">
                                 <label for="waktumulai" class="form-label fs-6">Waktu Mulai</label>
-                                <input type="text" class="form-control" placeholder="Input Your Text in here"
+                                <input type="time" value="{{ $meetings->start_time }}" class="form-control" placeholder="Input Your Text in here"
                                     name="waktumulai">
                             </div>
                             <div class="form-group mb-5 col-4">
                                 <label for="waktuberakhir" class="form-label fs-6">Waktu Berakhir</label>
-                                <input type="text" class="form-control" placeholder="Input Your Text in here"
+                                <input type="time" value="{{ $meetings->end_time }}" class="form-control" placeholder="Input Your Text in here"
                                     name="waktuberakhir">
                             </div>
                             <div class="form-group mb-5 col-4">
                                 <label for="token" class="form-label fs-6">Token</label>
-                                <input type="text" class="form-control" placeholder="Input Your Text in here"
+                                <input type="text" value="{{ $meetings->token }}" class="form-control" placeholder="Input Your Text in here"
                                     name="token">
                             </div>
                         </div>

@@ -64,17 +64,17 @@ Route::get('/admin/dashboard', fn () => view('admin.dashboard', [
 Route::get('/admin/edit-absensi', fn () => view('admin.edit_absensi'));
 Route::get('/admin/edit-profil', fn () => view('admin.edit_profil'));
 
+ Route::get('/edit-presensi', fn () => view('kadiv.config-presensi', [
+        'title' => 'Config Presensi',
+    ]));
+
 Route::resource('/miniclass', MiniclassController::class);
 
-Route::prefix('/kadiv')->group(function() {
+Route::group(['prefix' => 'kadiv','middleware' => ['auth']], function() {
     Route::get('/config-presensi', fn () => view('kadiv.config-presensi', [
         'title' => 'Config Presensi',
     ]));
-    Route::get('/edit-presensi', fn () => view('kadiv.config-presensi', [
-        'title' => 'Config Presensi',
-    ]));
-    Route::get('/check-presence/detail/{presence}/pertemuan-{presence}', [ConfigMeetingController::class, 'detailPresence'])->name('detail-presence');
-
+    Route::get('/check-meetings/detail/{meetings}', [ConfigMeetingController::class, 'show'])->name('detail-meetings');
     // Delete Meetings
     Route::delete('/delete-meetings/{meetings}', [ConfigMeetingController::class, 'deleteMeetings'])->name('delete-meetings');
 });
