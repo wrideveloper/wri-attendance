@@ -36,7 +36,6 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = $request->validate([
-            'id' => 'required|exists:users,id',
             'miniclas_id' => 'required|exists:miniclass,id',
             'roles_id' => 'required|exists:roles,id',
             'generation_id' => 'required|exists:generation,id',
@@ -44,8 +43,9 @@ class UserController extends Controller
             'email' => 'required|exists:users,email',
             'phone' => 'required|exists:users,phone',
             'nim' => 'required|exists:users,nim',
-            'password' => 'required|exists:users,password',
+            'password' => 'required|exists:users,password'
         ]);
+        $user['password'] = Hash::make($user['password']);
         User::create($user);
             return redirect()->route('user.index')->with('success', 'Presensi data Tersimpan');
     }
@@ -69,7 +69,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $model = User::find($user->id);
+        $model = User::find($user->nim);
         return view("user.edit_profil", compact("model"));}
 
     /**
@@ -79,13 +79,20 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $id)
+    public function update(Request $request, User $user)
     {
-        $validated = $request-> validate(["user_id" => "required",])
-        $model = User::find($id);
-        $model -> user_id = $validated["user_id"];
-        $model -> save();
-        return redirect('user' );
+        $validated = $request-> validate([
+        'miniclas_id' => 'required|exists:miniclass,id',
+        'roles_id' => 'required|exists:roles,id',
+        'generation_id' => 'required|exists:generation,id',
+        'name' => 'required',
+        'email' => 'required',
+        'phone' => 'required',
+        'nim' => 'required',
+        'password' => 'required']);
+        $user['password'] = Hash::make($user['password']);
+        User::where($user->nim)->update($validated);
+        return redirect()->route('user.index')->with('User data Updated.' );
     }
 
     /**
@@ -96,6 +103,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        user::destroy($user->nama);
-        return redirect()->route('user.index')->with('Presence deleted.' );    }
+        user::destroy($user->nim);
+        return redirect()->route('user.index')->with('User deleted.' );    }
 }
