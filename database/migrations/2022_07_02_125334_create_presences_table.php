@@ -14,7 +14,7 @@ class CreatePresencesTable extends Migration
     public function up() {
         Schema::create('presences', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('meetings_id')->constrained();
+            $table->foreignId('meetings_id')->constrained()->onDelete('cascade');
             $table->string('nim', 10);
             $table->date('presence_date');
             $table->string('status');

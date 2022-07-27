@@ -19,7 +19,7 @@ class MeetingsFactory extends Factory
             'tanggal' => $this->faker->dateTimeBetween('-3 months', 'now')->format('Y-m-d'),
             'start_time' => $this->faker->time(),
             'end_time' => $this->faker->time(),
-            'pertemuan' => $this->faker->randomDigit(),
+            'pertemuan' => $this->faker->numberBetween(1, 10),
             'token' => $this->faker->bothify('???????')
         ];
     }
