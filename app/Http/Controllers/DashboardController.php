@@ -14,6 +14,7 @@ class DashboardController extends Controller
         $user = User::find(auth()->user()->id);
         $role = $user->roles->roles_name;
         if ($role == 'Admin') {
+            $title = 'Dashboard';
             // ADMIN
             $users = User::count();
             $meetings = Meetings::count();
@@ -22,12 +23,14 @@ class DashboardController extends Controller
             return view('admin.dashboard', compact(
                 'users',
                 'meetings',
-                'miniclass'
+                'miniclass',
+                'title'
             ));
         } else if ($role == 'Kadiv') {
+            $title = 'Dashboard';
             // KADIV
             $miniclass = $user->miniclass_id;
-            $daftar_kehadiran = Meetings::where('miniclass_id', $miniclass)->orderBy('id', 'desc')->skip(0)->take(5)->get(); // limit 5
+            $daftar_kehadiran = Meetings::where('miniclass_id', $miniclass)->orderBy('pertemuan', 'asc')->skip(0)->take(5)->get(); // limit 5
             $jumlah_hadir = Miniclass::find($miniclass)->hadir->count();
             $jumlah_izin = Miniclass::find($miniclass)->izin->count();
             $jumlah_sakit = Miniclass::find($miniclass)->sakit->count();
@@ -50,8 +53,10 @@ class DashboardController extends Controller
                 'prosentase_hadir',
                 'prosentase_izin',
                 'prosentase_sakit',
+                'title'
             ));
         } else {
+            $title = 'Dashboard';
             // MEMBER
             $miniclass = $user->miniclass_id;
             $daftar_kehadiran = $user->presence->take(5); // limit 5
@@ -79,6 +84,7 @@ class DashboardController extends Controller
                 'prosentase_hadir',
                 'prosentase_izin',
                 'prosentase_sakit',
+                'title'
             ));
         }
     }
