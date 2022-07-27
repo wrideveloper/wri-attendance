@@ -13,22 +13,28 @@
                 <div class="mt-4 mt-lg-0 col-12 col-md-9 col-lg-10">
                     <div class="col-12 d-flex justify-content-around align-items-center mb-2">
                         <p class="m-0 ms-md-5 d-inline col-2 p-0 ps-lg-5">Hadir</p>
-                        <div class="progress col-8" style="height: .8rem">
-                            <div class="progress-bar bg-teal rounded" role="progressbar" style="width: {{ $prosentase_hadir }}%" aria-valuenow="{{ $prosentase_hadir }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress col-8 p-0" style="height: .8rem">
+                            <div class="progress-bar bg-teal rounded" role="progressbar"
+                                style="width: {{ $prosentase_hadir }}%" aria-valuenow="{{ $prosentase_hadir }}"
+                                aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <p class="m-0 d-inline col-2 text-end text-md-center">{{ $prosentase_hadir }}%</p>
                     </div>
                     <div class="col-12 d-flex justify-content-around align-items-center mb-2">
                         <p class="m-0 ms-md-5 d-inline col-2 p-0 ps-lg-5">Izin</p>
-                        <div class="progress col-8" style="height: .8rem">
-                            <div class="progress-bar bg-primary rounded" role="progressbar" style="width: {{ $prosentase_izin }}%" aria-valuenow="{{ $prosentase_izin }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress col-8 p-0" style="height: .8rem">
+                            <div class="progress-bar bg-primary rounded" role="progressbar"
+                                style="width: {{ $prosentase_izin }}%" aria-valuenow="{{ $prosentase_izin }}"
+                                aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <p class="m-0 d-inline col-2 text-end text-md-center">{{ $prosentase_izin }}%</p>
                     </div>
                     <div class="col-12 d-flex justify-content-around align-items-center">
                         <p class="m-0 ms-md-5 d-inline col-2 p-0 ps-lg-5">Sakit</p>
-                        <div class="progress col-8" style="height: .8rem">
-                            <div class="progress-bar bg-warning rounded" role="progressbar" style="width: {{ $prosentase_sakit }}%" aria-valuenow="{{ $prosentase_sakit }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress col-8 p-0" style="height: .8rem">
+                            <div class="progress-bar bg-warning rounded" role="progressbar"
+                                style="width: {{ $prosentase_sakit }}%" aria-valuenow="{{ $prosentase_sakit }}"
+                                aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <p class="m-0 d-inline col-2 text-end text-md-center">{{ $prosentase_sakit }}%</p>
                     </div>
@@ -76,13 +82,19 @@
 <script>
     controlBodyBackgroundColor()
 
-    const data = {
+    let data = {
         labels: ["Hadir", "Izin", "Sakit"],
         datasets: [{
             backgroundColor: ["rgb(32, 201, 151)", "rgb(13,110,253)", "rgb(255, 205, 86)"],
             data: @json($data_pie_kehadiran),
         }, ],
     };
+    
+    if(data.datasets[0].data.every((v) => v === 0 )) {
+        data.datasets[0].data = [0.1,0,0]
+        data.datasets[0].backgroundColor = ["rgb(192,192,192)","rgb(192,192,192)","rgb(192,192,192)"]
+    }
+
 
     const pieKehadiran = new Chart(document.getElementById("pieKehadiran"), {
         type: "doughnut",
