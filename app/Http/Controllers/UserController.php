@@ -79,7 +79,7 @@ class UserController extends Controller
         $model = User::find($id);
         $model -> user_id = $validated["user_id"];
         $model -> save();
-        return redirect('user');
+        return redirect('user' );
     }
 
     /**
@@ -91,5 +91,5 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         user::destroy($user->nama);
-        return redirect()->route('user.index')->with('Presence deleted.');    }
+        return redirect()->route('user.index')->with('Presence deleted.' );    }
 }
