@@ -35,7 +35,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = $request->validate([
+            'name' => 'required|exists:users,name',
+            'email' => 'required|exists:users,email',
+            'password' => 'required|exists:users,password',
+            'remember_token' => 'required|exists:users,remember_token',
+        ]);
     }
 
     /**
@@ -46,8 +51,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
-    }
+        return view('user.show', [
+            'user' => $user
+        ]);    }
 
     /**
      * Show the form for editing the specified resource.
@@ -57,8 +63,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
-    }
+        $model = User::find($user->id);
+        return view("user.edit_profil", compact("model"));}
 
     /**
      * Update the specified resource in storage.
@@ -67,9 +73,13 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $id)
     {
-        //
+        $validated = $request-> validate(["user_id" => "required",])
+        $model = User::find($id);
+        $model -> user_id = $validated["user_id"];
+        $model -> save();
+        return redirect('user');
     }
 
     /**
@@ -80,6 +90,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
-    }
+        user::destroy($user->nama);
+        return redirect()->route('user.index')->with('Presence deleted.');    }
 }
