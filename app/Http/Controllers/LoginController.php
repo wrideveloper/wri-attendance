@@ -15,10 +15,9 @@ class LoginController extends Controller
         ]);
     }
 
-    public function authenticate(Request $request)
-    {
+    public function authenticate(Request $request) {
         $credential = $request->validate([
-            'email' => 'required|email',
+            'nim' => 'required|exists:users,nim|string',
             'password' => 'required'
         ]);
 
@@ -27,7 +26,7 @@ class LoginController extends Controller
             return redirect()->intended('/dashboard');
         }
 
-        return back()->with('loginError', 'Login Failed!');
+        return redirect('/')->with('loginError', 'Login Failed!');
     }
 
     public function logout()
