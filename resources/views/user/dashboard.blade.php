@@ -13,7 +13,7 @@
                 <div class="mt-4 mt-lg-0 col-12  col-md-8">
                     <div class="col-12 d-flex justify-content-around align-items-center mb-2">
                         <p class="m-0 ms-md-5 d-inline col-2">Hadir</p>
-                        <div class="progress col-8 p-0" style="height: .8rem">
+                        <div class="progress col-8 ms-2 p-0" style="height: .8rem">
                             <div class="progress-bar bg-teal rounded" role="progressbar"
                                 style="width: {{ $prosentase_hadir }}%" aria-valuenow="{{ $prosentase_hadir }}"
                                 aria-valuemin="0" aria-valuemax="100"></div>
@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-12 d-flex justify-content-around align-items-center mb-2">
                         <p class="m-0 ms-md-5 d-inline col-2">Izin</p>
-                        <div class="progress col-8 p-0" style="height: .8rem">
+                        <div class="progress col-8 ms-2 p-0" style="height: .8rem">
                             <div class="progress-bar bg-primary rounded" role="progressbar"
                                 style="width: {{ $prosentase_izin }}%" aria-valuenow="{{ $prosentase_izin }}"
                                 aria-valuemin="0" aria-valuemax="100"></div>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="col-12 d-flex justify-content-around align-items-center">
                         <p class="m-0 ms-md-5 d-inline col-2">Sakit</p>
-                        <div class="progress col-8 p-0" style="height: .8rem">
+                        <div class="progress col-8 ms-2 p-0" style="height: .8rem">
                             <div class="progress-bar bg-warning rounded" role="progressbar"
                                 style="width: {{ $prosentase_sakit }}%" aria-valuenow="{{ $prosentase_sakit }}"
                                 aria-valuemin="0" aria-valuemax="100"></div>
@@ -43,14 +43,14 @@
             <div class="col-12 col-md-12 col-lg-4 shadow-cs p-3">
                 <p class="text-secondary">Timeline</p>
                 @foreach ($timeline as $item)
-                <div class="col-12 d-flex">
-                    <div class="col-8 d-flex flex-column">
+                <div class="col-12 d-flex p-0">
+                    <div class="col-8 d-flex flex-column p-0">
                         <a href="{{ url('/') }}" class="fw-bold text-dark text-decoration-none mb-3">
                             Pertemuan {{$item->pertemuan}}
                         </a>
                         <p>{{$item->topik}}</p>
                     </div>
-                    <div class="col-4 d-flex flex-column text-end">
+                    <div class="col-4 d-flex flex-column p-0 text-end">
                         <p class="text-secondary">{{date('d F Y', strtotime($item->tanggal)) }}</p>
                         <p class="text-secondary">{{date('H:i', strtotime($item->start_time))}} -
                             {{date('H:i', strtotime($item->end_time))}}
