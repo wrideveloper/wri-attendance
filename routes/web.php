@@ -61,20 +61,23 @@ Route::get('/admin/add-user', fn () => view('admin.add_user'));
 Route::get('/admin/dashboard', fn () => view('admin.dashboard', [
     'title' => 'Dashboard',
 ]));
-Route::get('/admin/edit-absensi', fn () => view('admin.edit_absensi'));
+Route::get('/admin/edit-absensi', fn () => view('admin.edit_absensi', [
+    'title' => 'Edit Absensi',
+]));
 Route::get('/admin/edit-profil', fn () => view('admin.edit_profil'));
+
+ Route::get('/edit-presensi', fn () => view('kadiv.config-presensi', [
+        'title' => 'Config Presensi',
+    ]));
 
 Route::resource('/miniclass', MiniclassController::class);
 
-Route::prefix('/kadiv')->group(function() {
+Route::group(['prefix' => 'kadiv','middleware' => ['auth']], function() {
     Route::get('/config-presensi', fn () => view('kadiv.config-presensi', [
         'title' => 'Config Presensi',
     ]));
-    Route::get('/edit-presensi', fn () => view('kadiv.config-presensi', [
-        'title' => 'Config Presensi',
-    ]));
-    Route::get('/check-presence/detail/{presence}/pertemuan-{presence}', [ConfigMeetingController::class, 'detailPresence'])->name('detail-presence');
-
+    Route::get('/rekap-meeting/{meetings}', [ConfigMeetingController::class, 'listMeetings'])->name('list-presence');
+    Route::get('/check-meetings/detail/{meetings}', [ConfigMeetingController::class, 'show'])->name('detail-meetings');
     // Delete Meetings
     Route::delete('/delete-meetings/{meetings}', [ConfigMeetingController::class, 'deleteMeetings'])->name('delete-meetings');
 });

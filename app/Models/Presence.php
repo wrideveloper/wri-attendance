@@ -21,7 +21,6 @@ class Presence extends Model {
     ];
 
     protected $with = [
-        'meetings',
         'user'
     ];
 
@@ -30,10 +29,10 @@ class Presence extends Model {
     }
 
     public function meetings() {
-        return $this->belongsTo(Meetings::class);
+        return $this->hasMany(Meetings::class);
     }
 
     public function user() {
-        return $this->belongsTo(User::class, 'nim');
+        return $this->belongsTo(User::class, 'nim', 'nim');
     }
 }

@@ -99,15 +99,22 @@
 @section('overrideScript')
 <script>
     controlBodyBackgroundColor()
+    const zeros = {
+        datasets: [{
+            data: [100],
+            backgroundColor: ['#C8C8C8']
+        }]
+    }
 
-    let data = {
+    const data = {
+
         labels: ["Hadir", "Izin", "Sakit"],
         datasets: [{
             backgroundColor: ["rgb(32, 201, 151)", "rgb(13,110,253)", "rgb(255, 205, 86)"],
             data: @json($data_pie_kehadiran),
         }, ],
     };
-    
+
     if(data.datasets[0].data.every((v) => v === 0 )) {
         data.datasets[0].data = [0.1,0,0]
         data.datasets[0].backgroundColor = ["rgb(192,192,192)","rgb(192,192,192)","rgb(192,192,192)"]
@@ -115,14 +122,14 @@
 
     const pieKehadiran = new Chart(document.getElementById("pieKehadiran"), {
         type: "doughnut",
-        data: data,
+        data: (data.length > 0) ? data : zeros,
         options: {
             cutout: 60,
             borderWidth: 0,
             plugins: {
                 legend: {
                     display: false
-                }
+                },
             }
         },
     });

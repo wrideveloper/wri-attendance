@@ -23,9 +23,13 @@
 
                 @endif
                 <a class="list-group-item d-inline-block text-truncate {{ ($title === "Edit Profile") ? 'active' : '' }}" href="#!">
-                    <i class="fa-solid fa-user-pen" style="padding-right: 12px;"></i>
+                    <i class="fa-solid fa-user-pen" style="padding-right: 14px;"></i>
                     <span>Edit Profile</span></a>
-                <a class="list-group-item d-inline-block text-truncate text-hover-red" href="#!">
-                    <i class="fa-solid fa-arrow-right-from-bracket" style="padding-right: 10px;"></i>
-                    <span>LogOut</span>
-                </a>
+                <form action="{{ route('logout') }}" method="POST" class="list-group-item d-block text-truncate text-hover-red">
+                    @csrf
+                    <button type="submit" class="fs-6 d-inline-block text-hover-red text-truncate text-light border-0 text-decoration-none shadow-none" style="background: none">
+                        <i class="fa-solid fa-arrow-right-from-bracket" style="padding-right: 14px;"></i>
+                        <span>Logout</span>
+                    </button>
+                </form>
+

@@ -46,16 +46,19 @@ class ConfigMeetingController extends Controller {
     }
 
     public function listMeetings(Meetings $meetings){
-        return view('dashboard.list-meetings', [
-            'meetings' => $meetings,
+        $meeting = Meetings::where('token', $meetings->token)->first();
+        $presence = Presence::where('meetings_id', $meeting->id)->get();
+        return view('kadiv.attendance_list', [
+            'presence' => $presence,
+            'meeting' => $meeting,
+            'title' => 'Config Presensi'
         ]);
     }
 
     // Hapus pertemuan
     public function deleteMeetings(Meetings $meetings) {
-        $data = Meetings::where('topik', 'LIKE','%'.$meetings->topik.'%')->get();
-        $data->delete();
-        return redirect('/dashboard')->with('success', 'Meetings deleted successfully.');
+        Meetings::where('token', $meetings->token)->delete();
+        return redirect()->back()->with('success', 'Meetings berhasil dihapus!');
     }
 
     // Berisi list presence dari mahasiswa pada miniclass yang dipilih
@@ -69,6 +72,13 @@ class ConfigMeetingController extends Controller {
     public function detailPresence(Presence $presence) {
         return view('dashboard.detail-presence', [
             'presence' => $presence,
+        ]);
+    }
+
+    public function show(Meetings $meeting) {
+        $meetings = Meetings::where('token', $meeting->token)->firstOrFail();
+        return view('kadiv.config-presensi', [
+            'meetings' => $meetings
         ]);
     }
 
