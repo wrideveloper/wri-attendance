@@ -66,7 +66,7 @@ Route::get('/admin/edit-profil', fn () => view('admin.edit_profil'));
 
 Route::resource('/miniclass', MiniclassController::class);
 
-Route::prefix('/kadiv')->group(function() {
+Route::prefix('/kadiv')->group(function () {
     Route::get('/config-presensi', fn () => view('kadiv.config-presensi', [
         'title' => 'Config Presensi',
     ]));
