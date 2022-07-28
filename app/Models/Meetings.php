@@ -40,6 +40,6 @@ class Meetings extends Model
     }
     public function miniclass()
     {
-        return $this->hasMany(Miniclass::class);
+        return $this->belongsTo(Miniclass::class);
     }
 }

@@ -25,10 +25,11 @@ class MeetingsController extends Controller {
         return view('Meetings.create');
     }
 
-    public function edit(Meetings $meeting)
-    {
-        return view('Meetings.edit',[
-            'Meetings'=> $meeting
+    public function edit(Meetings $meeting) {
+        $meetings = $meeting::where('token', $meeting->token)->first();
+        return view('meetings.edit',[
+            'meetings'=> $meetings,
+            'title' => 'Config Presensi'
         ]);
     }
 
@@ -37,8 +38,7 @@ class MeetingsController extends Controller {
      *
      *
      */
-    public function store(MeetingsRequest $request)
-    {
+    public function store(MeetingsRequest $request) {
         $data = $request->validated();
         Meetings::create($data);
         return redirect()->route('Meetings.index');
@@ -66,8 +66,8 @@ class MeetingsController extends Controller {
     public function update(MeetingsRequest $request, Meetings $meeting)
     {
         $newData = $request->validated();
-        $data = Meetings::where('id', $meeting->id)->update($newData);
-        return redirect()->route('Meetings.index');
+        $data = Meetings::where('id', $meeting->token)->update($newData);
+        return redirect()->route('/dashboard')->with('success', 'Data berhasil diubah');
     }
 
     /**
