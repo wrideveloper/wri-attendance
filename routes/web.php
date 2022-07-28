@@ -2,12 +2,13 @@
 
 use App\Models\Presence;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\PresenceController;
+use App\Http\Controllers\PresenceController;
 use App\Http\Controllers\ConfigMeetingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MiniclassController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 use App\Models\Meetings;
 
 /*
@@ -51,7 +52,7 @@ Route::get('/post-absensi', function () {
 // home route after login
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
-Route::get('/user/edit-profil', fn () => view('user.edit_profil'));
+Route::resource('/user', UserController::class);
 Route::get('/user/input_absensi', fn () => view('user.input_absensi'));
 
 Route::get('/kadiv/edit-profil', fn () => view('kadiv.edit_profil'));

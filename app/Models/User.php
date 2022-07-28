@@ -80,4 +80,9 @@ class User extends Authenticatable
     {
         return $this->presence()->where('status', 'Alpha')->orderBy('id', 'desc');
     }
+
+    public function getRouteKeyName() 
+    {
+        return 'nim';
+    }
 }
