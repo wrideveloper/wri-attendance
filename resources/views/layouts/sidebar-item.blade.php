@@ -1,3 +1,4 @@
+
                 <a class="list-group-item d-inline-block text-truncate {{ ($title === "Dashboard") ? 'active' : '' }}" href="/dashboard">
                     <i class="fa-solid fa-border-all" style="padding-right: 12px;"></i>
                     <span>Dashboard</span></a>
