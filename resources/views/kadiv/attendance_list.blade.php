@@ -5,19 +5,21 @@
     <div class="row g-3 align-items-center mt-5 justify-content-between">
         <span class="row col-auto">
             <div class="col-auto">
-                <button class="badge border-0 bg-white px-2"><i class="fa-solid fa-2x fa-angle-left text-muted"></i></button>
+                <a href="/dashboard" class="badge border-0 bg-white px-2"><i class="fa-solid fa-2x fa-angle-left text-muted"></i></a>
             </div>
             <div class="col-auto">
                 <h5 class="fw-normal mx-3">List Kehadiran Anggota • Pertemuan {{ $meeting->pertemuan }}</h5>
             </div>
         </span>
         <span class="row col-auto">
-            <div class="col-auto">
-                <input type="search" id="search" class="form-control" name="search">
-            </div>
-            <div class="col-auto">
-                <button type="submit" class="btn btn-primary px-4">Cari</button>
-            </div>
+            <form action="{{ route('list-presence', $meeting->token) }}">
+                <div class="col-auto">
+                    <input type="search" value="{{ request('search') }}" id="search" class="form-control" name="search">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary px-4">Cari</button>
+                </div>
+            </form>
         </span>
     </div>
     <div class="row shadow-cs rounded-4 px-5">
@@ -45,11 +47,14 @@
                         <td class="text-truncate align-middle"><span class="badge bg-danger">{{ $presences->status }}</span></td>
                     @endif
                     <td class="d-flex justify-content-center">
-                        <a class="ms-3 col-md-8 btn btn-primary text-light my-2">Detail</a>
+                        <a href="#" class="ms-3 col-md-8 btn btn-primary text-light my-2">Detail</a>
                     </td>
                 </tr>
                 @endforeach
             </table>
+        </div>
+        <div class="d-flex justify-content-end mt-2">
+            {{ $presence->links() }}
         </div>
     </div>
 </div>
