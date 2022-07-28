@@ -32,7 +32,7 @@ Route::get('/post-absensi', function () {
 })->name('post-absensi');
 
 Route::get('/user', fn () => view('user.dashboard'));
-Route::get('/user/edit-profil', fn () => view('user.edit_profil'));
+Route::get('/user/edit-profil/{NIM}', fn () => view('user.edit_profil'));
 Route::get('/user/input_absensi', fn () => view('user.input_absensi'));
 
 Route::get('/kadiv', fn () => view('kadiv.dashboard'));
