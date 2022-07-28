@@ -38,7 +38,7 @@ class Presence extends Model {
     }
 
     public function meetings() {
-        return $this->hasMany(Meetings::class);
+        return $this->belongsTo(Meetings::class);
     }
 
     public function user() {

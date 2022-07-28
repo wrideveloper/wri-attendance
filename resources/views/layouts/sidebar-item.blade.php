@@ -22,7 +22,7 @@
                 </a>
 
                 @endif
-                <a class="list-group-item d-inline-block text-truncate {{ ($title === "Edit Profile") ? 'active' : '' }}" href="">
+                <a class="list-group-item d-inline-block text-truncate {{ ($title === "Edit Profile") ? 'active' : '' }}" href="/user/{{ auth()->user()->nim }}/edit">
                     <i class="fa-solid fa-user-pen" style="padding-right: 14px;"></i>
                     <span>Edit Profile</span></a>
                 <form action="{{ route('logout') }}" method="POST" class="list-group-item d-block text-truncate text-hover-red">
