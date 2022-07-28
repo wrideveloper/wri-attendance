@@ -106,7 +106,7 @@ class PresenceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy(Presence $presence) {
-        Presence::destroy($presence->nim);
+        Presence::destroy($presence->user->nim);
         return redirect()->route('presence.index')->with('success', 'Presence deleted successfully.');
     }
 }

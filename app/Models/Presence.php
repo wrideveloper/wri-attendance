@@ -21,9 +21,17 @@ class Presence extends Model {
     ];
 
     protected $with = [
-        'meetings',
         'user'
     ];
+
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, function ($query, $search){
+            return $query->whereHas('user', function ($query) use ($search){
+                $query->where('nim', 'like', "%{$search}%")
+                    ->orWhere('name', 'like', "%{$search}%");
+            });
+        });
+    }
 
     public function getRouteKeyName() {
         return 'nim';
@@ -34,6 +42,6 @@ class Presence extends Model {
     }
 
     public function user() {
-        return $this->belongsTo(User::class, 'nim');
+        return $this->belongsTo(User::class, 'nim', 'nim');
     }
 }

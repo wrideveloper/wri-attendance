@@ -19,10 +19,14 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
+            'nim' => 'required|max:10',
             'name' => 'required|max:255',
-            'username' => ['required', 'max:255', 'unique:users'],
             'email' => 'required|email:dns|max:255|unique:users',
             'password' => 'required|min:5|max:255',
+            'miniclass_id' => 'required',
+            'generation_id' => 'required',
+            'roles_id' => 'required',
+            'phone' => 'required'
         ]);
 
         $data['password'] = Hash::make($data['password']);

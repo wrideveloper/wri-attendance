@@ -21,6 +21,17 @@ class User extends Authenticatable
         'id',
     ];
 
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'roles_id',
+        'nim',
+        'miniclass_id',
+        'generation_id',
+        'phone',
+    ];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -68,5 +79,10 @@ class User extends Authenticatable
     public function alpha()
     {
         return $this->presence()->where('status', 'Alpha')->orderBy('id', 'desc');
+    }
+
+    public function getRouteKeyName() 
+    {
+        return 'nim';
     }
 }

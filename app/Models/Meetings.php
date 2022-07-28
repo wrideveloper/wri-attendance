@@ -28,14 +28,18 @@ class Meetings extends Model
         'pertemuan',
         'token'
     ];
-    protected $with = 'miniclass';
+    protected $with = 'presence';
+
+    public function getRouteKeyName() {
+        return 'token';
+    }
 
     public function presence()
     {
-        return $this->hasMany(Presence::class);
+        return $this->belongsTo(Presence::class);
     }
     public function miniclass()
     {
-        return $this->belongsTo(Miniclass::class);
+        return $this->hasMany(Miniclass::class);
     }
 }
