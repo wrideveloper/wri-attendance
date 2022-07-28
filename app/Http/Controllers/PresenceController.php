@@ -35,7 +35,8 @@ class PresenceController extends Controller {
      */
     public function store(Request $request) {
         $presence = $request->validate([
-            'user_id' => 'required|exists:users,id',
+            'nim' => 'required|exists:users,nim',
+            'meeting_id' => 'required|exists:meetings,id',
             'presence_date' => 'required|date',
             'status' => 'required|',
             'ket' => 'sometimes|string|max:255',
@@ -85,15 +86,16 @@ class PresenceController extends Controller {
      */
     public function update(Request $request, Presence $presence) {
         $rule = [
-            'user_id' => 'required|exists:users,id',
+            'nim' => 'required|exists:users,nim',
+            'meetings_id' => 'required|exists:meetings,id',
             'presence_date' => 'required|date',
-            'status' => 'required|',
+            'status' => 'required',
             'ket' => 'sometimes|string|max:255',
             'feedback' => 'required|string|max:1000',
             'token' => 'required|string|max:10|exists:meetings,token',
         ];
         $validated = $request->validate($rule);
-        Presence::where('id', $presence->id)->update($validated);
+        Presence::where('nim', $presence->nim)->update($validated);
         return redirect()->route('presence.index')->with('success', 'Presence updated successfully.');
     }
 
@@ -104,7 +106,7 @@ class PresenceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy(Presence $presence) {
-        Presence::destroy($presence->id);
+        Presence::destroy($presence->user->nim);
         return redirect()->route('presence.index')->with('success', 'Presence deleted successfully.');
     }
 }

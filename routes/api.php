@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\PresenceController;
+use App\Http\Controllers\Api\MeetingsController;
+use App\Http\Controllers\Api\MiniclassController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -17,7 +19,7 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
-Route::resource('/presence', PresenceController::class);
+// Route::resource('/presence', PresenceController::class);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -29,3 +31,10 @@ Route::post('logout', [LoginController::class, 'logout']);
 
 Route::get('register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('register', [RegisterController::class, 'store']);
+
+// Sisi User
+Route::resource('/presence', PresenceController::class);
+
+Route::resource('/miniclass', MiniclassController::class);
+
+Route::apiResource('/meetings', MeetingsController::class);

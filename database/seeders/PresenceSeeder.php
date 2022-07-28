@@ -13,6 +13,6 @@ class PresenceSeeder extends Seeder
      * @return void
      */
     public function run() {
-        Presence::factory(25)->create();
+        Presence::factory(40)->create();
     }
 }

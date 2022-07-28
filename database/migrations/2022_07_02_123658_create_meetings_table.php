@@ -11,7 +11,7 @@ class CreateMeetingsTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('Meetings', function (Blueprint $table) {
+        Schema::create('meetings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('miniclass_id')->constrained();
             $table->string('topik');
@@ -19,7 +19,7 @@ class CreateMeetingsTable extends Migration {
             $table->time('start_time');
             $table->time('end_time');
             $table->integer('pertemuan');
-            $table->integer('token');
+            $table->string('token', 10);
             $table->timestamps();
         });
     }

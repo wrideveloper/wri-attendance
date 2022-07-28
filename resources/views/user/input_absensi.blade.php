@@ -1,6 +1,10 @@
 @extends('layouts.master')
+@section('title')
+Sistem Absensi WRI
+@endsection
+
 @section('content')
-    <div class="container-fluid pb-5">
+    <div class="container-fluid pb-5 px-4">
         <h1 class="h5 mb-4">Absen</h1>
         <form action="" method="POST">
             @csrf
@@ -19,7 +23,7 @@
                     </div>
                     <div class="col-md-4 py-3">
                         <input type="radio" name="status" id="sakit" value="sakit" onclick="showSick();">
-                        <label for="sakit" class="color-warning-bold"><i class="fa-solid fa-face-thermometer mx-3"></i>
+                        <label for="sakit" class="color-warning-bold"><i class="fa-solid fa-briefcase-medical mx-3"></i>
                             <span>Sakit</span></label>
                     </div>
                 </div>
@@ -30,6 +34,7 @@
         </form>
     </div>
 @endsection
+
 @section('overrideScript')
     <script src="{{ asset('js/showing-input.js') }}"></script>
 @endsection

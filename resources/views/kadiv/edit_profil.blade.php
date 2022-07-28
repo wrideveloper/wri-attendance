@@ -1,17 +1,14 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="position-absolute h-100 d-flex align-items-center px-5">
-    Sidebar
-</div>
-@include('components.konfirmasi', ['text' => "Apakah Anda yakin ingin memperbarui profil?"])
-<div class="container p-5 d-flex justify-content-center">
-    <div class="col-md-8">
-        <h5 class="mb-5 ">Edit Profile</h5>
-        <form class="edit-profil form rounded bg-light pb-5 px-5">
+@include('components.konfirmasi', ['text' => 'Apakah Anda yakin ingin memperbarui profil?'])
+<div class="container pb-5 px-4 d-flex flex-column justify-content-center">
+    <h5 class="mb-4 mb-md-5">Edit Profile</h5>
+    <div class="col-md-12">
+        <form class="edit-profil form rounded bg-light py-4 px-5 px-md-5 bg-white py-0 py-md-2">
             <div class="form-group mb-3">
-                <label for="nama" class="form-label fs-5">Nama</label>
-                <input id="nama" type="text" class="form-control" placeholder="Input your name">
+                <label for="name" class="form-label fs-5">Nama</label>
+                <input id="name" type="text" class="form-control" placeholder="Input your name">
             </div>
             <div class="form-group mb-3">
                 <label for="email" class="form-label fs-5">Email</label>
@@ -19,7 +16,7 @@
             </div>
             <div class="col-12">
                 <div class="row">
-                    <div class="form-group mb-3 col-6">
+                    <div class="form-group mb-3 col-12 col-md-6">
                         <label for="angkatan" class="form-label fs-5">Angkatan</label>
                         <select name="angkatan" id="angkatan" class="form-control">
                             <option selected disabled>Pilih Angkatan</option>
@@ -28,7 +25,7 @@
                             <option value="9">WRI9</option>
                         </select>
                     </div>
-                    <div class="form-group mb-3 col-6">
+                    <div class="form-group mb-3 col-12 col-md-6">
                         <label for="miniclass" class="form-label fs-5">Miniclass</label>
                         <select name="miniclass" id="miniclass" class="form-control">
                             <option selected disabled>Pilih Miniclass</option>
@@ -46,7 +43,7 @@
                 <button type="button" class="btn border-0 position-absolute bottom-0 end-0"
                     cs-show-password="password"><i class="fa-solid fa-eye-slash"></i></button>
             </div>
-            <div class="col-12 d-flex justify-content-end">
+            <div class="col-12 d-flex justify-content-end mt-4">
                 <button class="btn btn-teal text-light px-5">Simpan</button>
             </div>
         </form>
@@ -56,9 +53,8 @@
 @section('overrideScript')
 <script>
     controlBodyBackgroundColor()
-    controlPasswordVisibility()
-    controlConfirmationModal()
+        controlPasswordVisibility()
+        controlConfirmationModal()
 </script>
 @endsection
-
 @endsection
