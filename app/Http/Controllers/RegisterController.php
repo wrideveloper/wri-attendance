@@ -15,23 +15,22 @@ class RegisterController extends Controller
             'active' => 'register',
         ]);
     }
-
     public function store(Request $request)
     {
         $data = $request->validate([
-            'nim' => 'required|max:10',
+            'nim' => 'required|max:11',
             'name' => 'required|max:255',
             'email' => 'required|email:dns|max:255|unique:users',
             'password' => 'required|min:5|max:255',
+            'roles_id' => 'required',
             'miniclass_id' => 'required',
             'generation_id' => 'required',
-            'roles_id' => 'required',
             'phone' => 'required'
         ]);
 
         $data['password'] = Hash::make($data['password']);
-
-        User::create($data);
-        return redirect('/login')->with('success', 'Register successfull! Please login'); 
+        
+        return User::create($data);
+        // return redirect('/login')->with('success', 'Register successfull! Please login'); 
     }
 }

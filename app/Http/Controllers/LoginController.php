@@ -15,7 +15,8 @@ class LoginController extends Controller
         ]);
     }
 
-    public function authenticate(Request $request) {
+    public function authenticate(Request $request)
+    {
         $credential = $request->validate([
             'nim' => 'required|exists:users,nim|string',
             'password' => 'required'
@@ -26,7 +27,10 @@ class LoginController extends Controller
             return redirect()->intended('/dashboard');
         }
 
-        return redirect('/')->with('loginError', 'Login Failed!');
+        return response()->json([
+            'success' => false,
+            'message' => 'Invalid Email or Password',
+        ], 401);
     }
 
     public function logout()
