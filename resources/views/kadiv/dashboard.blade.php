@@ -3,7 +3,13 @@
 @section('content')
 
 <div class="container pb-5 px-4">
-    <h4 class="fw-normal mb-0">Prosentase Kehadiran</h4>
+    <h4 class="fw-normal mb-2">Prosentase Kehadiran</h4>
+    @if(session()->has('success'))
+        <div class="alert alert-success alert-dismissible col-lg-12 fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="col-12 mt-4">
         <div class="row align-items-center justify-content-between flex-column flex-lg-row">
             <div class="col-12 d-flex align-items-center flex-column flex-md-row shadow-cs p-3">
@@ -46,21 +52,30 @@
             <div class="table-responsive">
                 <table class="table mt-3 table-borderless">
                     <tr class="border-bottom border-dark mb-3">
-                        <th class="py-3">Pertemuan</th>
+                        <th class="py-3">No</th>
+                        <th class="py-3">Pertemuan Ke</th>
                         <th class="py-3">Tanggal</th>
                         <th class="py-3">Topik</th>
                         <th class="py-3 text-center">Aksi</th>
                     </tr>
                     @foreach($daftar_kehadiran as $p)
                     <tr class="align-middle">
+                        <td>{{$loop->iteration}}</td>
                         <td>{{$p->pertemuan}}</td>
-                        <td>{{$p->tanggal}}</td>
+                        <td>{{\Carbon\Carbon::parse($p->tanggal)->format('d M Y')}}</td>
                         <td class="col-1 text-truncate">{{$p->topik}}</td>
                         <td class="d-flex justify-content-center">
-                            <button class="btn btn-warning text-light">
+                            <a class="btn btn-warning text-light">
                                 <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            <button class="ms-3 col-md-7 btn btn-primary text-light">Detail</button>
+                            </a>
+                            <a class="ms-3 col-md-7 btn btn-primary text-light" href="{{ route('list-presence', $p->token) }}">Detail</a>
+                            <form action="{{ route('delete-meetings', $p->token) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button onclick="return confirm('Apakah anda yakin untuk menghapus meetings ini?')" class="btn btn-danger text-light mx-1">
+                                    <span><i class="fa-solid fa-trash-can"></i></span>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
@@ -75,16 +90,22 @@
 @section('overrideScript')
 <script>
     controlBodyBackgroundColor()
+    const zeros = {
+        datasets: [{
+            data: [1],
+            backgroundColor: ['#C8C8C8']
+        }]
+    }
 
-    let data = {
+    const data = {
         labels: ["Hadir", "Izin", "Sakit"],
         datasets: [{
             backgroundColor: ["rgb(32, 201, 151)", "rgb(13,110,253)", "rgb(255, 205, 86)"],
             data: @json($data_pie_kehadiran),
-        }, ],
+        }]
     };
 
-    if(data.datasets[0].data.every((v) => v === 0 )) {
+    if(data.datasets[0].data.every((v) => v == 0 )) {
         data.datasets[0].data = [0.1,0,0]
         data.datasets[0].backgroundColor = ["rgb(192,192,192)","rgb(192,192,192)","rgb(192,192,192)"]
     }
@@ -99,9 +120,10 @@
             plugins: {
                 legend: {
                     display: false
-                }
-            }
+                },
+            },
         },
     });
 </script>
 @endsection
+

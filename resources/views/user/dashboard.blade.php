@@ -99,8 +99,15 @@
 @section('overrideScript')
 <script>
     controlBodyBackgroundColor()
+    const zeros = {
+        datasets: [{
+            data: [100],
+            backgroundColor: ['#C8C8C8']
+        }]
+    }
 
-    let data = {
+    const data = {
+
         labels: ["Hadir", "Izin", "Sakit"],
         datasets: [{
             backgroundColor: ["rgb(32, 201, 151)", "rgb(13,110,253)", "rgb(255, 205, 86)"],
@@ -115,14 +122,14 @@
 
     const pieKehadiran = new Chart(document.getElementById("pieKehadiran"), {
         type: "doughnut",
-        data: data,
+        data: (data.length > 0) ? data : zeros,
         options: {
             cutout: 60,
             borderWidth: 0,
             plugins: {
                 legend: {
                     display: false
-                }
+                },
             }
         },
     });

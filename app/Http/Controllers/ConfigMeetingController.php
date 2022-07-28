@@ -46,14 +46,18 @@ class ConfigMeetingController extends Controller {
     }
 
     public function listMeetings(Meetings $meetings){
-        return view('dashboard.list-meetings', [
-            'meetings' => $meetings,
+        $meeting = Meetings::where('token', $meetings->token)->first();
+        $presence = Presence::where('meetings_id', $meeting->id)->get();
+        return view('kadiv.attendance_list', [
+            'presence' => $presence,
+            'meeting' => $meeting,
+            'title' => 'Config Presensi'
         ]);
     }
 
     // Hapus pertemuan
     public function deleteMeetings(Meetings $meetings) {
-        Meetings::where('id', $meetings->id)->delete();
+        Meetings::where('token', $meetings->token)->delete();
         return redirect()->back()->with('success', 'Meetings berhasil dihapus!');
     }
 
