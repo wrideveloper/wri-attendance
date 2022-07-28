@@ -1,15 +1,16 @@
 <?php
 
+use App\Models\Meetings;
 use App\Models\Presence;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PresenceController;
-use App\Http\Controllers\ConfigMeetingController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\MiniclassController;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
-use App\Models\Meetings;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MeetingsController;
+use App\Http\Controllers\PresenceController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MiniclassController;
+use App\Http\Controllers\ConfigMeetingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,16 +68,15 @@ Route::get('/admin/edit-absensi', fn () => view('admin.edit_absensi', [
 ]));
 Route::get('/admin/edit-profil', fn () => view('admin.edit_profil'));
 
- Route::get('/edit-presensi', fn () => view('kadiv.config-presensi', [
-        'title' => 'Config Presensi',
-    ]));
+//  Route::get('/edit-meetings', fn () => view('kadiv.config-presensi', [
+//         'title' => 'Config Presensi',
+//     ]));
 
 Route::resource('/miniclass', MiniclassController::class);
 
 Route::group(['prefix' => 'kadiv','middleware' => ['auth']], function() {
-    Route::get('/config-presensi', fn () => view('kadiv.config-presensi', [
-        'title' => 'Config Presensi',
-    ]));
+    // Route::get('/edit-meetings/{meetings}', [MeetingsController::class, 'edit'])->name('edit-meetings');
+    Route::resource('/meetings', MeetingsController::class);
     Route::get('/rekap-meeting/{meetings}', [ConfigMeetingController::class, 'listPresence'])->name('list-presence');
     Route::get('/check-meetings/detail/{meetings}', [ConfigMeetingController::class, 'show'])->name('detail-meetings');
     // Delete Meetings

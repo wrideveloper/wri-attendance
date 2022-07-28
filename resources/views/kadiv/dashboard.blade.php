@@ -65,7 +65,7 @@
                         <td>{{\Carbon\Carbon::parse($p->tanggal)->format('d M Y')}}</td>
                         <td class="col-1 text-truncate">{{$p->topik}}</td>
                         <td class="d-flex justify-content-center">
-                            <a class="btn btn-warning text-light">
+                            <a class="btn btn-warning text-light" href="{{ route('meetings.edit', $p->token) }}">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                             <a class="ms-3 col-md-7 btn btn-primary text-light" href="{{ route('list-presence', $p->token) }}">Detail</a>
