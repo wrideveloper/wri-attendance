@@ -24,6 +24,15 @@ class Presence extends Model {
         'user'
     ];
 
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, function ($query, $search){
+            return $query->whereHas('user', function ($query) use ($search){
+                $query->where('nim', 'like', "%{$search}%")
+                    ->orWhere('name', 'like', "%{$search}%");
+            });
+        });
+    }
+
     public function getRouteKeyName() {
         return 'nim';
     }

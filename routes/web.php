@@ -76,10 +76,12 @@ Route::group(['prefix' => 'kadiv','middleware' => ['auth']], function() {
     Route::get('/config-presensi', fn () => view('kadiv.config-presensi', [
         'title' => 'Config Presensi',
     ]));
-    Route::get('/rekap-meeting/{meetings}', [ConfigMeetingController::class, 'listMeetings'])->name('list-presence');
+    Route::get('/rekap-meeting/{meetings}', [ConfigMeetingController::class, 'listPresence'])->name('list-presence');
     Route::get('/check-meetings/detail/{meetings}', [ConfigMeetingController::class, 'show'])->name('detail-meetings');
     // Delete Meetings
     Route::delete('/delete-meetings/{meetings}', [ConfigMeetingController::class, 'deleteMeetings'])->name('delete-meetings');
+
+    // Route::get('/check-presence/{presence}', 'checkPresence')->name('check-presence');
 });
 
 // Sisi User
@@ -88,7 +90,7 @@ Route::resource('/presence', PresenceController::class);
 Route::controller(ConfigMeetingController::class)->group(function () {
     Route::prefix('/dashboard')->group(function () {
         Route::get('/config-meeting', 'listMeetings')->name('list-meetings');
-        Route::get('/check-presence/{presence}', 'checkPresence')->name('check-presence');
+        // Route::get('/check-presence/{presence}', 'checkPresence')->name('check-presence');
         //Route::get('/check-presence/{presence}/detail', 'detailPresence')->name('detail-presence');
         Route::get('/config-meeting/create', 'createMeetings')->name('create-meetings');
 

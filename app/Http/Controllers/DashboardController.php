@@ -30,7 +30,7 @@ class DashboardController extends Controller
             $title = 'Dashboard';
             // KADIV
             $miniclass = $user->miniclass_id;
-            $daftar_kehadiran = Meetings::where('miniclass_id', $miniclass)->orderBy('pertemuan', 'asc')->skip(0)->take(5)->get(); // limit 5
+            $daftar_kehadiran = Meetings::where('miniclass_id', $miniclass)->orderBy('tanggal', 'asc')->skip(0)->take(5)->get(); // limit 5
             $jumlah_hadir = Miniclass::find($miniclass)->hadir->count();
             $jumlah_izin = Miniclass::find($miniclass)->izin->count();
             $jumlah_sakit = Miniclass::find($miniclass)->sakit->count();

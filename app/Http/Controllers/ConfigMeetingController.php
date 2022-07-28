@@ -45,9 +45,9 @@ class ConfigMeetingController extends Controller {
         return redirect()->route('dashboard.list-meetings')->with('success', 'Update Meeting berhasil');
     }
 
-    public function listMeetings(Meetings $meetings){
+    public function listPresence(Meetings $meetings){
         $meeting = Meetings::where('token', $meetings->token)->first();
-        $presence = Presence::where('meetings_id', $meeting->id)->get();
+        $presence = Presence::where('meetings_id', $meeting->id)->filter(request(['search']))->paginate(5)->withQueryString();
         return view('kadiv.attendance_list', [
             'presence' => $presence,
             'meeting' => $meeting,

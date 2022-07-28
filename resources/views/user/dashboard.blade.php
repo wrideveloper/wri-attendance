@@ -48,7 +48,7 @@
                         <a href="{{ url('/') }}" class="fw-bold text-dark text-decoration-none mb-3">
                             Pertemuan {{$item->pertemuan}}
                         </a>
-                        <p>{{$item->topik}}</p>
+                        <p class="text-truncate">{{$item->topik}}</p>
                     </div>
                     <div class="col-4 d-flex flex-column p-0 text-end">
                         <p class="text-secondary">{{date('d F Y', strtotime($item->tanggal)) }}</p>
