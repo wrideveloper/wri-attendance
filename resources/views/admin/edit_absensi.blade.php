@@ -1,18 +1,20 @@
 @extends('layouts.master')
 @section('content')
     <div class="container-fluid pb-5 px-4">
-        <div class="container-fluid">
+    <div class="container-fluid text-center" style="padding-right: 0px;padding-left: 0px;">
             <div class="row align-items-center" id="atas">
-                <div class="col-1" id="bgback">
+                <div class="col-1" >
+                    <div class="container" id="bgback" style="padding-right: 18px;">
                     <a href="" id="back"><i class="fa-solid fa-angle-left"></i></a>
+                    </div>                    
                 </div>
-                <div class="col-2 col-sm-3" style="width: auto;">
+                <div class="col-4 col-sm-4 col-md-4 col-lg-3 col-xl-3" style="width: auto;">
                     <p id="pertemuan">Pertemuan 1</p>
                 </div>
                 <div class="col-1" style="width: auto;">
                     <img src="{{ asset('img/Ellipse 30.png') }}" />
                 </div>
-                <div class="col" style="width: auto;">
+                <div class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4" style="padding-left: 0px;padding-right: 0px;padding-top:10px;">
                     <p id="nama">Muhamad Alif Rizki</p>
                 </div>
             </div>
@@ -24,7 +26,7 @@
             <div class="row justify-content-between">
                 <div class="col-sm-12 col-md-12 col-lg-6">
                     <h5>DATA ANGGOTA</h5>
-                    <div class="row justify-content-start">
+                    <div class="row justify-content-start" style="margin-bottom: 47px;">
                         <div class="col-6 col-sm-6 col-md-5">
                             <p>Miniclass</p>
                             <p>Angkatan</p>
