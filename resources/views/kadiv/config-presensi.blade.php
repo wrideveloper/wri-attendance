@@ -41,20 +41,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 d-flex justify-content-end">
-                        <button class="btn btn-outline-secondary px-5 me-4">Batal</button>
-                        <button class="btn btn-warning text-light px-5">Update</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div class="col-12 d-flex justify-content-md-end justify-content-between px-0">
+                    <button class="btn btn-outline-secondary px-md-5 px-2 me-4"><b>Batal</b></button>
+                    <button class="btn btn-warning text-light px-md-5 px-2"><b>Update</b></button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
 @section('overrideScript')
-    <script>
-        controlBodyBackgroundColor()
-        controlPasswordVisibility()
-        controlConfirmationModal()
-    </script>
+<script>
+    controlBodyBackgroundColor()
+    controlPasswordVisibility()
+    controlConfirmationModal()
+</script>
 @endsection
 @endsection
