@@ -55,7 +55,7 @@ class DashboardController extends Controller
                 'prosentase_sakit',
                 'title'
             ));
-        } else {
+        } else if($role == 'Members') {
             $title = 'Dashboard';
             // MEMBER
             $miniclass = $user->miniclass_id;
@@ -86,6 +86,8 @@ class DashboardController extends Controller
                 'prosentase_sakit',
                 'title'
             ));
+        } else {
+            return redirect()->route('login');
         }
     }
 }
