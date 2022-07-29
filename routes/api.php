@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\Api\PresenceController;
-use App\Http\Controllers\Api\MeetingsController;
-use App\Http\Controllers\Api\MiniclassController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Api\MeetingsController;
+use App\Http\Controllers\Api\PresenceController;
+use App\Http\Controllers\Api\MiniclassController;
 
 /*
 |--------------------------------------------------------------------------
