@@ -38,6 +38,12 @@ class Meetings extends Model
     {
         return $this->belongsTo(Presence::class);
     }
+
+    public function presences()
+    {
+        return $this->hasMany(Presence::class);
+    }
+
     public function miniclass()
     {
         return $this->belongsTo(Miniclass::class);

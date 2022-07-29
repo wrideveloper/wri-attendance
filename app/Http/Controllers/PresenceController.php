@@ -33,16 +33,8 @@ class PresenceController extends Controller {
      * @param  \App\Http\Requests\StorePresenceRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        $presence = $request->validate([
-            'nim' => 'required|exists:users,nim',
-            'meeting_id' => 'required|exists:meetings,id',
-            'presence_date' => 'required|date',
-            'status' => 'required|',
-            'ket' => 'sometimes|string|max:255',
-            'feedback' => 'required|string|max:1000',
-            'token' => 'required|string|max:10|exists:meetings,token',
-        ]);
+    public function store(PresenceRequest $request) {
+        $presence = $request->validated();
         $cekToken = Meetings::where('token', $request->token)->firstOrFail();
 
         if($cekToken) {
@@ -59,9 +51,11 @@ class PresenceController extends Controller {
      * @param  \App\Models\Presence  $presence
      * @return \Illuminate\Http\Response
      */
-    public function show(Presence $presence){
-        return view('presence.show', [
-            'presence' => $presence
+    public function show(Presence $presences){
+        $presence = Presence::where('nim', $presences->nim)->get();
+        return view('user.list-absensi', [
+            'presence' => $presence,
+            'title' => 'Presensi'
         ]);
     }
 
@@ -73,7 +67,8 @@ class PresenceController extends Controller {
      */
     public function edit(Presence $presence){
         return view('presence.edit', [
-            'presence' => $presence
+            'presence' => $presence,
+            'title' => 'Presensi'
         ]);
     }
 
@@ -84,17 +79,8 @@ class PresenceController extends Controller {
      * @param  \App\Models\Presence  $presence
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Presence $presence) {
-        $rule = [
-            'nim' => 'required|exists:users,nim',
-            'meetings_id' => 'required|exists:meetings,id',
-            'presence_date' => 'required|date',
-            'status' => 'required',
-            'ket' => 'sometimes|string|max:255',
-            'feedback' => 'required|string|max:1000',
-            'token' => 'required|string|max:10|exists:meetings,token',
-        ];
-        $validated = $request->validate($rule);
+    public function update(PresenceRequest $request, Presence $presence) {
+        $validated = $request->validated();
         Presence::where('nim', $presence->nim)->update($validated);
         return redirect()->route('presence.index')->with('success', 'Presence updated successfully.');
     }

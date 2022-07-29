@@ -81,7 +81,7 @@
                     @endforeach
                 </table>
             </div>
-            <a class="mt-3 link-secondary text-decoration-none text-center" href="">Lihat Semua</a>
+            <a class="mt-3 mb-3 link-secondary text-decoration-none text-center" href="">Lihat Semua</a>
         </div>
     </div>
 </div>

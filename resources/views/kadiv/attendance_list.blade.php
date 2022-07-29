@@ -50,7 +50,7 @@
                             <td class="text-truncate align-middle"><span class="badge bg-danger">{{ $presences->status }}</span></td>
                         @endif
                         <td class="d-flex justify-content-center">
-                            <a href="#" class="ms-3 col-md-8 btn btn-primary text-light my-2">Detail</a>
+                            <a href="{{ route('detail-presence', $presences->nim) }}" class="ms-3 col-md-8 btn btn-primary text-light my-2">Detail</a>
                         </td>
                     </tr>
                     @endforeach

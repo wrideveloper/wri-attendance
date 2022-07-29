@@ -63,7 +63,7 @@ class UserController extends Controller
     {
         return view('user.show', [
             'user' => $user
-        ]);   
+        ]);
     }
 
     /**
@@ -96,10 +96,10 @@ class UserController extends Controller
         'generations_id' => 'required',
         'name' => 'required',
         'email' => 'required',
-        'password' => 'required']);
+        'password' => 'sometimes']);
         $validated['password'] = Hash::make($validated['password']);
         User::where('nim', $user->nim)->update($validated);
-        return redirect('/dashboard')->with('User data Updated.' );
+        return redirect('/dashboard')->with('success', 'Profil berhasil diubah');
     }
 
     /**
