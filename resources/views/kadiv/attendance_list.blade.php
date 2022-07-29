@@ -34,25 +34,31 @@
                     <th class="py-3">Status</th>
                     <th class="py-3 text-center">Aksi</th>
                 </tr>
-                @foreach($presence as $presences)
-                <tr class="align-middle">
-                    <td class="align-middle">{{ $loop->iteration }}</td>
-                    <td class="align-middle">{{ $presences->user->name }}</td>
-                    <td class="align-middle">{{ $presences->created_at->format('H:i:s') }} WIB</td>
-                    @if ($presences->status === 'Hadir')
-                        <td class="text-truncate align-middle"><span class="badge bg-success">{{ $presences->status }}</span></td>
-                    @elseif ($presences->status === 'Izin')
-                        <td class="text-truncate align-middle"><span class="badge bg-warning text-dark">{{ $presences->status }}</span></td>
-                    @elseif ($presences->status === 'Sakit')
-                        <td class="text-truncate align-middle"><span class="badge bg-info text-dark">{{ $presences->status }}</span></td>
-                    @elseif ($presences->status === 'Alpha')
-                        <td class="text-truncate align-middle"><span class="badge bg-danger">{{ $presences->status }}</span></td>
-                    @endif
-                    <td class="d-flex justify-content-center">
-                        <a href="#" class="ms-3 col-md-8 btn btn-primary text-light my-2">Detail</a>
-                    </td>
-                </tr>
-                @endforeach
+                @if ($presence->count() > 0)
+                    @foreach($presence as $presences)
+                    <tr class="align-middle">
+                        <td class="align-middle">{{ $loop->iteration }}</td>
+                        <td class="align-middle">{{ $presences->user->name }}</td>
+                        <td class="align-middle">{{ $presences->created_at->format('H:i:s') }} WIB</td>
+                        @if ($presences->status === 'Hadir')
+                            <td class="text-truncate align-middle"><span class="badge bg-success">{{ $presences->status }}</span></td>
+                        @elseif ($presences->status === 'Izin')
+                            <td class="text-truncate align-middle"><span class="badge bg-warning text-dark">{{ $presences->status }}</span></td>
+                        @elseif ($presences->status === 'Sakit')
+                            <td class="text-truncate align-middle"><span class="badge bg-info text-dark">{{ $presences->status }}</span></td>
+                        @elseif ($presences->status === 'Alpha')
+                            <td class="text-truncate align-middle"><span class="badge bg-danger">{{ $presences->status }}</span></td>
+                        @endif
+                        <td class="d-flex justify-content-center">
+                            <a href="#" class="ms-3 col-md-8 btn btn-primary text-light my-2">Detail</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td colspan="5" class="text-center text-danger">Data tidak ditemukan</td>
+                    </tr>
+                @endif
             </table>
         </div>
         <div class="d-flex justify-content-end mt-2">

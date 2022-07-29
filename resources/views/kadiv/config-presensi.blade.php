@@ -11,12 +11,19 @@
                 </div>
                 <h5>Pertemuan ke {{ $meetings->pertemuan }} - Miniclass {{ $meetings->miniclass->miniclass_name }}</h5>
             </div>
-            <form class="update-jadwal form rounded p-5" action="{{ route('meetings.update', $meetings->token) }}" method="POST">
+            <form class="update-jadwal form rounded p-5" action="{{ route('meetings.update', $meetings->token) }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <h5 class="">Pertemuan 1</h5>
+                @method('PUT')
+                <h5 class="">Pertemuan {{ $meetings->pertemuan }}</h5>
                 <div class="form-group mb-md-5 mb-4">
                     <label for="topik" class="form-label fs-6">Topik</label>
-                    <input value="{{ $meetings->topik }}" type="text" class="form-control" placeholder="Input Your Text in here" name="topik">
+                    <input value="{{ $meetings->topik }}" type="text" class="form-control @error('topik') is-invalid @enderror" placeholder="Input Your Text in here" name="topik">
+                    @error('topik')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                    <input value="{{ $meetings->miniclass_id }}" type="hidden" class="form-control" name="miniclass_id">
                 </div>
                 <div class="form-group mb-md-5 mb-4">
                     <label for="tanggal" class="form-label fs-6">Tanggal</label>
@@ -25,22 +32,37 @@
                 <div class="col-12 px-0">
                     <div class="row">
                         <div class="form-group mb-md-5 mb-4 col-lg-4 col-md-6 col-12">
-                            <label for="waktumulai" class="form-label fs-6">Waktu Mulai</label>
-                            <input value="{{ $meetings->start_time }}" type="time" class="form-control" placeholder="Input Your Text in here" name="waktumulai">
+                            <label for="start_time" class="form-label fs-6">Waktu Mulai</label>
+                            <input value="{{ $meetings->start_time }}" type="time" class="@error('start_time') is-invalid @enderror form-control" placeholder="Input Your Text in here" name="start_time">
+                            @error('start_time')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group mb-md-5 mb-4 col-lg-4 col-md-6 col-12">
-                            <label for="waktuberakhir" class="form-label fs-6">Waktu Berakhir</label>
-                            <input value="{{ $meetings->end_time }}" type="time" class="form-control" placeholder="Input Your Text in here" name="waktuberakhir">
+                            <label for="end_time" class="form-label fs-6">Waktu Berakhir</label>
+                            <input value="{{ $meetings->end_time }}" type="time" class="@error('end_time') is-invalid @enderror form-control" placeholder="Input Your Text in here" name="end_time">
+                            @error('end_time')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         <div class="form-group mb-md-5 mb-4 col-lg-4 col-md-12 col-12">
                             <label for="token" class="form-label fs-6">Token</label>
-                            <input value="{{ $meetings->token }}" type="text" class="form-control" placeholder="Input Your Text in here" name="token">
+                            <input value="{{ $meetings->token }}" type="text" class="@error('token') is-invalid @enderror form-control" placeholder="Input Your Text in here" name="token">
+                            @error('token')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                 </div>
                 <div class="col-12 d-flex justify-content-end px-0">
-                    <button class="btn btn-outline-secondary px-md-5 px-2 me-4"><b>Batal</b></button>
-                    <button class="btn btn-warning text-light px-md-5 px-2"><b>Update</b></button>
+                    <a href="/dashboard" class="btn btn-outline-secondary px-md-5 px-2 me-4"><b>Batal</b></a>
+                    <button type="submit" class="btn btn-warning text-light px-md-5 px-2"><b>Update</b></button>
                 </div>
             </form>
         </div>

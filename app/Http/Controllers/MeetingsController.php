@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use \App\Http\Requests\MeetingsRequest;
 use \App\Models\Meetings;
 use \Illuminate\Http\Response;
-
+use \App\Http\Requests\MeetingsRequest;
 class MeetingsController extends Controller {
         /**
      * Display a listing of the resource.
@@ -27,7 +26,7 @@ class MeetingsController extends Controller {
 
     public function edit(Meetings $meeting) {
         $meetings = $meeting::where('token', $meeting->token)->first();
-        return view('meetings.edit',[
+        return view('kadiv.config-presensi',[
             'meetings'=> $meetings,
             'title' => 'Config Presensi'
         ]);
@@ -41,7 +40,7 @@ class MeetingsController extends Controller {
     public function store(MeetingsRequest $request) {
         $data = $request->validated();
         Meetings::create($data);
-        return redirect()->route('Meetings.index');
+        return redirect()->route('dashboard')->with('success', 'Data berhasil ditambahkan');
     }
 
 
@@ -66,8 +65,8 @@ class MeetingsController extends Controller {
     public function update(MeetingsRequest $request, Meetings $meeting)
     {
         $newData = $request->validated();
-        $data = Meetings::where('id', $meeting->token)->update($newData);
-        return redirect()->route('/dashboard')->with('success', 'Data berhasil diubah');
+        Meetings::where('token', $meeting->token)->update($newData);
+        return redirect()->route('dashboard')->with('success', 'Data meetings berhasil diubah');
     }
 
     /**

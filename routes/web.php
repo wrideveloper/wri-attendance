@@ -51,7 +51,7 @@ Route::get('/post-absensi', function () {
 })->name('post-absensi');
 
 // home route after login
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
 Route::resource('/user', UserController::class);
 Route::get('/user/input_absensi', fn () => view('user.input_absensi'));
