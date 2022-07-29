@@ -1,9 +1,9 @@
-@extends('layouts.master')
+@extends('layouts.master', ['sectionHeader' => 'Prosentase Kehadiran'])
 
 @section('content')
 
 <div class="container-fluid pb-5 px-4">
-    <h4 class="fw-normal mb-0">Prosentase Kehadiran</h4>
+    {{-- <h4 class="fw-normal mb-0"></h4> --}}
     <div class="col-12 mt-4">
         <div class="row align-items-center justify-content-between flex-column flex-lg-row">
             <div class="col-12 col-md-12 col-lg-7 d-flex align-items-center flex-column flex-md-row shadow-cs p-3">

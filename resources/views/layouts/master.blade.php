@@ -27,29 +27,27 @@
     <div class="d-flex" id="wrapper">
         <div class="sidebar" id="sidebar-wrapper">
             <div class="sidebar-brand">
-                <a href="" class=""><img src="{{ asset('img/wri-logo-white.png') }}"
-                        alt="wri-polinema"></a>
+                <a href="" class=""><img src="{{ asset('img/wri-logo-white.png') }}" alt="wri-polinema"></a>
             </div>
             <div class="list-group rounded-0">
                 @include('layouts.sidebar-item')
             </div>
         </div>
         <div id="page-content-wrapper">
-            <nav class="navbar navbar-expand-lg bg-light">
+            <nav class="navbar navbar-expand-lg bg-light flex-column">
                 <div class="container-fluid py-3 px-4">
                     <a class="btn-bar" id="sidebarToggle"><i class="fa-solid fa-bars"></i></a>
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown ">
                             <a class="nav-link position-relative" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="text-sm-hidden">{{ Auth::user()->name }}</span> <span
-                                    class="item-users"><i class="fa-solid fa-user"></i></span>
+                                <span class="text-sm-hidden">{{ Auth::user()->name }}</span> <span class="item-users"><i
+                                        class="fa-solid fa-user"></i></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end my-2 position-absolute"
                                 aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a class="dropdown-item text-hover-red" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
+                                    <a class="dropdown-item text-hover-red" href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();"><i
                                             class="fa-solid fa-arrow-right-from-bracket text-red"
                                             style="padding-right: 10px;"></i>Logout</a>
@@ -62,6 +60,11 @@
                         </li>
                     </ul>
                 </div>
+                @isset($sectionHeader)
+                <div class="col-md-12 px-4">
+                    <h5>{{$sectionHeader}}</h5>
+                </div>
+                @endisset
             </nav>
             {{-- page content --}}
             @yield('content')
