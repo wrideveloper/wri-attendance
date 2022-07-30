@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Meetings;
 use App\Models\Presence;
+use App\Models\Miniclass;
+use App\Models\Generation;
 use Illuminate\Http\Request;
 
 class ConfigMeetingController extends Controller {
@@ -70,8 +73,17 @@ class ConfigMeetingController extends Controller {
 
     // Detail per anggota
     public function detailPresence(Presence $presence) {
-        return view('dashboard.detail-presence', [
+        $user = User::where('nim', $presence->nim)->first();
+        $gen = Generation::where('id', $user->generations_id)->first();
+        $mc = Miniclass::where('id', $user->miniclass_id)->first();
+        return view('admin.edit_absensi', [
             'presence' => $presence,
+            'user' => $user,
+            'gen' => $gen,
+            'mc' => $mc,
+            'title' => 'Config Presensi',
+            'generations' => Generation::all(),
+            'miniclasses' => Miniclass::all()
         ]);
     }
 

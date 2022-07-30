@@ -24,16 +24,28 @@
                         <th class="text-center">Waktu</th>
                         <th>Topik</th>
                         <th class="text-center">Status</th>
-                        <th class="text-center">Keterangan</th>
+                        <th class="text-center">Keterangan / Feedback</th>
                     </tr>
+                    @if ($presence->count() > 0)
+                        @foreach ($presence as $presences)
+                            <tr class="align-middle border-custom-none">
+                                <td>{{ $presences->meeting->pertemuan }}</td>
+                                <td class="text-center">{{ $presences->created_at->format('d M Y') }}</td>
+                                <td class="text-center">{{ $presences->created_at->format('H:i:s') }}</td>
+                                <td class="text-truncate">{{ $presences->meeting->topik }}</td>
+                                <td class="text-truncate">{{ $presences->status }}</td>
+                                @if ($presences->status != 'Hadir')
+                                    <td class="text-center">{{ $presences->feedback }}</td>
+                                @else
+                                    <td class="text-center">{{ $presences->ket }}</td>
+                                @endif
+                                <td><a class="btn w-100 btn-warning text-light fw-bold" href="{{ route('presence.edit', $presences->nim) }}">Pilih</a></td>
+                            </tr>
+                        @endforeach
+                    @else
                     <tr class="align-middle border-custom-none">
-                        <td>1</td>
-                        <td class="text-center">asddasd</td>
-                        <td class="text-center">asdasdasd</td>
-                        <td class="text-truncate">sadasd</td>
-                        <td class="text-center">asdasd</td>
-                        <td><a class="btn w-100 btn-warning text-light fw-bold" href="">Pilih</a></td>
-                    </tr>
+                        <td colspan="6" class="text-center text-danger">Tidak ada data</td>
+                    @endif
                 </table>
             </div>
         </div>
