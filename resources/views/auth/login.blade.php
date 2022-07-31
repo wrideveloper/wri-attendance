@@ -57,7 +57,7 @@
 @endif
 <div class="d-flex justify-content-center align-items-center vh-100 vw-100 position-relative">
     <div id="box" class="rounded-4">
-        <form class="container" action="{{ route('login') }}" method="POST" enctype="multipart/form-data">
+        <form class="container" action="/api/login" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="col-12">
                 <div class="row d-flex justify-content-center ">
