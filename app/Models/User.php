@@ -25,7 +25,7 @@ class User extends Authenticatable
         'password',
         'roles_id',
         'miniclass_id',
-        'generation_id',
+        'generations_id',
         'phone',
     ];
 

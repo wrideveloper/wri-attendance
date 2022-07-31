@@ -39,18 +39,21 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = $request->validate([
-            'miniclas_id' => 'required|exists:miniclass,id',
+            'miniclass_id' => 'required|exists:miniclasses,id',
             'roles_id' => 'required|exists:roles,id',
-            'generation_id' => 'required|exists:generation,id',
-            'name' => 'required|exists:users,name',
-            'email' => 'required|exists:users,email',
-            'phone' => 'required|exists:users,phone',
-            'nim' => 'required|exists:users,nim',
-            'password' => 'required|exists:users,password'
+            'generations_id' => 'required|exists:generations,id',
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'nim' => 'required',
+            'password' => 'required'
         ]);
         $user['password'] = Hash::make($user['password']);
+        $user['miniclass_id'] = (int)$user['miniclass_id'];
+        $user['roles_id'] = (int)$user['roles_id'];
+        $user['generations_id'] = (int)$user['generations_id'];
         User::create($user);
-            return redirect()->route('user.index')->with('success', 'Presensi data Tersimpan');
+        return redirect("/admin/add-user")->with('success', 'Presensi data Tersimpan');
     }
 
     /**
@@ -91,12 +94,13 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $validated = $request-> validate([
-        'miniclass_id' => 'required',
-        'generations_id' => 'required',
-        'name' => 'required',
-        'email' => 'required',
-        'password' => 'sometimes']);
+        $validated = $request->validate([
+            'miniclass_id' => 'required',
+            'generations_id' => 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'sometimes'
+        ]);
         $validated['password'] = Hash::make($validated['password']);
         User::where('nim', $user->nim)->update($validated);
         return redirect('/dashboard')->with('success', 'Profil berhasil diubah');
@@ -111,5 +115,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         user::destroy($user->nim);
-        return redirect()->route('user.index')->with('User deleted.' );    }
+        return redirect()->route('user.index')->with('User deleted.');
+    }
 }
