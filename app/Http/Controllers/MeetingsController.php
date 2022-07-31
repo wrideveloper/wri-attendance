@@ -14,8 +14,7 @@ class MeetingsController extends Controller {
      *
      *
      */
-    public function index()
-    {
+    public function index() {
         $datas = Meetings::all();
         return view('Meetings.index', compact([
             'datas' => $datas
@@ -26,7 +25,7 @@ class MeetingsController extends Controller {
         $miniclass = Miniclass::where('id', Auth::user()->miniclass_id)->first();
         return view('meetings.create', [
             'miniclass' => $miniclass,
-            'title' => 'Config Presensi'
+            'title' => 'List Pertemuan'
         ]);
     }
 
@@ -34,7 +33,7 @@ class MeetingsController extends Controller {
         $meetings = $meeting::where('token', $meeting->token)->first();
         return view('kadiv.config-presensi',[
             'meetings'=> $meetings,
-            'title' => 'Config Presensi'
+            'title' => 'List Pertemuan'
         ]);
     }
 

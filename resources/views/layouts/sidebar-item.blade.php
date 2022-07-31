@@ -6,15 +6,15 @@
         <i class="fa-solid fa-user" style="padding-right: 12px;"></i>
         <span>Edit User</span>
     </a>
-    <a class="list-group-item d-inline-block text-truncate {{ $title === 'Config Presensi' ? 'active' : '' }}"
+    <a class="list-group-item d-inline-block text-truncate {{ $title === 'List Pertemuan' ? 'active' : '' }}"
         href="">
         <i class="fa-solid fa-clipboard-check" style="padding-right: 14px;"></i>
-        <span>Config Presensi</span></a>
+        <span>List Pertemuan</span></a>
 @elseif(Auth::user()->roles_id == 2)
-    <a class="list-group-item d-inline-block text-truncate {{ $title === 'Config Presensi' ? 'active' : '' }}"
+    <a class="list-group-item d-inline-block text-truncate {{ $title === 'List Pertemuan' ? 'active' : '' }}"
         href="">
         <i class="fa-solid fa-clipboard-check" style="padding-right: 14px;"></i>
-        <span>Config Presensi</span></a>
+        <span>List Pertemuan</span></a>
 @elseif(Auth::user()->roles_id == 3)
     <a href="{{ route('presence.show', Auth::user()->nim) }}" class="list-group-item d-inline-block text-truncate {{ $title === 'Presensi' ? 'active' : '' }}">
         <i class="fa-solid fa-clipboard-user" style="padding-right: 14px;"></i>
