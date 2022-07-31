@@ -1,9 +1,15 @@
-@extends('layouts.master')
+@extends('layouts.master', ['sectionHeader' => 'Prosentase Kehadiran'])
 
 @section('content')
 
 <div class="container-fluid pb-5 px-4">
-    <h4 class="fw-normal mb-0">Prosentase Kehadiran</h4>
+    @if(session()->has('success'))
+        <div class="alert alert-success alert-dismissible col-lg-12 fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    {{-- <h4 class="fw-normal mb-0"></h4> --}}
     <div class="col-12 mt-4">
         <div class="row align-items-center justify-content-between flex-column flex-lg-row">
             <div class="col-12 col-md-12 col-lg-7 d-flex align-items-center flex-column flex-md-row shadow-cs p-3">
@@ -81,8 +87,8 @@
                     @endphp
                     <tr class="align-middle">
                         <td>{{$item->meetings->pertemuan}}</td>
-                        <td>{{$item->meetings->tanggal}}</td>
-                        <td>{{date('H:i', strtotime($item->meetings->start_time))}}</td>
+                        <td>{{\Carbon\Carbon::parse($item->meetings->tanggal)->format('d M Y')}}</td>
+                        <td>{{date('H:i:s', strtotime($item->meetings->start_time))}} WIB</td>
                         <td class="col-1 text-truncate">{{$item->meetings->topik}}</td>
                         <td class="{{$statusColor}}">{{$item->status}}</td>
                         <td><button class="btn w-100 btn-warning text-light">Pilih</button></td>
@@ -90,7 +96,7 @@
                     @endforeach
                 </table>
             </div>
-            <a class="mt-3 link-secondary text-decoration-none text-center" href="">Lihat Semua</a>
+            <a class="mt-3 mb-3 link-secondary text-decoration-none text-center" href="">Lihat Semua</a>
         </div>
     </div>
 </div>

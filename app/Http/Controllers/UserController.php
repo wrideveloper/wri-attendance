@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Generation;
+use App\Models\Miniclass;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -49,6 +52,7 @@ class UserController extends Controller
         User::create($user);
             return redirect()->route('user.index')->with('success', 'Presensi data Tersimpan');
     }
+
     /**
      * Display the specified resource.
      *
@@ -59,7 +63,8 @@ class UserController extends Controller
     {
         return view('user.show', [
             'user' => $user
-        ]);    }
+        ]);
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -69,8 +74,13 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $model = User::find($user->nim);
-        return view("user.edit_profil", compact("model"));}
+        return view("user.edit_profil", [
+            'user' => $user,
+            'generations' => Generation::all(),
+            'miniclasses' => Miniclass::all(),
+            'title' => 'Edit Profile'
+        ]);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -82,17 +92,14 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $validated = $request-> validate([
-        'miniclas_id' => 'required|exists:miniclass,id',
-        'roles_id' => 'required|exists:roles,id',
-        'generation_id' => 'required|exists:generation,id',
+        'miniclass_id' => 'required',
+        'generations_id' => 'required',
         'name' => 'required',
         'email' => 'required',
-        'phone' => 'required',
-        'nim' => 'required',
-        'password' => 'required']);
-        $user['password'] = Hash::make($user['password']);
-        User::where($user->nim)->update($validated);
-        return redirect()->route('user.index')->with('User data Updated.' );
+        'password' => 'sometimes']);
+        $validated['password'] = Hash::make($validated['password']);
+        User::where('nim', $user->nim)->update($validated);
+        return redirect('/dashboard')->with('success', 'Profil berhasil diubah');
     }
 
     /**

@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-    <link rel="stylesheet" href="{{ asset('css/style.css')}}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>WRI Attendance | {{ $title }}</title>
 
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
@@ -33,28 +34,37 @@
             </div>
         </div>
         <div id="page-content-wrapper">
-            <nav class="navbar navbar-expand-lg bg-light">
+            <nav class="navbar navbar-expand-lg bg-light flex-column">
                 <div class="container-fluid py-3 px-4">
                     <a class="btn-bar" id="sidebarToggle"><i class="fa-solid fa-bars"></i></a>
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown ">
-                            <a class="nav-link position-relative" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="text-sm-hidden">{{ Auth::user()->name }}</span> <span class="item-users"><i class="fa-solid fa-user"></i></span>
+                            <a class="nav-link position-relative" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="text-sm-hidden">{{ Auth::user()->name }}</span> <span class="item-users"><i
+                                        class="fa-solid fa-user"></i></span>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end my-2 position-absolute" aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu dropdown-menu-end my-2 position-absolute"
+                                aria-labelledby="navbarDropdown">
                                 <li>
-                                    <form action="{{ route('logout') }}" method="POST">
+                                    <a class="dropdown-item text-hover-red" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();"><i
+                                            class="fa-solid fa-arrow-right-from-bracket text-red"
+                                            style="padding-right: 10px;"></i>Logout</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        style="display: none;">
                                         @csrf
-                                        <button type="submit" class="dropdown-item text-hover-red">
-                                            <i class="fa-solid fa-arrow-right-from-bracket text-red" style="padding-right: 10px;">
-                                            </i>Logout
-                                        </button>
                                     </form>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </div>
+                @isset($sectionHeader)
+                <div class="col-md-12 px-4">
+                    <h5>{{$sectionHeader}}</h5>
+                </div>
+                @endisset
             </nav>
             {{-- page content --}}
             @yield('content')

@@ -6,10 +6,9 @@ use App\Models\Meetings;
 use App\Models\Miniclass;
 use App\Models\User;
 
-class DashboardController extends Controller
-{
-    public function index()
-    {
+class DashboardController extends Controller {
+
+    public function index() {
         // next menggunakan Auth::user()
         $user = User::find(auth()->user()->id);
         $role = $user->roles->roles_name;
@@ -55,7 +54,7 @@ class DashboardController extends Controller
                 'prosentase_sakit',
                 'title'
             ));
-        } else {
+        } else if($role == 'Members') {
             $title = 'Dashboard';
             // MEMBER
             $miniclass = $user->miniclass_id;
@@ -86,6 +85,8 @@ class DashboardController extends Controller
                 'prosentase_sakit',
                 'title'
             ));
+        } else {
+            return redirect()->route('login');
         }
     }
 }

@@ -16,11 +16,14 @@ class Presence extends Model {
         'presence_date',
         'status',
         'ket',
-        'feedback',
         'token',
+        'feedback',
+        'created_at',
+        'updated_at'
     ];
 
     protected $with = [
+        'meetings',
         'user'
     ];
 
@@ -38,7 +41,11 @@ class Presence extends Model {
     }
 
     public function meetings() {
-        return $this->hasMany(Meetings::class);
+        return $this->belongsTo(Meetings::class);
+    }
+
+    public function meeting() {
+        return $this->belongsTo(Meetings::class);
     }
 
     public function user() {
