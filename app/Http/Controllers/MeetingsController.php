@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use \App\Models\Meetings;
+use App\Models\Miniclass;
 use \Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use \App\Http\Requests\MeetingsRequest;
+
 class MeetingsController extends Controller {
         /**
      * Display a listing of the resource.
@@ -19,9 +22,12 @@ class MeetingsController extends Controller {
         ]));
     }
 
-    public function create()
-    {
-        return view('Meetings.create');
+    public function create() {
+        $miniclass = Miniclass::where('id', Auth::user()->miniclass_id)->first();
+        return view('meetings.create', [
+            'miniclass' => $miniclass,
+            'title' => 'Config Presensi'
+        ]);
     }
 
     public function edit(Meetings $meeting) {
