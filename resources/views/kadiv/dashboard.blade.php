@@ -3,16 +3,16 @@
 @section('content')
 
 <div class="container pb-5 px-4">
-    <h4 class="fw-normal mb-2">Prosentase Kehadiran</h4>
     @if(session()->has('success'))
-        <div class="alert alert-success alert-dismissible col-lg-12 fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+    <div class="alert alert-success alert-dismissible col-lg-12 fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     @endif
     <div class="col-12 mt-4">
-        <div class="row align-items-center justify-content-between flex-column flex-lg-row">
-            <div class="col-12 d-flex align-items-center flex-column flex-md-row shadow-cs p-3">
+        <div class="rounded-cs row align-items-center justify-content-between flex-column flex-lg-row bg-white py-5 px-4">
+            <h4 class="fw-normal mb-2">Prosentase Kehadiran</h4>
+            <div class="col-12 d-flex align-items-center flex-column flex-md-row p-3 bg-transparent">
                 <div class="col-8 col-md-3 col-lg-2">
                     <canvas id="pieKehadiran"></canvas>
                 </div>
@@ -47,8 +47,8 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-5 shadow-cs">
-            <h4 class="fw-normal">List Absensi Pertemuan</h4>
+        <h4 class="mt-5 px-4 fw-normal">List Absensi Pertemuan</h4>       
+        <div class="p-4 rounded-cs row mt-5 shadow-cs bg-white">
             <div class="table-responsive">
                 <table class="table mt-3 table-borderless">
                     <tr class="border-bottom border-dark mb-3">
@@ -68,11 +68,13 @@
                             <a class="btn btn-warning text-light" href="{{ route('meetings.edit', $p->token) }}">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
-                            <a class="ms-3 col-md-7 btn btn-primary text-light" href="{{ route('list-presence', $p->token) }}">Detail</a>
+                            <a class="ms-3 col-md-7 btn btn-primary text-light"
+                                href="{{ route('list-presence', $p->token) }}">Detail</a>
                             <form action="{{ route('delete-meetings', $p->token) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button onclick="return confirm('Apakah anda yakin untuk menghapus meetings ini?')" class="btn btn-danger text-light mx-1">
+                                <button onclick="return confirm('Apakah anda yakin untuk menghapus meetings ini?')"
+                                    class="btn btn-danger text-light mx-1">
                                     <span><i class="fa-solid fa-trash-can"></i></span>
                                 </button>
                             </form>
@@ -126,4 +128,3 @@
     });
 </script>
 @endsection
-

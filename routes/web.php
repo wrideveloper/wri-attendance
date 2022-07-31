@@ -11,6 +11,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MiniclassController;
 use App\Http\Controllers\ConfigMeetingController;
+use App\Http\Controllers\GenerationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,7 +60,8 @@ Route::get('/user/input_absensi', fn () => view('user.input_absensi'));
 Route::get('/kadiv/edit-profil', fn () => view('kadiv.edit_profil'));
 Route::get('/kadiv/attendance-list', fn () => view('kadiv.attendance_list'));
 
-Route::get('/admin/add-user', fn () => view('admin.add_user'));
+Route::get('/admin/add-user', fn () => view('admin.add_user', ['generations' => DB::table('generations')->get(), 'miniclasses' => DB::table('miniclasses')->get()]));
+Route::post('/admin/add-user', [UserController::class, 'store'])->name('adminAddUser');
 Route::get('/admin/dashboard', fn () => view('admin.dashboard', [
     'title' => 'Dashboard',
 ]));
@@ -74,7 +76,7 @@ Route::get('/admin/edit-profil', fn () => view('admin.edit_profil'));
 
 Route::resource('/miniclass', MiniclassController::class);
 
-Route::group(['prefix' => 'kadiv','middleware' => ['auth']], function() {
+Route::group(['prefix' => 'kadiv', 'middleware' => ['auth']], function () {
     // Route::get('/edit-meetings/{meetings}', [MeetingsController::class, 'edit'])->name('edit-meetings');
     Route::resource('/meetings', MeetingsController::class);
     Route::get('/rekap-meeting/{meetings}', [ConfigMeetingController::class, 'listPresence'])->name('list-presence');
