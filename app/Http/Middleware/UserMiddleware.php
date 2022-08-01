@@ -17,13 +17,14 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $Uri =  request()->getRequestUri();
-
         if (!auth()->user()->roles_id >= 1 && !auth()->user()->roles_id <= 3) {
             abort(403);
             return redirect('/');
-        } else if ($Uri !== '/user/'.auth()->user()->nim.'/edit') {
-            abort(403);
+        } else if(Route::currentRouteName()=='user.edit'){
+            $Uri =  request()->getRequestUri();
+            if($Uri !== '/user/'.auth()->user()->nim.'/edit') {
+                abort(403);
+            }
         }
 
         return $next($request);
