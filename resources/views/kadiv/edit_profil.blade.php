@@ -47,6 +47,7 @@
                 <button class="btn btn-teal text-light px-5">Simpan</button>
             </div>
         </form>
+        @include('components.konfirmasi', ['text' => 'Apakah Anda yakin ingin memperbarui profil?'])
     </div>
 </div>
 
