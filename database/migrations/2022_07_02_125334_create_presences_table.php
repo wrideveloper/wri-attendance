@@ -19,7 +19,7 @@ class CreatePresencesTable extends Migration
             $table->date('presence_date');
             $table->string('status');
             $table->string('ket')->nullable();
-            $table->string('token', 10);
+            $table->string('token', 10)->nullable();
             $table->text('feedback')->nullable();
             $table->timestamps();
 

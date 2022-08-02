@@ -54,7 +54,7 @@ class ConfigMeetingController extends Controller {
         return view('kadiv.attendance_list', [
             'presence' => $presence,
             'meeting' => $meeting,
-            'title' => 'Config Presensi'
+            'title' => 'List Pertemuan'
         ]);
     }
 
@@ -81,7 +81,7 @@ class ConfigMeetingController extends Controller {
             'user' => $user,
             'gen' => $gen,
             'mc' => $mc,
-            'title' => 'Config Presensi',
+            'title' => 'List Pertemuan',
             'generations' => Generation::all(),
             'miniclasses' => Miniclass::all()
         ]);
