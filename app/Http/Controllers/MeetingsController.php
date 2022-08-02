@@ -13,7 +13,7 @@ class MeetingsController extends Controller {
      * Display a listing of the resource.
      *
      *
-     */Meetings
+     */
     public function index()
     {
         $datas = Meetings::where('miniclass_id', Auth::user()->miniclass_id);
