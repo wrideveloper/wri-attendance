@@ -16,11 +16,18 @@ const controlPasswordVisibility = () => {
 const controlConfirmationModal = () => {
     const elementKonfirmasi = new bootstrap.Modal("#konfirmasi", null);
     const elementTerkonfirmasi = new bootstrap.Modal("#terkonfirmasi", null);
-    $("form.edit-profil").submit((e) => {
-        e.preventDefault();
+    const form = $('form');
+    form.submit(() => {
         elementKonfirmasi.show();
-        $("#terkonfirmasi").on("shown.bs.modal", (e) => setTimeout(() => elementTerkonfirmasi.hide(), 2200));
-    });
+        return false
+    })
+    $('#batal').click(() => location.reload())
+    $('#lanjut').click(() => {
+        elementKonfirmasi.hide();
+        elementTerkonfirmasi.show()
+        form.unbind("submit")
+        setTimeout(() => form.submit(), 1500);
+    })
 }
 
 const controlBodyBackgroundColor = (color = "#F9F9F9") => $("body").css({ backgroundColor: color });

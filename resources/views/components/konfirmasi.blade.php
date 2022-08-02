@@ -1,25 +1,17 @@
-<div id="konfirmasi" class="modal fade" tabindex="-1">
+<div class="modal fade" id="konfirmasi" tabindex="-1" aria-labelledby="konfirmasiLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-body text-center p-5">
-                <div class="col-8 mx-auto mb-4">
-                    <h6 class="text-secondary fw-normal">{{$text}}</h6>
-                </div>
-                <div class="d-flex justify-content-start justify-content-sm-around pt-2">
-                    <div class="col col-xs-3 col-md-3">
-                        <button type="button" class="btn btn-default border border-secondary w-100 py-2"
-                            data-bs-dismiss="modal">Tidak</button>
-                    </div>
-                    <div class="col col-xs-3 col-md-3 col-lg-3">
-                        <button type="button" class="btn btn-teal text-light w-100 py-2" data-bs-toggle="modal"
-                            data-bs-target="#terkonfirmasi">Lanjutkan</button>
-                    </div>
+            <div class="modal-body p-5">
+                <h6 class="text-secondary fw-light text-center">{{$text}}</h6>
+                <div class="d-flex justify-content-around mt-4">
+                    <button id="batal" type="button" class="btn btn-outline-secondary"
+                        data-bs-dismiss="modal">Tidak</button>
+                    <button id="lanjut" type="submit" class="btn btn-teal text-light">Lanjutkan</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <div id="terkonfirmasi" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content py-5">
