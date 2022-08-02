@@ -24,6 +24,10 @@ use App\Http\Controllers\GenerationController;
 |
 */
 
+Route::get('tested', function () {
+    return view('kadiv.list_pertemuan', ['title' => 'Dashboard']);
+});
+
 Route::get('/', function () {
     return view('auth.login');
 });
