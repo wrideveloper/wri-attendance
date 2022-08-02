@@ -95,9 +95,7 @@ class ConfigMeetingController extends Controller {
     }
     public function listMeeting(){
         $datas = Meetings::where('miniclass_id', Auth::user()->miniclass_id);
-        return view('kadiv.list_pertemuan', compact(
-            'datas' => $datas
-        ));
+        return view('kadiv.list_pertemuan', compact($datas));
     }
 
     // Update dari masing-masing anggota
