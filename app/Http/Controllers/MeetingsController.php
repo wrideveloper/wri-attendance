@@ -14,11 +14,10 @@ class MeetingsController extends Controller {
      *
      *
      */
-    public function index() {
-        $datas = Meetings::all();
-        return view('Meetings.index', compact([
-            'datas' => $datas
-        ]));
+    public function index()
+    {
+        $datas = Meetings::where('miniclass_id', Auth::user()->miniclass_id);
+        return view('list-pertemuan', compact('datas'));
     }
 
     public function create() {

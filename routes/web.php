@@ -86,6 +86,7 @@ Route::group(['prefix' => 'kadiv', 'middleware' => ['auth']], function () {
     Route::get('/rekap-meeting/{meetings}', [ConfigMeetingController::class, 'listPresence'])->name('list-presence');
     Route::get('/check-meetings/detail/{meetings}', [ConfigMeetingController::class, 'show'])->name('detail-meetings');
     Route::get('/check-presence/detail/{presence}', [ConfigMeetingController::class, 'detailPresence'])->name('detail-presence');
+    
     // Delete Meetings
     Route::delete('/delete-meetings/{meetings}', [ConfigMeetingController::class, 'deleteMeetings'])->name('delete-meetings');
     Route::get('/list-pertemuan', fn () => view('kadiv.list_pertemuan'))->name('list-pertemuan');

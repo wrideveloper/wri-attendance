@@ -17,7 +17,7 @@ class MeetingsController extends Controller
     public function index()
     {
         return response()->json([
-            'response' => Meetings::all()
+            'response' => Meetings::where('miniclass_id', Auth::user()->miniclass_id)
         ]);
     }
     
