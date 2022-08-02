@@ -17,9 +17,9 @@ class MeetingsController extends Controller {
     public function index()
     {
         $datas = Meetings::where('miniclass_id', Auth::user()->miniclass_id);
-        return view('kadiv.meetings_list', compact([
+        return view('kadiv.list_pertemuan', compact(
             'datas' => $datas
-        ]));
+        ));
     }
 
     public function create() {
