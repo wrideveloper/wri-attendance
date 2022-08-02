@@ -3,7 +3,7 @@ function showPresent() {
     $('#sick').empty();
     $('#present').html(`<div class="card card-rounded">
                         <h1 class="h5 mb-4">Bagaimana komentarmu tentang miniclass hari ini?</h1>
-                        <textarea class="form-control" rows="10" name="desc"
+                        <textarea class="form-control" rows="10" name="feedback"
                             placeholder="Input Your Text in here"></textarea>
                     </div>
                     <div class="card card-rounded">
@@ -12,7 +12,7 @@ function showPresent() {
                             placeholder="Input Your Text in here" />
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-success px-5">Simpan</button>
+                        <button class="btn btn-teal text-white px-5">Simpan</button>
                     </div>`);
 }
 function showPermit() {
@@ -20,11 +20,11 @@ function showPermit() {
     $('#sick').empty();
     $('#permit').html(`<div class="card card-rounded">
                         <h1 class="h5 mb-4">Keterangan Izin</h1>
-                        <textarea class="form-control" rows="10" name="keterangan"
+                        <textarea class="form-control" rows="10" name="ket"
                             placeholder="Input Your Text in here"></textarea>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-success px-5">Simpan</button>
+                        <button class="btn btn-teal text-white px-5">Simpan</button>
                     </div>`);
 }
 function showSick() {
@@ -32,10 +32,10 @@ function showSick() {
     $('#present').empty();
     $('#sick').html(`<div class="card card-rounded">
                         <h1 class="h5 mb-4">Keterangan Sakit</h1>
-                        <textarea class="form-control" name="keterangan" rows="10"
+                        <textarea class="form-control" name="ket" rows="10"
                             placeholder="Input Your Text in here"></textarea>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-success px-5">Simpan</button>
+                        <button class="btn btn-teal text-white px-5">Simpan</button>
                     </div>`);
 }
