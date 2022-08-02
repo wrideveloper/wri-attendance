@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        <h4 class="mt-5 px-4 fw-normal">List Absensi Pertemuan</h4>       
+        <h4 class="mt-5 px-4 fw-normal">List Absensi Pertemuan</h4>
         <div class="p-4 rounded-cs row mt-5 shadow-cs bg-white">
             <div class="table-responsive">
                 <table class="table mt-3 table-borderless">
@@ -83,7 +83,7 @@
                     @endforeach
                 </table>
             </div>
-            <a class="mt-3 mb-3 link-secondary text-decoration-none text-center" href="">Lihat Semua</a>
+            <a class="mt-3 mb-3 link-secondary text-decoration-none text-center" href="{{ route('list-pertemuan') }}">Lihat Semua</a>
         </div>
     </div>
 </div>

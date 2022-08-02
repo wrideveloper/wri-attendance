@@ -34,7 +34,7 @@ class PresenceRequest extends FormRequest
                     'status' => 'required|in:hadir,izin,sakit,alfa',
                     'ket' => 'nullable|string|max:255',
                     'feedback' => 'nullable|string|max:1000',
-                    'token' => 'required|string|max:10|exists:meetings,token'
+                    'token' => 'sometimes|string|max:10|exists:meetings,token'
                 ];
             } break;
             case 'PUT' : {
@@ -45,7 +45,7 @@ class PresenceRequest extends FormRequest
                     'status' => 'sometimes|in:hadir,izin,sakit,alfa',
                     'ket' => 'sometimes|string|max:255',
                     'feedback' => 'sometimes|string|max:1000',
-                    'token' => 'required|string|max:10|exists:meetings,token'
+                    'token' => 'sometimes|string|max:10|exists:meetings,token'
                 ];
             } break;
         }
