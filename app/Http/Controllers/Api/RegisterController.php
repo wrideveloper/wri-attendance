@@ -16,6 +16,7 @@ class RegisterController extends Controller
             'active' => 'register',
         ]);
     }
+
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -30,8 +31,12 @@ class RegisterController extends Controller
         ]);
 
         $data['password'] = Hash::make($data['password']);
-        
-        return User::create($data);
+        $response = User::create($data);
+        // $response->header('Content-Type', 'application/json');
+        return $response;
+            
         // return redirect('/login')->with('success', 'Register successfull! Please login'); 
     }
+
+    
 }

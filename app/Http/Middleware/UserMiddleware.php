@@ -4,8 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
-class User
+class UserMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,14 +17,16 @@ class User
      */
     public function handle(Request $request, Closure $next)
     {
-        $id=$request->route('id');
-        if(auth()->user()->roles_id!==3){
+        if (!auth()->user()->roles_id >= 1 && !auth()->user()->roles_id <= 3) {
             abort(403);
-            return redirect('/user');
+            return redirect('/');
+        } else if(Route::currentRouteName()=='user.edit'){
+            $Uri =  request()->getRequestUri();
+            if($Uri !== '/user/'.auth()->user()->nim.'/edit') {
+                abort(403);
+            }
         }
-        else if($id!==auth()->user()->id){
-            abort(403);
-        }
+
         return $next($request);
     }
 }

@@ -54,7 +54,7 @@ Route::get('/post-absensi', function () {
 // home route after login
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
-Route::resource('/user', UserController::class);
+Route::resource('/user', UserController::class)->middleware('user');
 Route::get('/user/input_absensi', fn () => view('user.input_absensi'));
 
 Route::get('/kadiv/edit-profil', fn () => view('kadiv.edit_profil'));

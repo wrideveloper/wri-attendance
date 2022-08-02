@@ -2,20 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function index()
-    {
-        return view('login.index', [
-            'title' => 'Login',
-            'active' => 'login',
-        ]);
-    }
-
     public function authenticate(Request $request)
     {
         $credential = $request->validate([
@@ -30,7 +22,7 @@ class LoginController extends Controller
 
         return response()->json([
             'success' => false,
-            'message' => 'Invalid Email or Password',
+            'message' => 'Invalid Nim or Password',
         ], 401);
     }
 
