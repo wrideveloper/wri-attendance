@@ -1,6 +1,6 @@
-@extends('layouts.master')
-
+@extends('layouts.master', ['title' => 'Add User'])
 @section('content')
+
 <div class="container py-5 px-4">
     <div class="container-fluid">
         <div class="d-flex justify-content-between mb-3 flex-column flex-md-row">
@@ -49,46 +49,48 @@
 <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header p-5 py-3">
+            <div class="modal-header py-4 px-5">
                 <h5 class="modal-title" id="addUserLabel">Tambah Data User</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body p-5 pt-4">
-                <form>
+            <div class="modal-body px-5 pt-3">
+                <form method="POST" accept="{{ route('adminAddUser') }}">
+                    @csrf
+                    <input type="hidden" name="roles_id" value="3">
                     <div class="form-group mb-3">
                         <label for="name" class="form-label fs-5">Nama</label>
-                        <input id="name" type="text" class="form-control" placeholder="Input your name">
+                        <input name="name" id="name" type="text" class="form-control" placeholder="Input your name">
                     </div>
                     <div class="form-group mb-3">
                         <label for="email" class="form-label fs-5">Email</label>
                         <input name="email" id="email" type="text" class="form-control" placeholder="Input your email">
                     </div>
                     <div class="form-group mb-3">
-                        <label for="telp" class="form-label fs-5">Telepon</label>
-                        <input name="telp" id="telp" type="number" class="form-control" placeholder="No. Telp">
+                        <label for="phone" class="form-label fs-5">Telepon</label>
+                        <input name="phone" id="phone" type="number" class="form-control" placeholder="No. Telp">
                     </div>
                     <div class="form-group mb-3">
                         <label for="nim" class="form-label fs-5">NIM</label>
                         <input name="nim" id="nim" type="number" class="form-control" placeholder="Input your NIM">
                     </div>
                     <div class="col-12">
-                        <div class="row">
-                            <div class="form-group mb-3 col-12 col-md-6">
-                                <label for="angkatan" class="form-label fs-5">Angkatan</label>
-                                <select name="angkatan" id="angkatan" class="form-control">
+                        <div class="row justify-content-between">
+                            <div class="form-group mb-3 col-12 col-md-6 ps-0 pe-2">
+                                <label for="generations_id" class="form-label fs-5">Angkatan</label>
+                                <select name="generations_id" id="generations_id" class="form-control">
                                     <option selected disabled>Pilih Angkatan</option>
-                                    <option value="7">WRI7</option>
-                                    <option value="8">WRI8</option>
-                                    <option value="9">WRI9</option>
+                                    @foreach ($generations as $item)
+                                    <option value="{{$item->id}}">{{$item->crew_name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
-                            <div class="form-group mb-3 col-12 col-md-6">
-                                <label for="miniclass" class="form-label fs-5">Miniclass</label>
-                                <select name="miniclass" id="miniclass" class="form-control">
+                            <div class="form-group mb-3 col-12 col-md-6 p-0">
+                                <label for="miniclass_id" class="form-label fs-5">Miniclass</label>
+                                <select name="miniclass_id" id="miniclass_id" class="form-control">
                                     <option selected disabled>Pilih Miniclass</option>
-                                    <option value="1">Web</option>
-                                    <option value="2">Mobile</option>
-                                    <option value="3">UI|UX</option>
+                                    @foreach ($miniclasses as $item)
+                                    <option value="{{$item->id}}">{{$item->miniclass_name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -98,10 +100,11 @@
                         <input id="password" name="password" type="password" class="form-control"
                             placeholder="Input your password">
                     </div>
-                    <div class="col-12 px-2">
-                        <div class="row justify-content-between">
-                            <button class="col-5 btn btn-danger text-light px-2 px-md-5">Batal</button>
-                            <button class="col-5 btn btn-teal text-light px-2 px-md-5">Simpan</button>
+                    <div class="col-12 w-100 p-0 mt-4">
+                        <div class="row w-100 justify-content-between m-0">
+                            <button class="col-12 col-sm-5 btn btn-danger text-light">Batal</button>
+                            <button type="submit"
+                                class="col-12 col-sm-5 mt-3 mt-sm-0 btn btn-teal text-light">Simpan</button>
                         </div>
                     </div>
                 </form>
