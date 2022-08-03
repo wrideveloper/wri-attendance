@@ -19,8 +19,8 @@ class DatabaseSeeder extends Seeder
             MiniclassSeeder::class,
             GenerationSeeder::class,
             UserSeeder::class,
-            MeetingsSeeder::class,
-            PresenceSeeder::class,
+            //MeetingsSeeder::class,
+            //PresenceSeeder::class,
         ]);
     }
 }

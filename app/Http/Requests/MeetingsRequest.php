@@ -29,8 +29,8 @@ class MeetingsRequest extends FormRequest {
                     'tanggal' => 'required|date',
                     'start_time' => 'required',
                     'end_time' => 'required',
-                    'pertemuan' => 'required|integer',
-                    'token' => 'required|string|max:10'
+                    'pertemuan' => 'required|integer|min:1',
+                    'token' => 'required|string|max:10|unique:meetings,token'
                 ];
             } break;
             case 'PUT' : {
@@ -40,7 +40,7 @@ class MeetingsRequest extends FormRequest {
                     'tanggal' => 'sometimes|date',
                     'start_time' => 'sometimes',
                     'end_time' => 'sometimes',
-                    'token' => 'required|string|max:10'
+                    'token' => 'required|string|max:10|unique:meetings,token'
                 ];
             } break;
         }

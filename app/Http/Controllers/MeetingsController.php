@@ -43,8 +43,13 @@ class MeetingsController extends Controller {
      */
     public function store(MeetingsRequest $request) {
         $data = $request->validated();
-        Meetings::create($data);
-        return redirect()->route('dashboard')->with('success', 'Data berhasil ditambahkan');
+        $checking = Meetings::where('token', $data['token'])->first();
+        if($checking) {
+            return redirect()->back()->with('error', 'Token sudah digunakan');
+        } else {
+            Meetings::create($data);
+            return redirect()->route('meetings.index')->with('success', 'Pertemuan berhasil ditambahkan');
+        }
     }
 
 

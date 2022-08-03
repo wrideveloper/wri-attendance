@@ -2,6 +2,7 @@
 
 use App\Models\Meetings;
 use App\Models\Presence;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
@@ -10,8 +11,8 @@ use App\Http\Controllers\PresenceController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MiniclassController;
-use App\Http\Controllers\ConfigMeetingController;
 use App\Http\Controllers\GenerationController;
+use App\Http\Controllers\ConfigMeetingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,11 +87,12 @@ Route::group(['prefix' => 'kadiv', 'middleware' => ['auth']], function () {
     Route::get('/rekap-meeting/{meetings}', [ConfigMeetingController::class, 'listPresence'])->name('list-presence');
     Route::get('/check-meetings/detail/{meetings}', [ConfigMeetingController::class, 'show'])->name('detail-meetings');
     Route::get('/check-presence/detail/{presence}', [ConfigMeetingController::class, 'detailPresence'])->name('detail-presence');
-    
+
     // Delete Meetings
     Route::delete('/delete-meetings/{meetings}', [ConfigMeetingController::class, 'deleteMeetings'])->name('delete-meetings');
-    Route::get('/list-pertemuan', fn () => view('kadiv.list_pertemuan'))->name('list-pertemuan');
-
+    Route::get('/list-pertemuan', fn () => view('kadiv.list_pertemuan', [
+        'title' => 'List Pertemuan'
+    ]))->name('list-pertemuan');
     // Route::get('/check-presence/{presence}', 'checkPresence')->name('check-presence');
 });
 
