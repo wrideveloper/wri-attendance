@@ -17,17 +17,25 @@ const controlConfirmationModal = () => {
     const elementKonfirmasi = new bootstrap.Modal("#konfirmasi", null);
     const elementTerkonfirmasi = new bootstrap.Modal("#terkonfirmasi", null);
     const form = $('form');
+
+    if(localStorage.getItem('showConfirmedModal')) {
+        elementTerkonfirmasi.show()
+        localStorage.removeItem('showConfirmedModal');
+        elementTerkonfirmasi.hide()
+    }
+
     form.submit(() => {
         elementKonfirmasi.show();
         return false
     })
-    $('#batal').click(() => location.reload())
     $('#lanjut').click(() => {
         elementKonfirmasi.hide();
-        elementTerkonfirmasi.show()
         form.unbind("submit")
-        setTimeout(() => form.submit(), 1500);
+        form.submit()
+        localStorage.setItem('showConfirmedModal', true)
     })
+    
+    
 }
 
 const controlBodyBackgroundColor = (color = "#F9F9F9") => $("body").css({ backgroundColor: color });
