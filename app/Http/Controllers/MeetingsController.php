@@ -18,6 +18,7 @@ class MeetingsController extends Controller {
     {
         $datas = Meetings::where('miniclass_id', Auth::user()->miniclass_id)->filter(request(['search']))->paginate(5)->withQueryString();
         return view('list-pertemuan', compact('datas'));
+
     }
 
     public function create() {

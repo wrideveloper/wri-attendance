@@ -34,18 +34,26 @@
                         <th>Topik</th>
                         <th class="text-center">Aksi</th>
                     </tr>
-                    <tr class="align-middle border-custom-none">
-                        <td>asdasd</td>
-                        <td>asdasd</td>
-                        <td>asdasc</td>
+                    @if ($datas->count() > 0)
+                        @foreach($datas as $meetings)
+                        <tr class="align-middle border-custom-none">
+                            <td>class="align-middle">{{ $meetings->pertemuan }}</td>
+                            <td>class="align-middle">{{ $meetings->tanggal }}</td>
+                            <td>class="align-middle">{{ $meetings->topik }}</td>
 
-                        <td class="d-flex gap-3 justify-content-center">
-                            <a class="btn btn-warning text-white" href="#">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </a>
-                            <a class="btn btn-primary text-light fw-bold rounded w-50" href="">Detail</a>
-                        </td>
-                    </tr>
+                            <td class="d-flex gap-3 justify-content-center">
+                                <a class="btn btn-warning text-white" href="{{ route('config-presensi', $meetings->pertemuan) }}">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a class="btn btn-primary text-light fw-bold rounded w-50" href="{{ route('detail-meetings', $meetings->pertemuan) }}">Detail</a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="5" class="text-center text-danger">Data tidak ditemukan</td>
+                        </tr>
+                    @endif
                 </table>
             </div>
             <div class="d-flex justify-content-end mt-2">
