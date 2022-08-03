@@ -7,12 +7,12 @@
         <span>Edit User</span>
     </a>
     <a class="list-group-item d-inline-block text-truncate {{ $title === 'List Pertemuan' ? 'active' : '' }}"
-        href="">
+        href="{{ route('list-pertemuan') }}">
         <i class="fa-solid fa-clipboard-check" style="padding-right: 14px;"></i>
         <span>List Pertemuan</span></a>
 @elseif(Auth::user()->roles_id == 2)
     <a class="list-group-item d-inline-block text-truncate {{ $title === 'List Pertemuan' ? 'active' : '' }}"
-        href="">
+        href="{{ route('list-pertemuan') }}">
         <i class="fa-solid fa-clipboard-check" style="padding-right: 14px;"></i>
         <span>List Pertemuan</span></a>
 @elseif(Auth::user()->roles_id == 3)

@@ -37,11 +37,11 @@ class PresenceController extends Controller {
         $presence = $request->validated();
         $cekToken = Meetings::where('token', $request->token)->firstOrFail();
 
-        if($cekToken) {
+        if($cekToken && $cekToken->end_time <= now()) {
             Presence::create($presence);
             return redirect()->route('presence.index')->with('success', 'Presensi berhasil');
         } else {
-            return redirect()->back()->with('error', 'Presensi gagal, cek kembali token');
+            return redirect()->back()->with('error', 'Presensi gagal, cek kembali token atau waktu sudah habis');
         }
     }
 

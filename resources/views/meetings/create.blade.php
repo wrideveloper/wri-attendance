@@ -1,17 +1,17 @@
 @extends('layouts.master')
 
 @section('content')
-@include('components.konfirmasi', ['text' => 'Apakah Anda yakin ingin memperbarui jadwal?'])
+@include('components.konfirmasi', ['text' => 'Apakah Anda yakin ingin memposting pertemuan?'])
 <div class="container-fluid pb-5 form-jadwal-absensi">
     <div class="row p-md-4 p-1">
         <div class="col-md-12">
             <div class="title d-flex align-items-center mb-2">
                 <div class="back rounded p-2 d-flex justify-content-center align-items-center me-3">
-                    <i class="fas fa-chevron-left text-muted"></i>
+                    <a href="{{ route('list-pertemuan') }}" class="text-decoration-none fas fa-chevron-left text-muted"></a>
                 </div>
                 <h5>Post Meetings</h5>
             </div>
-            <form class="update-jadwal form rounded p-5" action="{{ route('meetings.store') }}" method="POST" enctype="multipart/form-data">
+            <form class="update-jadwal form rounded p-5" action="{{ route('meetings.store') }}" method="POST">
                 @csrf
                 {{-- <h5 class="">Pertemuan {{ $meetings->pertemuan }}</h5> --}}
                 <div class="form-group mb-md-5 mb-4">
@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div class="col-12 d-flex justify-content-end px-0">
-                    <a href="/dashboard" class="btn btn-outline-secondary px-md-5 px-2 me-4"><b>Batal</b></a>
+                    <a href="{{ route('meetings.create') }}" class="btn btn-outline-secondary px-md-5 px-2 me-4"><b>Batal</b></a>
                     <button type="submit" class="btn btn-warning text-light px-md-5 px-2"><b>Simpan</b></button>
                 </div>
             </form>
