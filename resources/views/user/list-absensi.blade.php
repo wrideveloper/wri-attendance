@@ -7,13 +7,17 @@
                 <h5 class="fw-normal ">Absensi</h5>
             </div>
             <div class="row col-auto">
-                <div class="col-auto">
-                    <input type="search" id="search" class="form-control" name="search">
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary px-4">Cari</button>
-                </div>
-            </div>
+                <form class="d-flex" action="{{ route('presence.show', Auth::user()->nim) }}">
+                    <span class="row col-auto">
+                        <div class="col-auto">
+                            <input value="{{ request('search') }}" type="search" id="search" class="form-control" name="search">
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary">Cari</button>
+                        </div>
+                    </span>
+                </form>
+            </d>
         </div>
         <div class="my-4 bg-white rounded-3 px-4 py-4">
             <div class="table-responsive">
@@ -47,6 +51,9 @@
                         <td colspan="6" class="text-center text-danger">Tidak ada data</td>
                     @endif
                 </table>
+            </div>
+            <div class="d-flex justify-content-end mt-2">
+                {{ $presence->links() }}
             </div>
         </div>
     </div>
