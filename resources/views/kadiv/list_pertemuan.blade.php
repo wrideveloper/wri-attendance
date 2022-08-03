@@ -12,13 +12,17 @@
                     </a>
                 </div>
             </div>
-            <div class="row col-auto gap-1">
-                <div class="col-auto">
-                    <input type="search" id="search" class="form-control" name="search" placeholder="Search">
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary px-4">Cari</button>
-                </div>
+            <div class="row col-auto">
+                <form class="d-flex" action="{{ route('meetings.index') }}">
+                    <span class="row col-auto">
+                        <div class="col-auto">
+                            <input value="{{ request('search') }}" type="search" id="search" class="form-control" name="search" placeholder="Search">
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary">Cari</button>
+                        </div>
+                    </span>
+                </form>
             </div>
         </div>
         <div class="my-4 bg-white rounded-3 px-4 py-4">
@@ -30,19 +34,30 @@
                         <th>Topik</th>
                         <th class="text-center">Aksi</th>
                     </tr>
-                    <tr class="align-middle border-custom-none">
-                        <td>asdasd</td>
-                        <td>asdasd</td>
-                        <td>asdasc</td>
+                    @if ($datas->count() > 0)
+                        @foreach($datas as $meetings)
+                        <tr class="align-middle border-custom-none">
+                            <td>class="align-middle">{{ $meetings->pertemuan }}</td>
+                            <td>class="align-middle">{{ $meetings->tanggal }}</td>
+                            <td>class="align-middle">{{ $meetings->topik }}</td>
 
-                        <td class="d-flex gap-3 justify-content-center">
-                            <a class="btn btn-warning text-white" href="#">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </a>
-                            <a class="btn btn-primary text-light fw-bold rounded w-50" href="">Detail</a>
-                        </td>
-                    </tr>
+                            <td class="d-flex gap-3 justify-content-center">
+                                <a class="btn btn-warning text-white" href="{{ route('config-presensi', $meetings->pertemuan) }}">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a class="btn btn-primary text-light fw-bold rounded w-50" href="{{ route('detail-meetings', $meetings->pertemuan) }}">Detail</a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="5" class="text-center text-danger">Data tidak ditemukan</td>
+                        </tr>
+                    @endif
                 </table>
+            </div>
+            <div class="d-flex justify-content-end mt-2">
+                {{ $presence->links() }}
             </div>
         </div>
     </div>

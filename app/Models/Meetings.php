@@ -34,6 +34,15 @@ class Meetings extends Model
         return 'token';
     }
 
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, function ($query, $search){
+            return $query->whereHas('presence', function ($query) use ($search){
+                $query->where('nim', 'like', "%{$search}%")
+                    ->orWhere('name', 'like', "%{$search}%");
+            });
+        });
+    }
+
     public function presence()
     {
         return $this->belongsTo(Presence::class);
