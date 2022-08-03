@@ -7,12 +7,12 @@
                     <h5 class="fw-normal ">List Absensi Pertemuan</h5>
                 </div>
                 <div class="col-auto">
-                    <a class="btn btn-teal text-light w-sm-100" href="">
+                    <a class="btn btn-teal text-light w-sm-100" href="{{ route('meetings.create') }}">
                         Tambah
                     </a>
                 </div>
             </div>
-            <div class="row col-auto gap-4">
+            <div class="row col-auto gap-1">
                 <div class="col-auto">
                     <input type="search" id="search" class="form-control" name="search" placeholder="Search">
                 </div>
