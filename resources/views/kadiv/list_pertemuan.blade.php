@@ -12,13 +12,17 @@
                     </a>
                 </div>
             </div>
-            <div class="row col-auto gap-1">
-                <div class="col-auto">
-                    <input type="search" id="search" class="form-control" name="search" placeholder="Search">
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary px-4">Cari</button>
-                </div>
+            <div class="row col-auto">
+                <form class="d-flex" action="{{ route('meetings.index') }}">
+                    <span class="row col-auto">
+                        <div class="col-auto">
+                            <input value="{{ request('search') }}" type="search" id="search" class="form-control" name="search" placeholder="Search">
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary">Cari</button>
+                        </div>
+                    </span>
+                </form>
             </div>
         </div>
         <div class="my-4 bg-white rounded-3 px-4 py-4">
@@ -51,6 +55,9 @@
                         </tr>
                     @endif
                 </table>
+            </div>
+            <div class="d-flex justify-content-end mt-2">
+                {{ $presence->links() }}
             </div>
         </div>
     </div>

@@ -52,7 +52,7 @@ class PresenceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show(Presence $presences){
-        $presence = Presence::where('nim', $presences->nim)->get();
+        $presence = Presence::where('nim', $presences->nim)->filter(request(['search']))->paginate(5)->withQueryString();
         return view('user.list-absensi', [
             'presence' => $presence,
             'title' => 'Presensi'
