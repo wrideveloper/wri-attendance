@@ -33,9 +33,9 @@
                     @if ($meeting->count() > 0)
                         @foreach($meeting as $meetings)
                         <tr class="align-middle border-custom-none">
-                            <td>class="align-middle">{{ $meeting->pertemuan }}</td>
-                            <td>class="align-middle">{{ $meeting->tanggal }}</td>
-                            <td>class="align-middle">{{ $meeting->topik }}</td>
+                            <td>class="align-middle">{{ $meetings->pertemuan }}</td>
+                            <td>class="align-middle">{{ $meetings->tanggal }}</td>
+                            <td>class="align-middle">{{ $meetings->topik }}</td>
 
                             <td class="d-flex gap-3 justify-content-center">
                                 <a class="btn btn-warning text-white" href="{{ route('config-presensi', $meetings->pertemuan) }}">
