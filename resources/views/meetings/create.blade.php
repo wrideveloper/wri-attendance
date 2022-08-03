@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-@include('components.konfirmasi', ['text' => 'Apakah Anda yakin ingin memposting pertemuan?'])
 <div class="container-fluid pb-5 form-jadwal-absensi">
     <div class="row p-md-4 p-1">
         <div class="col-md-12">
@@ -87,6 +86,7 @@
         </div>
     </div>
 </div>
+@include('components.konfirmasi', ['text' => 'Apakah Anda yakin ingin memposting pertemuan?'])
 
 @section('overrideScript')
 <script>
