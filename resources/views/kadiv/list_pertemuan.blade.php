@@ -34,8 +34,8 @@
                         <th>Topik</th>
                         <th class="text-center">Aksi</th>
                     </tr>
-                    @if ($meeting->count() > 0)
-                        @foreach($meeting as $meetings)
+                    @if ($datas->count() > 0)
+                        @foreach($datas as $meetings)
                         <tr class="align-middle border-custom-none">
                             <td>class="align-middle">{{ $meetings->pertemuan }}</td>
                             <td>class="align-middle">{{ $meetings->tanggal }}</td>
