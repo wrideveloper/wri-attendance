@@ -21,7 +21,7 @@
             </div>
             <div class="col-12">
                 <div class="row justify-content-between">
-                    <div class="form-group mb-3 col-12 col-md-6 ps-0">
+                    <div class="form-group mb-3 col-12 col-md-6">
                         <label for="generation" class="form-label fs-5">Angkatan</label>
                         <select name="generations_id" id="generation" class="form-control">
                             @foreach ($generations as $generation)
@@ -33,7 +33,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group mb-3 col-12 col-md-6 pe-0">
+                    <div class="form-group mb-3 col-12 col-md-6">
                         <label for="miniclass" class="form-label fs-5">Miniclass</label>
                         <select name="miniclass_id" id="miniclass" class="form-control">
                             @foreach ($miniclasses as $miniclass)
