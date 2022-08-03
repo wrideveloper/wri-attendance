@@ -48,7 +48,10 @@ class MeetingsController extends Controller {
             return redirect()->back()->with('error', 'Token sudah digunakan');
         } else {
             Meetings::create($data);
+            /* ERROR: InvalidArgumentException View [list-pertemuan] not found.
             return redirect()->route('meetings.index')->with('success', 'Pertemuan berhasil ditambahkan');
+            */
+            return redirect()->back();
         }
     }
 
