@@ -43,7 +43,7 @@ class UserController extends Controller
             'roles_id' => 'required|exists:roles,id',
             'generations_id' => 'required|exists:generations,id',
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'phone' => 'required',
             'nim' => 'required',
             'password' => 'required'
@@ -98,7 +98,7 @@ class UserController extends Controller
             'miniclass_id' => 'required',
             'generations_id' => 'required',
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'sometimes'
         ]);
         $validated['password'] = Hash::make($validated['password']);

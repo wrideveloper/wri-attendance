@@ -16,14 +16,14 @@
             </div>
             <div class="form-group mb-3">
                 <label for="email" class="form-label fs-5">Email</label>
-                <input name="email" id="email" type="text" class="form-control" placeholder="Input your email"
+                <input name="email" id="email" type="email" class="form-control" placeholder="Input your email"
                     value="{{ old('name', $user->email) }}" required>
             </div>
             <div class="col-12">
                 <div class="row justify-content-between">
                     <div class="form-group mb-3 col-12 col-md-6">
                         <label for="generation" class="form-label fs-5">Angkatan</label>
-                        <select name="generations_id" id="generation" class="form-control">
+                        <select name="generations_id" id="generation" class="form-control" {{$user->roles_id !== 1 ? 'disabled':''}}>
                             @foreach ($generations as $generation)
                             @if (old('generation', $user->generations_id) == $generation->id)
                             <option value="{{ $generation->id }}" selected>{{ $generation->crew_name }}</option>
@@ -50,8 +50,7 @@
             <div class="form-group mb-3 position-relative">
                 <label for="password" class="form-label fs-5">Password</label>
                 <input id="password" name="password" type="password" class="form-control"
-                    placeholder="Input your password" autocomplete="" value="{{ old('password', $user->password) }}"
-                    required>
+                    placeholder="Input your password" autocomplete="" required>
                 <button type="button" class="btn border-0 position-absolute bottom-0 end-0"
                     cs-show-password="password"><i class="fa-solid fa-eye-slash"></i></button>
             </div>
