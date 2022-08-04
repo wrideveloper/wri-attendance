@@ -16,7 +16,7 @@ class UserFactory extends Factory
     {
         return [
             'miniclass_id' => $this->faker->numberBetween(1, 5),
-            'roles_id' => $this->faker->numberBetween(1, 3),
+            'roles_id' => $this->faker->randomElement([3]),
             'generations_id' => $this->faker->numberBetween(1, 4),
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),

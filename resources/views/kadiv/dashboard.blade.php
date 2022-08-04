@@ -83,7 +83,7 @@
                     @endforeach
                 </table>
             </div>
-            <a class="mt-3 mb-3 link-secondary text-decoration-none text-center" href="{{ route('list-pertemuan') }}">Lihat Semua</a>
+            <a class="mt-3 mb-3 link-secondary text-decoration-none text-center" href="{{ route('meetings.index') }}">Lihat Semua</a>
         </div>
     </div>
 </div>
