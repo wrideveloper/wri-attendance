@@ -16,7 +16,7 @@ const controlPasswordVisibility = () => {
 const controlConfirmationModal = () => {
     const elementKonfirmasi = new bootstrap.Modal("#konfirmasi", null);
     const elementTerkonfirmasi = new bootstrap.Modal("#terkonfirmasi", null);
-    const form = $('form');
+    const form = $('.form');
 
     if(localStorage.getItem('showConfirmedModal')) {
         elementTerkonfirmasi.show()
@@ -25,6 +25,9 @@ const controlConfirmationModal = () => {
     }
 
     form.submit(() => {
+        $(':disabled').each(function(e) {
+        $(this).removeAttr('disabled');
+        })
         elementKonfirmasi.show();
         return false
     })
