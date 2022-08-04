@@ -36,10 +36,9 @@ class Meetings extends Model
 
     public function scopeFilter($query, array $filters){
         $query->when($filters['search'] ?? false, function ($query, $search){
-            return $query->whereHas('presence', function ($query) use ($search){
-                $query->where('nim', 'like', "%{$search}%")
-                    ->orWhere('name', 'like', "%{$search}%");
-            });
+            return $query->Where('topik', 'like', "%{$search}%")
+                ->orWhere('pertemuan', 'like', "%{$search}%")
+                ->orWhere('tanggal', 'like', "%{$search}%");
         });
     }
 

@@ -17,7 +17,8 @@ class MeetingsController extends Controller {
     public function index()
     {
         $datas = Meetings::where('miniclass_id', Auth::user()->miniclass_id)->filter(request(['search']))->paginate(5)->withQueryString();
-        return view('list-pertemuan', compact('datas'));
+        $title = 'List Pertemuan';
+        return view('kadiv.list_pertemuan', compact('datas', 'title'));
 
     }
 
@@ -49,10 +50,7 @@ class MeetingsController extends Controller {
             return redirect()->back()->with('error', 'Token sudah digunakan');
         } else {
             Meetings::create($data);
-            /* ERROR: InvalidArgumentException View [list-pertemuan] not found.
-            return redirect()->route('meetings.index')->with('success', 'Pertemuan berhasil ditambahkan');
-            */
-            return redirect()->back();
+            return redirect()->route('dashboard')->with('success', 'Pertemuan berhasil ditambahkan');
         }
     }
 
@@ -65,8 +63,9 @@ class MeetingsController extends Controller {
      */
     public function show(Meetings $meeting)
     {
-        return view('Meetings.show', [
-            'Meetings' => $meeting
+        return view('kadiv.config-presensi', [
+            'meetings'=> $meeting,
+            'title' => 'List Pertemuan'
         ]);
     }
 
@@ -90,6 +89,6 @@ class MeetingsController extends Controller {
     public function destroy(Meetings $meeting)
     {
         Meetings::destroy($meeting->id);
-        return redirect()->route('Meetings.index');
+        return redirect()->route('meetings.index');
     }
 }

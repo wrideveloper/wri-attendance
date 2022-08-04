@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="title d-flex align-items-center mb-2">
                 <div class="back rounded p-2 d-flex justify-content-center align-items-center me-3">
-                    <a href="{{ route('list-pertemuan') }}" class="text-decoration-none fas fa-chevron-left text-muted"></a>
+                    <a href="{{ route('meetings.index') }}" class="text-decoration-none fas fa-chevron-left text-muted"></a>
                 </div>
                 <h5>Post Meetings</h5>
             </div>

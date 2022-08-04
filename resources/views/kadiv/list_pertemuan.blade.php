@@ -37,15 +37,15 @@
                     @if ($datas->count() > 0)
                         @foreach($datas as $meetings)
                         <tr class="align-middle border-custom-none">
-                            <td>class="align-middle">{{ $meetings->pertemuan }}</td>
-                            <td>class="align-middle">{{ $meetings->tanggal }}</td>
-                            <td>class="align-middle">{{ $meetings->topik }}</td>
+                            <td class="align-middle">{{ $meetings->pertemuan }}</td>
+                            <td class="align-middle">{{ \Carbon\Carbon::parse($meetings->tanggal)->format('d M Y') }}</td>
+                            <td class="align-middle">{{ $meetings->topik }}</td>
 
                             <td class="d-flex gap-3 justify-content-center">
-                                <a class="btn btn-warning text-white" href="{{ route('config-presensi', $meetings->pertemuan) }}">
+                                <a class="btn btn-warning text-white" href="{{ route('meetings.edit', $meetings->token) }}">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
-                                <a class="btn btn-primary text-light fw-bold rounded w-50" href="{{ route('detail-meetings', $meetings->pertemuan) }}">Detail</a>
+                                <a class="btn btn-primary text-light fw-bold rounded w-50" href="{{ route('meetings.show', $meetings->token) }}">Detail</a>
                             </td>
                         </tr>
                         @endforeach
@@ -57,7 +57,7 @@
                 </table>
             </div>
             <div class="d-flex justify-content-end mt-2">
-                {{ $presence->links() }}
+                {{ $datas->links() }}
             </div>
         </div>
     </div>
