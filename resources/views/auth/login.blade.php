@@ -50,10 +50,10 @@
     </div>
 </div>
 @if (session()->has('loginError'))
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    {{ session('loginError') }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('loginError') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 @endif
 <div class="d-flex justify-content-center align-items-center vh-100 vw-100 position-relative">
     <div id="box" class="rounded-4">
@@ -70,23 +70,23 @@
                     </h5>
                 </div>
                 <div class="row">
-                    <input value="{{ old('nim') }}" type="text"
+                    <input value="{{ old('nim') }}" type="text" required
                         class="@error('nim') is-invalid @enderror form-control p-2 input-login" id="nim" name="nim"
                         placeholder="Nim">
-                    @error('nim')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
+                        @error('nim')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{!! $message !!}</strong>
+                            </span>
+                        @enderror
                 </div>
                 <div class="row">
-                    <input type="password" class="input-login form-control p-2 @error('nim') is-invalid @enderror"
+                    <input required type="password" class="input-login form-control p-2 @error('password') is-invalid @enderror"
                         id="password" placeholder="Password" name="password">
-                    @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{!! $message !!}</strong>
+                            </span>
+                        @enderror
                 </div>
                 <div class="d-flex justify-content-end">
                     <div class="fw-semibold my-2">

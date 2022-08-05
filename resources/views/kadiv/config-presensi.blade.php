@@ -69,10 +69,10 @@
                     <button type="submit" {{ (Route::currentRouteName() == 'meetings.show') ? 'hidden' : '' }} class="btn btn-warning text-light px-md-5 px-2"><b>Update</b></button>
                 </div>
             </form>
-            @include('components.konfirmasi', ['text' => 'Apakah Anda yakin ingin memperbarui jadwal?'])
         </div>
     </div>
 </div>
+{{-- @include('components.konfirmasi', ['text' => 'Apakah Anda yakin ingin memperbarui jadwal?']) --}}
 @section('overrideScript')
 <script>
     controlBodyBackgroundColor()
