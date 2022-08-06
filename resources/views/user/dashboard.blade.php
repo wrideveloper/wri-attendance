@@ -81,24 +81,31 @@
                         <th class="py-3 border-top-0">Status</th>
                         <th class="py-3 border-top-0">Keterangan</th>
                     </tr>
-                    @foreach ($daftar_kehadiran as $item)
-                    @php
-                    $statusColor = "";
-                    if($item->status === "Hadir") $statusColor = "text-info";
-                    elseif($item->status === "Izin") $statusColor = "text-primary";
-                    elseif($item->status === "Alpha") $statusColor = "text-danger";
-                    @endphp
-                    <tr class="align-middle">
-                        <td>{{$item->meetings->pertemuan}}</td>
-                        <td>{{\Carbon\Carbon::parse($item->meetings->tanggal)->format('d M Y')}}</td>
-                        <td>{{date('H:i:s', strtotime($item->meetings->start_time))}} WIB</td>
-                        <td class="col-1 text-truncate">{{$item->meetings->topik}}</td>
-                        <td class="{{$statusColor}}">{{$item->status}}</td>
-                        <td><button class="btn w-100 btn-warning text-light">Pilih</button></td>
-                    </tr>
-                    @endforeach
+                    @if($presensi->count() > 0)
+                        @foreach ($presensi as $item)
+                            @php
+                                $statusColor = "";
+                                if($item->status === "Hadir") $statusColor = "text-success";
+                                elseif($item->status === "Izin") $statusColor = "text-primary";
+                                elseif($item->status === "Sakit") $statusColor = "text-info";
+                                elseif($item->status === "Alpha") $statusColor = "text-danger";
+                            @endphp
+                            <tr class="align-middle">
+                                <td>{{$item->meetings->pertemuan}}</td>
+                                <td>{{\Carbon\Carbon::parse($item->meetings->tanggal)->format('d M Y')}}</td>
+                                <td>{{date('H:i:s', strtotime($item->meetings->start_time))}} WIB</td>
+                                <td class="col-1 text-truncate">{{$item->meetings->topik}}</td>
+                                <td class="{{ $statusColor }}">{{$item->status}}</td>
+                                <td><a class="btn w-100 btn-warning text-light" href="{{ route('presence.show', $item->nim) }}">Pilih</a></td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr class="align-middle">
+                            <td colspan="6" class="text-center text-danger">Tidak ada data</td>
+                        </tr>
+                    @endif
                 </table>
-                <a class="mt-3 mb-3 link-secondary text-decoration-none text-center d-block" href="{{ route('list-pertemuan') }}">Lihat Semua</a>
+                <a class="mt-3 mb-3 link-secondary text-decoration-none text-center d-block" href="{{ route('presence.index') }}">Lihat Semua</a>
             </div>
         </div>
     </div>
@@ -131,7 +138,7 @@
 
     const pieKehadiran = new Chart(document.getElementById("pieKehadiran"), {
         type: "doughnut",
-        data: (data.length > 0) ? data : zeros,
+        data: data,
         options: {
             cutout: 60,
             borderWidth: 0,

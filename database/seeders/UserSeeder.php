@@ -89,6 +89,6 @@ class UserSeeder extends Seeder
             ],
         ];
         DB::table('users')->insert($user);
-        User::factory(70)->create();
+        //User::factory(70)->create();
     }
 }

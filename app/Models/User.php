@@ -52,6 +52,16 @@ class User extends Authenticatable
         return $this->belongsTo(Roles::class);
     }
 
+    public function miniclass()
+    {
+        return $this->belongsTo(Miniclass::class);
+    }
+
+    public function generations()
+    {
+        return $this->belongsTo(Generation::class);
+    }
+
     public function presence()
     {
         return $this->hasMany(Presence::class, 'nim', 'nim');
@@ -77,7 +87,7 @@ class User extends Authenticatable
         return $this->presence()->where('status', 'Alpha')->orderBy('id', 'desc');
     }
 
-    public function getRouteKeyName() 
+    public function getRouteKeyName()
     {
         return 'nim';
     }

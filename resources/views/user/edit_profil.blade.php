@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group mb-3 col-12 col-md-6">
                         <label for="miniclass" class="form-label fs-5">Miniclass</label>
-                        <select name="miniclass_id" id="miniclass" class="form-control">
+                        <select name="miniclass_id" id="miniclass" class="form-control" {{$user->roles_id !== 1 ? 'disabled':''}}>
                             @foreach ($miniclasses as $miniclass)
                             @if (old('miniclass', $user->miniclass_id) == $miniclass->id)
                             <option value="{{ $miniclass->id }}" selected>{{ $miniclass->miniclass_name }}</option>
