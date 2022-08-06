@@ -16,7 +16,10 @@ class MeetingsController extends Controller {
      */
     public function index()
     {
-        $datas = Meetings::where('miniclass_id', Auth::user()->miniclass_id)->filter(request(['search']))->paginate(5)->withQueryString();
+        $datas = Meetings::where('miniclass_id', Auth::user()->miniclass_id)
+        ->filter(request(['search']))
+        ->orderBy('tanggal', 'asc')
+        ->paginate(5)->withQueryString();
         $title = 'List Pertemuan';
         return view('kadiv.list_pertemuan', compact('datas', 'title'));
 
@@ -77,7 +80,8 @@ class MeetingsController extends Controller {
     public function update(MeetingsRequest $request, Meetings $meeting)
     {
         $newData = $request->validated();
-        Meetings::where('token', $meeting->token)->update($newData);
+        $datas = Meetings::where('token', $meeting->token)->update($newData);
+        //ddd($datas);
         return redirect()->route('dashboard')->with('success', 'Data meetings berhasil diubah');
     }
 
@@ -88,7 +92,7 @@ class MeetingsController extends Controller {
      */
     public function destroy(Meetings $meeting)
     {
-        Meetings::destroy($meeting->id);
-        return redirect()->route('meetings.index');
+        $destroy = Meetings::destroy($meeting->id);
+        return redirect()->route('dashboard')->with('success', 'Data meetings berhasil dihapus');;
     }
 }

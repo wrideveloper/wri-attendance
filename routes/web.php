@@ -33,13 +33,12 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/login-page', function () {
-    return view('auth.login');
-});
+// Route::get('/login-page', function () {
+//     return view('auth.login');
+// });
 
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
-
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/forgot-password', function () {
@@ -74,10 +73,6 @@ Route::get('/admin/edit-absensi', fn () => view('admin.edit_absensi', [
     'title' => 'Edit Absensi',
 ]));
 Route::get('/admin/edit-profil', fn () => view('admin.edit_profil'));
-
-//  Route::get('/edit-meetings', fn () => view('kadiv.config-presensi', [
-//         'title' => 'Config Presensi',
-//     ]));
 
 Route::resource('/miniclass', MiniclassController::class);
 

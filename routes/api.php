@@ -21,19 +21,19 @@ use App\Http\Controllers\Api\MiniclassController;
 
 // Route::resource('/presence', PresenceController::class);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::post('login', [LoginController::class, 'authenticate'])->middleware('guest');
-Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+// Route::post('login', [LoginController::class, 'authenticate'])->middleware('guest');
+// Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('register', [RegisterController::class, 'index'])->middleware('guest');
-Route::post('register', [RegisterController::class, 'store']);
+// Route::get('register', [RegisterController::class, 'index'])->middleware('guest');
+// Route::post('register', [RegisterController::class, 'store']);
 
-// Sisi User
-Route::resource('/presence', PresenceController::class);
+// // Sisi User
+// Route::resource('/presence', PresenceController::class);
 
-Route::resource('/miniclass', MiniclassController::class);
+// Route::resource('/miniclass', MiniclassController::class);
 
-Route::apiResource('/meetings', MeetingsController::class);
+// Route::apiResource('/meetings', MeetingsController::class);

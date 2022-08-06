@@ -4,10 +4,10 @@
 
 <div class="container-fluid pb-5 px-4">
     @if(session()->has('success'))
-    <div class="alert alert-success alert-dismissible col-lg-12 fade show" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+        <div class="alert alert-success alert-dismissible col-lg-12 fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     @endif
     {{-- <h4 class="fw-normal mb-0"></h4> --}}
     <div class="col-12 mt-4">

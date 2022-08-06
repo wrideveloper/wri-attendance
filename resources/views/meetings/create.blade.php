@@ -79,7 +79,7 @@
                     </div>
                 </div>
                 <div class="col-12 d-flex justify-content-end px-0">
-                    <a href="{{ route('meetings.create') }}" class="btn btn-outline-secondary px-md-5 px-2 me-4"><b>Batal</b></a>
+                    <a href="{{ route('meetings.index') }}" class="btn btn-outline-secondary px-md-5 px-2 me-4"><b>Batal</b></a>
                     <button type="submit" class="btn btn-warning text-light px-md-5 px-2"><b>Simpan</b></button>
                 </div>
             </form>
@@ -87,6 +87,7 @@
     </div>
 </div>
 @include('components.konfirmasi', ['text' => 'Apakah Anda yakin ingin memposting pertemuan?'])
+
 
 @section('overrideScript')
 <script>
