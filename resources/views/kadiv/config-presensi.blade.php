@@ -1,5 +1,4 @@
 @extends('layouts.master')
-
 @section('content')
 <div class="container-fluid pb-5 form-jadwal-absensi">
     <div class="row p-md-4 p-1">
@@ -65,19 +64,19 @@
                     </div>
                 </div>
                 <div class="col-12 d-flex justify-content-end px-0">
-                    <a href="{{ route('meetings.create') }}" class="btn btn-outline-secondary px-md-5 px-2 me-4"><b>{{ (Route::currentRouteName() == 'meetings.show') ? 'Kembali' : 'Batal' }}</b></a>
+                    <a href="{{ route('meetings.index') }}" class="btn btn-outline-secondary px-md-5 px-2 me-4"><b>{{ (Route::currentRouteName() == 'meetings.show') ? 'Kembali' : 'Batal' }}</b></a>
                     <button type="submit" {{ (Route::currentRouteName() == 'meetings.show') ? 'hidden' : '' }} class="btn btn-warning text-light px-md-5 px-2"><b>Update</b></button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-{{-- @include('components.konfirmasi', ['text' => 'Apakah Anda yakin ingin memperbarui jadwal?']) --}}
-@section('overrideScript')
-<script>
-    controlBodyBackgroundColor()
-    controlPasswordVisibility()
-    controlConfirmationModal()
-</script>
-@endsection
+@include('components.konfirmasi', ['text' => 'Apakah Anda yakin ingin memperbarui jadwal?'])
+    @section('overrideScript')
+    <script>
+        controlBodyBackgroundColor()
+        controlPasswordVisibility()
+        controlConfirmationModal()
+    </script>
+    @endsection
 @endsection

@@ -1,13 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
-
 <div class="container pb-5 px-4">
     @if(session()->has('success'))
-    <div class="alert alert-success alert-dismissible col-lg-12 fade show" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+        <div class="alert alert-success alert-dismissible col-lg-12 fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     @endif
     <div class="col-12 mt-4">
         <div class="rounded-cs row align-items-center justify-content-between flex-column flex-lg-row bg-white py-5 px-4">
@@ -47,8 +46,8 @@
                 </div>
             </div>
         </div>
-        <h4 class="mt-5 px-4 fw-normal">List Absensi Pertemuan</h4>
-        <div class="p-4 rounded-cs row mt-5 shadow-cs bg-white">
+        <h4 class="mt-4 px-4 fw-normal">List Absensi Pertemuan</h4>
+        <div class="p-4 rounded-cs row mt-3 shadow-cs bg-white">
             <div class="table-responsive">
                 <table class="table mt-3 table-borderless">
                     <tr class="border-bottom border-dark mb-3">
@@ -58,32 +57,38 @@
                         <th class="py-3">Topik</th>
                         <th class="py-3 text-center">Aksi</th>
                     </tr>
-                    @foreach($daftar_kehadiran as $p)
-                    <tr class="align-middle">
-                        <td>{{$loop->iteration}}</td>
-                        <td>{{$p->pertemuan}}</td>
-                        <td>{{\Carbon\Carbon::parse($p->tanggal)->format('d M Y')}}</td>
-                        <td class="col-1 text-truncate">{{$p->topik}}</td>
-                        <td class="d-flex justify-content-center">
-                            <a class="btn btn-warning text-light" href="{{ route('meetings.edit', $p->token) }}">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </a>
-                            <a class="ms-3 col-md-7 btn btn-primary text-light"
-                                href="{{ route('list-presence', $p->token) }}">Detail</a>
-                            <form action="{{ route('delete-meetings', $p->token) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button onclick="return confirm('Apakah anda yakin untuk menghapus meetings ini?')"
-                                    class="btn btn-danger text-light mx-1">
-                                    <span><i class="fa-solid fa-trash-can"></i></span>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
+                    @if($daftar_kehadiran->count() > 0)
+                        @foreach($daftar_kehadiran as $p)
+                        <tr class="align-middle">
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$p->pertemuan}}</td>
+                            <td>{{\Carbon\Carbon::parse($p->tanggal)->format('d M Y')}}</td>
+                            <td class="col-1 text-truncate">{{$p->topik}}</td>
+                            <td class="d-flex justify-content-center">
+                                <a class="btn btn-warning text-light" href="{{ route('meetings.edit', $p->token) }}">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a class="ms-3 col-md-7 btn btn-primary text-light"
+                                    href="{{ route('list-presence', $p->token) }}">Detail</a>
+                                <form action="{{ route('meetings.destroy', $p->token) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button onclick="return confirm('Apakah anda yakin untuk menghapus meetings ini?')"
+                                        class="btn btn-danger text-light mx-1">
+                                        <span><i class="fa-solid fa-trash-can"></i></span>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="5" class="text-center text-danger">Tidak ada data</td>
+                        </tr>
+                    @endif
                 </table>
             </div>
-            <a class="mt-3 mb-3 link-secondary text-decoration-none text-center" href="{{ route('meetings.index') }}">Lihat Semua</a>
+            <a class="mt-2 mb-2 link-secondary text-decoration-none text-center" href="{{ route('meetings.index') }}">Lihat Semua</a>
         </div>
     </div>
 </div>

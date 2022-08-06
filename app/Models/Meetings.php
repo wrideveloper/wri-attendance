@@ -42,12 +42,12 @@ class Meetings extends Model
         });
     }
 
-    public function presence()
-    {
-        return $this->belongsTo(Presence::class);
-    }
+    // public function presence()
+    // {
+    //     return $this->belongsTo(Presence::class);
+    // }
 
-    public function presences()
+    public function presence()
     {
         return $this->hasMany(Presence::class);
     }

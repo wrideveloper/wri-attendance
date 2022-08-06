@@ -4,7 +4,7 @@
         <div class="row align-items-center mt-3 justify-content-between gap-5">
             <div class="col-auto row gap-3">
                 <div class="col-auto">
-                    <h5 class="fw-normal ">List Absensi Pertemuan</h5>
+                    <h5 class="fw-normal ">List Pertemuan Miniclass</h5>
                 </div>
                 <div class="col-auto">
                     <a class="btn btn-teal text-light w-sm-100" href="{{ route('meetings.create') }}">
