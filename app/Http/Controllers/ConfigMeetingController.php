@@ -90,7 +90,8 @@ class ConfigMeetingController extends Controller {
     public function show(Meetings $meeting) {
         $meetings = Meetings::where('token', $meeting->token)->firstOrFail();
         return view('kadiv.config-presensi', [
-            'meetings' => $meetings
+            'meetings' => $meetings,
+            'title' => 'List Pertemuan'
         ]);
     }
 

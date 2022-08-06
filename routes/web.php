@@ -90,9 +90,10 @@ Route::group(['prefix' => 'kadiv', 'middleware' => ['auth']], function () {
 });
 
 // Sisi User
-Route::resource('/presence', PresenceController::class);
+Route::resource('/presence', PresenceController::class)->middleware('auth');
 // Configurasi Meetings dan Presence dari sisi Admin
 Route::controller(ConfigMeetingController::class)->group(function () {
+    Route::get('/presence/detail/{presence}', [ConfigMeetingController::class, 'detailPresence'])->name('presence-members');
     Route::prefix('/dashboard')->group(function () {
         Route::get('/config-meeting', 'listMeetings')->name('list-meetings');
         // Route::get('/check-presence/{presence}', 'checkPresence')->name('check-presence');

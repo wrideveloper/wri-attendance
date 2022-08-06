@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Meetings;
-use App\Models\Miniclass;
 use App\Models\User;
+use App\Models\Meetings;
+use App\Models\Presence;
+use App\Models\Miniclass;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller {
 
@@ -12,7 +14,7 @@ class DashboardController extends Controller {
         // next menggunakan Auth::user()
         $user = User::find(auth()->user()->id);
         $role = $user->roles->roles_name;
-        if ($role == 'Admin') {
+        if ($user->roles->roles_name === 'Admin') {
             $title = 'Dashboard';
             // ADMIN
             $users = User::count();
@@ -25,7 +27,7 @@ class DashboardController extends Controller {
                 'miniclass',
                 'title'
             ));
-        } else if ($role == 'Kadiv') {
+        } else if ($user->roles->roles_name === 'Kadiv') {
             $title = 'Dashboard';
             // KADIV
             $miniclass = $user->miniclass_id;
@@ -54,11 +56,11 @@ class DashboardController extends Controller {
                 'prosentase_sakit',
                 'title'
             ));
-        } else if($role == 'Members') {
+        } else if($user->roles->roles_name === 'Members') {
             $title = 'Dashboard';
             // MEMBER
             $miniclass = $user->miniclass_id;
-            $daftar_kehadiran = $user->presence->take(5); // limit 5
+            $presensi = Presence::where('nim', Auth::user()->nim)->skip(0)->take(5)->get(); // limit 5
             $timeline = Meetings::where('miniclass_id', $miniclass)->where('tanggal', '>=', '2022-05-25')->orderBy('tanggal', 'asc')->take(3)->get(); // limit 3
             $jumlah_hadir = $user->hadir->count();
             $jumlah_izin = $user->izin->count();
@@ -75,9 +77,9 @@ class DashboardController extends Controller {
                 $prosentase_izin = round($jumlah_izin / $jumlah_kehadiran * 100, 1);
                 $prosentase_sakit = round($jumlah_sakit / $jumlah_kehadiran * 100, 1);
             }
-
+            //dd($presensi);
             return view('user.dashboard', compact(
-                'daftar_kehadiran',
+                'presensi',
                 'timeline',
                 'data_pie_kehadiran',
                 'prosentase_hadir',
@@ -86,7 +88,7 @@ class DashboardController extends Controller {
                 'title'
             ));
         } else {
-            return redirect()->route('login');
+            return redirect()->route('login')->with('loginError', 'Anda belum login');
         }
     }
 }

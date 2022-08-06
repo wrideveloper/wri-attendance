@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Meetings;
 use App\Models\Presence;
+use App\Models\Miniclass;
+use App\Models\Generation;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PresenceRequest;
 use Illuminate\Support\Facades\Request;
 use App\Http\Requests\UpdatePresenceRequest;
@@ -15,7 +19,11 @@ class PresenceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view('presence.index');
+        $presence = Presence::where('nim', Auth::user()->nim)->filter(request(['search']))->paginate(5)->withQueryString();
+        return view('user.list-absensi', [
+            'presence' => $presence,
+            'title' => 'Presensi'
+        ]);
     }
 
     /**
@@ -51,11 +59,15 @@ class PresenceController extends Controller {
      * @param  \App\Models\Presence  $presence
      * @return \Illuminate\Http\Response
      */
-    public function show(Presence $presences){
-        $presence = Presence::where('nim', $presences->nim)->filter(request(['search']))->paginate(5)->withQueryString();
-        return view('user.list-absensi', [
-            'presence' => $presence,
-            'title' => 'Presensi'
+    public function show(Presence $presence){
+        $presences = Presence::where('token', $presence->token)
+                    ->where('nim', Auth::user()->nim)
+                    ->first();
+        return view('admin.edit_absensi', [
+            'presence' => $presences,
+            'title' => 'Presensi',
+            'generations' => Generation::all(),
+            'miniclasses' => Miniclass::all()
         ]);
     }
 
@@ -66,7 +78,7 @@ class PresenceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit(Presence $presence){
-        return view('presence.edit', [
+        return view('admin.edit_absensi', [
             'presence' => $presence,
             'title' => 'Presensi'
         ]);
