@@ -13,6 +13,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MiniclassController;
 use App\Http\Controllers\GenerationController;
 use App\Http\Controllers\ConfigMeetingController;
+use App\Http\Controllers\EmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -113,3 +114,7 @@ Route::controller(ConfigMeetingController::class)->group(function () {
         Route::delete('/check-presence/{presence}/edit', 'deletePresence')->name('delete-presence');
     });
 });
+
+// Kirim Email Forgot Password
+// Route::get('/send-mail', [EmailController::class, 'forpas']);
+Route::post('/send-forpas-mail', [EmailController::class, 'forpas']);
