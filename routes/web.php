@@ -13,6 +13,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MiniclassController;
 use App\Http\Controllers\GenerationController;
 use App\Http\Controllers\ConfigMeetingController;
+use App\Http\Controllers\ForPasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,14 +42,15 @@ Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+// Forgot Password
 Route::get('/forgot-password', function () {
     return view('auth.forgotpassword');
 })->name('forgot-password');
+Route::post('/send-forpas-mail', [ForPasController::class, 'forpas']);
+Route::post('/ganti-pass', [ForPasController::class, 'reset']);
+Route::get('/reset-password/{token}', [ForPasController::class, 'halaman_reset'])->name('reset-password');
 
-Route::get('/reset-password', function () {
-    return view('auth.gantipass');
-})->name('reset-password');
-
+// 
 Route::get('/post-absensi', function () {
     return view('user.input_absensi', [
         'title' => 'Sistem Absensi Miniclass',
