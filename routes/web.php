@@ -112,4 +112,5 @@ Route::controller(ConfigMeetingController::class)->group(function () {
 });
 
 // Kirim Email Forgot Password
-Route::get('/send-mail', [EmailController::class, 'forpas']);
+// Route::get('/send-mail', [EmailController::class, 'forpas']);
+Route::post('/send-forpas-mail', [EmailController::class, 'forpas']);
