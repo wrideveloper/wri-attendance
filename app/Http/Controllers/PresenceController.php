@@ -60,14 +60,12 @@ class PresenceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show(Presence $presence){
-        $presences = Presence::where('token', $presence->token)
+        $presences = $presence->where('token', $presence->token)
                     ->where('nim', Auth::user()->nim)
                     ->first();
         return view('admin.edit_absensi', [
             'presence' => $presences,
             'title' => 'Presensi',
-            'generations' => Generation::all(),
-            'miniclasses' => Miniclass::all()
         ]);
     }
 

@@ -103,7 +103,7 @@ class UserController extends Controller
         ]);
         $validated['password'] = Hash::make($validated['password']);
         User::where('nim', $user->nim)->update($validated);
-        return redirect()->back();
+        return redirect()->route('dashboard')->with('success', 'Profil berhasil diperbarui');
     }
 
     /**
