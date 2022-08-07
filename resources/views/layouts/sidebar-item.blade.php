@@ -16,7 +16,8 @@
         <i class="fa-solid fa-clipboard-check" style="padding-right: 14px;"></i>
         <span>List Pertemuan</span></a>
 @elseif(Auth::user()->roles_id == 3)
-    <a href="{{ route('presence.index') }}" class="list-group-item d-inline-block text-truncate {{ $title === 'Presensi' ? 'active' : '' }}">
+    <a href="{{ route('presence.index') }}"
+        class="list-group-item d-inline-block text-truncate {{ $title === 'Presensi' ? 'active' : '' }}">
         <i class="fa-solid fa-clipboard-user" style="padding-right: 14px;"></i>
         <span>Presensi</span>
     </a>
@@ -25,10 +26,8 @@
     href="/user/{{ auth()->user()->nim }}/edit">
     <i class="fa-solid fa-user-pen" style="padding-right: 14px;"></i>
     <span>Edit Profile</span></a>
-<a class="list-group-item d-inline-block text-truncate text-hover-red" href="{{ route('logout') }}"
-    onclick="event.preventDefault();
-document.getElementById('logout-form').submit();"><i
-        class="fa-solid fa-arrow-right-from-bracket" style="padding-right: 10px;"></i>
+<a class="list-group-item d-inline-block text-truncate text-hover-red" href="#" data-bs-toggle="modal"
+    data-bs-target="#logoutConfirm"><i class="fa-solid fa-arrow-right-from-bracket" style="padding-right: 10px;"></i>
     <span>Log
         Out</span></a>
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

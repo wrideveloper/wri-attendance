@@ -44,15 +44,10 @@
                             <ul class="dropdown-menu dropdown-menu-end my-2 position-absolute"
                                 aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a class="dropdown-item text-hover-red" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();"><i
+                                    <a href="#" class="dropdown-item text-hover-red" data-bs-toggle="modal"
+                                        data-bs-target="#logoutConfirm"><i
                                             class="fa-solid fa-arrow-right-from-bracket text-red"
                                             style="padding-right: 10px;"></i>Logout</a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        style="display: none;">
-                                        @csrf
-                                    </form>
                                 </li>
                             </ul>
                         </li>
@@ -69,6 +64,7 @@
             {{-- end page content --}}
         </div>
     </div>
+    @include('components.logout_confirm')
 </body>
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
