@@ -23,16 +23,18 @@ class LoginRequest extends FormRequest
      */
     public function rules() {
         return [
-            'nim' => 'required|string|exists:users,nim',
+            'nim' => 'required|string|exists:users,nim|min:10|max:10',
             'password' => 'required'
         ];
     }
 
     public function messages() {
         return [
-            'name.required' => 'NIM tidak boleh kosong',
-            'name.exists' => 'Silahkan masukan NIM atau Password dengan benar',
-            'password.required' => 'Password tidak boleh kosong'
+            'nim.required' => 'NIM tidak boleh kosong',
+            'nim.exists' => 'Silahkan masukan NIM atau Password dengan benar',
+            'password.required' => 'Password tidak boleh kosong',
+            'nim.min' => 'Ada kesalahan pada NIM Anda',
+            'nim.max' => 'Ada kesalahan pada NIM Anda',
         ];
     }
 }
