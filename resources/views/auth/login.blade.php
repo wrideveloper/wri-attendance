@@ -49,9 +49,16 @@
         </div>
     </div>
 </div>
-@if (session()->has('loginError'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        {{ session('loginError') }}
+@if(session()->has('LoginErrors'))
+    <div class="alert alert-danger alert-dismissible fade show py-3 px-3" role="alert">
+        {{ session('LoginErrors') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+@if(session()->has('LogoutSuccess'))
+    <div class="alert alert-danger alert-dismissible fade show py-3 px-3" role="alert">
+        {{ session('LogoutSuccess') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif
@@ -71,22 +78,16 @@
                 </div>
                 <div class="row">
                     <input value="{{ old('nim') }}" type="text" required
-                        class="@error('nim') is-invalid @enderror form-control p-2 input-login" id="nim" name="nim"
-                        placeholder="Nim">
-                        @error('nim')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{!! $message !!}</strong>
-                            </span>
-                        @enderror
+                    class="@error('nim') is-invalid @enderror form-control p-2 input-login" id="nim" name="nim" placeholder="Nim" autofocus required>
+                    @error('nim')
+                        <div class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
                 <div class="row">
                     <input required type="password" class="input-login form-control p-2 @error('password') is-invalid @enderror"
                         id="password" placeholder="Password" name="password">
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{!! $message !!}</strong>
-                            </span>
-                        @enderror
                 </div>
                 <div class="d-flex justify-content-end">
                     <div class="fw-semibold my-2">

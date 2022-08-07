@@ -17,10 +17,11 @@ class LoginController extends Controller {
 
         if (Auth::attempt($credential)) {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard')->with('success', 'Login berhasil!');
+            return redirect()->intended('/dashboard')->with(
+                'success', 'Login berhasil, Selamat datang ' . Auth::user()->name . '!'
+            );
         }
-
-        return back()->with('loginError', 'Login Failed!');
+        return back()->with('LoginErrors', 'Login gagal! tolong cek kembali NIM atau Password Anda');
     }
 
     public function logout() {
@@ -29,6 +30,6 @@ class LoginController extends Controller {
         request()->session()->invalidate();
         request()->session()->regenerateToken();
 
-        return redirect('/')->with('success', 'Logout berhasil, sampai jumpa lagi!');;
+        return redirect('/')->with('LogoutSuccess', 'Logout berhasil, sampai jumpa lagi!');;
     }
 }
