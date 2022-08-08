@@ -7,6 +7,7 @@ use App\Models\Meetings;
 use App\Models\Presence;
 use App\Models\Miniclass;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class DashboardController extends Controller {
 
@@ -62,10 +63,16 @@ class DashboardController extends Controller {
             ));
         } else if($user->roles->roles_name === 'Members') {
             $title = 'Dashboard';
+
+            $currentTime = Carbon::now()->format('H:i:s');
+            $currentDate = Carbon::now()->format('Y-m-d');
+
             // MEMBER
-            $miniclass = $user->miniclass_id;
             $presensi = Presence::where('nim', Auth::user()->nim)->skip(0)->take(5)->get(); // limit 5
-            $timeline = Meetings::where('miniclass_id', $miniclass)->where('tanggal', '>=', '2022-05-25')->orderBy('tanggal', 'asc')->take(3)->get(); // limit 3
+            $timeline = Meetings::where('miniclass_id', Auth::user()->miniclass_id)
+                        ->whereDate('tanggal', '=', $currentDate)
+                        ->where('end_time', '>=', $currentTime)
+                        ->orderBy('tanggal', 'asc')->take(3)->get(); // limit 3
             $jumlah_hadir = $user->hadir->count();
             $jumlah_izin = $user->izin->count();
             $jumlah_sakit = $user->sakit->count();

@@ -18,7 +18,7 @@ class UserFactory extends Factory
             'miniclass_id' => $this->faker->numberBetween(1, 5),
             'roles_id' => $this->faker->randomElement([3]),
             'generations_id' => $this->faker->numberBetween(1, 4),
-            'name' => $this->faker->name(),
+            'name' => $this->faker->firstName() . " "  . $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->phoneNumber(),
             'nim' => $this->faker->bothify('##########'),

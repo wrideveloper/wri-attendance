@@ -31,6 +31,17 @@ class ConfigMeetingController extends Controller {
         return view('dashboard.create-meetings');
     }
 
+    public function inputPresence(Miniclass $miniclass, Meetings $meetings){
+        $meeting = Meetings::where('pertemuan', $meetings->token)
+                ->whereHas('miniclass', function($query) use ($miniclass) {
+                    $query->where('miniclass_name', $miniclass->miniclass_name);
+                })->first();
+        return view('user.input_absensi',[
+            'meetings'=> $meeting,
+            'title' => 'Presensi'
+        ]);
+    }
+
     // Untuk melakukan updatepresence
     public function updateMeetings(Request $request, Meetings $meetings) {
         $rule = [
