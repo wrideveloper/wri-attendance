@@ -17,11 +17,11 @@
                             </h5>
                         </div>
                         <div class="row mb-3">
-                            <input type="password" class="input-login form-control p-2" id="password" name="password"
+                            <input type="password" class="input-login form-control p-2" id="password" name="password1"
                                 placeholder="Masukkan password baru">
                         </div>
                         <div class="row">
-                            <input type="password" class="input-login form-control p-2" id="password" name="password"
+                            <input type="password" class="input-login form-control p-2" id="password" name="password2"
                                 placeholder="Konfirmasi password">
                         </div>
 
