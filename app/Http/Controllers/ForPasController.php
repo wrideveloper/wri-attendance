@@ -11,7 +11,7 @@ class ForPasController extends Controller
     public function forpas(Request $request)
     {
         $request->validate([
-            'email' => 'required|email:dns|unique:password_resets',
+            'email' => 'required|email:dns',
         ]);
         // check email ada atau tidak
         $user = DB::table('users')->where('email', '=', $request->email)->first();
@@ -49,15 +49,23 @@ class ForPasController extends Controller
     {
         $request->validate([
             'token' => 'required',
-            'password' => 'required|min:5|max:255'
+            'password1' => 'required|min:5|max:255',
+            'password2' => 'required|min:5|max:255',
         ]);
-        $email = DB::table('password_resets')->where('token', '=', $request->token)->first()->email;
-        DB::table('users')->where('email', '=', $email)->update([
-            'password' => bcrypt($request->password),
-        ]);
-        DB::table('password_resets')->where('email', '=', $email)->update([
-            'token' => Str::random(16),
-        ]);
-        return redirect('/');
+        if($request->password1 == $request->password2){
+            $email = DB::table('password_resets')->where('token', '=', $request->token)->first()->email;
+            DB::table('users')->where('email', '=', $email)->update([
+                'password' => bcrypt($request->password1),
+            ]);
+            DB::table('password_resets')->where('email', '=', $email)->update([
+                'token' => Str::random(16),
+            ]);
+            return redirect('/');
+        }
+        else{
+            $request->validate([
+                'error' => 'required',
+            ]);
+        }
     }
 }
