@@ -170,20 +170,55 @@ button {
 .border-custom-none td {
     border: 0;
 }
+
 .border-cs-dark {
     border: 1px solid #aca8cc;
 }
+
 .placeholder-cs::placeholder {
     --bs-text-opacity: 1;
     color: #73787e !important;
 }
+
 .btn-cs-back {
     background-color: white;
     font-weight: bolder;
 }
+
 .btn-cs-back:hover {
     background-color: white;
     font-weight: bolder;
     color: #000;
     border-color: white;
 }
+
+/* pagination */
+.pagination .page-item {
+    margin: 5px;
+}
+
+.pagination .page-item .page-link {
+    padding: 7px 16px;
+    border-radius: 5px;
+    color: #000;
+    font-weight: 500;
+    border-color: transparent;
+}
+
+.pagination .page-item .page-link i {
+    font-size: 12px;
+}
+
+.pagination .page-item .page-link:hover {
+    color: #ffb020;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #ffff;
+    color: #ffb020;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #9fa4a9;
+}
+/* end pagination */

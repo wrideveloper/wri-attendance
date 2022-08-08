@@ -16,7 +16,8 @@
                 <form class="d-flex" action="{{ route('meetings.index') }}">
                     <span class="row col-auto">
                         <div class="col-auto">
-                            <input value="{{ request('search') }}" type="search" id="search" class="form-control" name="search" placeholder="Search">
+                            <input value="{{ request('search') }}" type="search" id="search" class="form-control"
+                                name="search" placeholder="Search">
                         </div>
                         <div class="col-auto">
                             <button type="submit" class="btn btn-primary">Cari</button>
@@ -35,19 +36,22 @@
                         <th class="text-center">Aksi</th>
                     </tr>
                     @if ($datas->count() > 0)
-                        @foreach($datas as $meetings)
-                        <tr class="align-middle border-custom-none">
-                            <td class="align-middle">{{ $meetings->pertemuan }}</td>
-                            <td class="align-middle">{{ \Carbon\Carbon::parse($meetings->tanggal)->format('d M Y') }}</td>
-                            <td class="align-middle">{{ $meetings->topik }}</td>
+                        @foreach ($datas as $meetings)
+                            <tr class="align-middle border-custom-none">
+                                <td class="align-middle">{{ $meetings->pertemuan }}</td>
+                                <td class="align-middle">{{ \Carbon\Carbon::parse($meetings->tanggal)->format('d M Y') }}
+                                </td>
+                                <td class="align-middle">{{ $meetings->topik }}</td>
 
-                            <td class="d-flex gap-3 justify-content-center">
-                                <a class="btn btn-warning text-white" href="{{ route('meetings.edit', $meetings->token) }}">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-                                <a class="btn btn-primary text-light fw-bold rounded w-50" href="{{ route('meetings.show', $meetings->token) }}">Detail</a>
-                            </td>
-                        </tr>
+                                <td class="d-flex gap-3 justify-content-center">
+                                    <a class="btn btn-warning text-white"
+                                        href="{{ route('meetings.edit', $meetings->token) }}">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <a class="btn btn-primary text-light fw-bold rounded w-50"
+                                        href="{{ route('meetings.show', $meetings->token) }}">Detail</a>
+                                </td>
+                            </tr>
                         @endforeach
                     @else
                         <tr>
@@ -56,9 +60,9 @@
                     @endif
                 </table>
             </div>
-            <div class="d-flex justify-content-end mt-2">
-                {{ $datas->links() }}
-            </div>
         </div>
+
+        {{ $datas->links('vendor.pagination.custom') }}
+
     </div>
 @endsection
