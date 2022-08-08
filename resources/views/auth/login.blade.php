@@ -49,6 +49,7 @@
             </div>
         </div>
     </div>
+
     @if (session()->has('LoginErrors'))
         <div class="alert alert-danger alert-dismissible fade show py-3 px-3 position-fixed-alert" role="alert">
             {{ session('LoginErrors') }}
@@ -62,6 +63,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
+
     <div class="d-flex justify-content-center align-items-center vh-100 vw-100 position-relative">
         <div id="box" class="rounded-4">
             <form class="container" action="{{ route('login') }}" method="POST" enctype="multipart/form-data">
@@ -108,6 +110,7 @@
                 </div>
             </form>
         </div>
+
         <div id="garisVector" class="position-absolute">
             <img src="{{ asset('svg/line.svg') }}" alt="">
         </div>

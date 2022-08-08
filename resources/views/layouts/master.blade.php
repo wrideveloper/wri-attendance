@@ -30,6 +30,7 @@
                 @include('layouts.sidebar-item')
             </div>
         </div>
+
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg bg-light flex-column">
                 <div class="container-fluid py-3 px-4">
@@ -53,6 +54,7 @@
                         </li>
                     </ul>
                 </div>
+
                 @isset($sectionHeader)
                     <div class="col-md-12 px-4">
                         <h5>{{ $sectionHeader }}</h5>
@@ -64,7 +66,10 @@
             {{-- end page content --}}
         </div>
     </div>
+
+    {{-- component logout confirm --}}
     @include('components.logout_confirm')
+    {{-- end component logout confirm --}}
 </body>
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>

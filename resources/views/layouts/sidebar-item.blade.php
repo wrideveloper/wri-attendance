@@ -30,6 +30,3 @@
     data-bs-target="#logoutConfirm"><i class="fa-solid fa-arrow-right-from-bracket" style="padding-right: 10px;"></i>
     <span>Log
         Out</span></a>
-<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-    @csrf
-</form>

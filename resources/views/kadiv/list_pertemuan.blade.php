@@ -61,6 +61,8 @@
                 </table>
             </div>
         </div>
+
         {{ $datas->links('vendor.pagination.custom') }}
+
     </div>
 @endsection
