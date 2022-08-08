@@ -35,17 +35,20 @@ class DashboardController extends Controller {
             $jumlah_hadir = Miniclass::find($miniclass)->hadir->count();
             $jumlah_izin = Miniclass::find($miniclass)->izin->count();
             $jumlah_sakit = Miniclass::find($miniclass)->sakit->count();
-            $jumlah_kehadiran = $jumlah_hadir + $jumlah_izin + $jumlah_sakit;
-            $data_pie_kehadiran = [$jumlah_hadir, $jumlah_izin, $jumlah_sakit];
+            $jumlah_alpha = Miniclass::find($miniclass)->alpha->count();
+            $jumlah_kehadiran = $jumlah_hadir + $jumlah_izin + $jumlah_sakit + $jumlah_alpha;
+            $data_pie_kehadiran = [$jumlah_hadir, $jumlah_izin, $jumlah_sakit, $jumlah_alpha];
 
             if ($jumlah_kehadiran == 0) {
                 $prosentase_hadir = 0;
                 $prosentase_izin = 0;
                 $prosentase_sakit = 0;
+                $prosentase_alpha = 0;
             } else {
                 $prosentase_hadir = round($jumlah_hadir / $jumlah_kehadiran * 100, 1);
                 $prosentase_izin = round($jumlah_izin / $jumlah_kehadiran * 100, 1);
                 $prosentase_sakit = round($jumlah_sakit / $jumlah_kehadiran * 100, 1);
+                $prosentase_alpha = round($jumlah_alpha / $jumlah_kehadiran * 100, 1);
             }
 
             return view('kadiv.dashboard', compact(
@@ -54,6 +57,7 @@ class DashboardController extends Controller {
                 'prosentase_hadir',
                 'prosentase_izin',
                 'prosentase_sakit',
+                'prosentase_alpha',
                 'title'
             ));
         } else if($user->roles->roles_name === 'Members') {
@@ -65,17 +69,20 @@ class DashboardController extends Controller {
             $jumlah_hadir = $user->hadir->count();
             $jumlah_izin = $user->izin->count();
             $jumlah_sakit = $user->sakit->count();
-            $jumlah_kehadiran = $jumlah_hadir + $jumlah_izin + $jumlah_sakit;
-            $data_pie_kehadiran = [$jumlah_hadir, $jumlah_izin, $jumlah_sakit];
+            $jumlah_alpha = $user->alpha->count();
+            $jumlah_kehadiran = $jumlah_hadir + $jumlah_izin + $jumlah_sakit + $jumlah_alpha;
+            $data_pie_kehadiran = [$jumlah_hadir, $jumlah_izin, $jumlah_sakit, $jumlah_alpha];
 
             if ($jumlah_kehadiran == 0) {
                 $prosentase_hadir = 0;
                 $prosentase_izin = 0;
                 $prosentase_sakit = 0;
+                $prosentase_alpha = 0;
             } else {
                 $prosentase_hadir = round($jumlah_hadir / $jumlah_kehadiran * 100, 1);
                 $prosentase_izin = round($jumlah_izin / $jumlah_kehadiran * 100, 1);
                 $prosentase_sakit = round($jumlah_sakit / $jumlah_kehadiran * 100, 1);
+                $prosentase_alpha = round($jumlah_alpha / $jumlah_kehadiran * 100, 1);
             }
             //dd($presensi);
             return view('user.dashboard', compact(
@@ -85,6 +92,7 @@ class DashboardController extends Controller {
                 'prosentase_hadir',
                 'prosentase_izin',
                 'prosentase_sakit',
+                'prosentase_alpha',
                 'title'
             ));
         } else {

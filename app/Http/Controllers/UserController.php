@@ -101,7 +101,11 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'sometimes'
         ]);
-        $validated['password'] = Hash::make($validated['password']);
+        if(request()->password){
+            $validated['password'] = Hash::make($request['password']);
+        } else {
+            $validated['password'] = $user->password;
+        }
         User::where('nim', $user->nim)->update($validated);
         return redirect()->route('dashboard')->with('success', 'Profil berhasil diperbarui');
     }
