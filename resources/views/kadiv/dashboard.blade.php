@@ -34,7 +34,7 @@
                         </div>
                         <p class="m-0 d-inline col-2 text-end text-md-center">{{ $prosentase_izin }}%</p>
                     </div>
-                    <div class="col-12 d-flex justify-content-around align-items-center">
+                    <div class="col-12 d-flex justify-content-around align-items-center mb-2">
                         <p class="m-0 ms-md-5 d-inline col-2 p-0 ps-lg-5">Sakit</p>
                         <div class="progress col-8 p-0" style="height: .8rem">
                             <div class="progress-bar bg-warning rounded" role="progressbar"
@@ -42,6 +42,15 @@
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <p class="m-0 d-inline col-2 text-end text-md-center">{{ $prosentase_sakit }}%</p>
+                    </div>
+                    <div class="col-12 d-flex justify-content-around align-items-center">
+                        <p class="m-0 ms-md-5 d-inline col-2 p-0 ps-lg-5">Alpha</p>
+                        <div class="progress col-8 p-0" style="height: .8rem">
+                            <div class="progress-bar bg-danger rounded" role="progressbar"
+                                style="width: {{ $prosentase_alpha }}%" aria-valuenow="{{ $prosentase_alpha }}"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="m-0 d-inline col-2 text-end text-md-center">{{ $prosentase_alpha }}%</p>
                     </div>
                 </div>
             </div>
@@ -105,16 +114,16 @@
     }
 
     const data = {
-        labels: ["Hadir", "Izin", "Sakit"],
+        labels: ["Hadir", "Izin", "Sakit", "Alpha"],
         datasets: [{
-            backgroundColor: ["rgb(32, 201, 151)", "rgb(13,110,253)", "rgb(255, 205, 86)"],
+            backgroundColor: ["rgb(32, 201, 151)", "rgb(13,110,253)", "rgb(255, 205, 86)", "rgb(220, 53, 69)"],
             data: @json($data_pie_kehadiran),
         }]
     };
 
     if(data.datasets[0].data.every((v) => v == 0 )) {
         data.datasets[0].data = [0.1,0,0]
-        data.datasets[0].backgroundColor = ["rgb(192,192,192)","rgb(192,192,192)","rgb(192,192,192)"]
+        data.datasets[0].backgroundColor = ["rgb(192,192,192)","rgb(192,192,192)","rgb(192,192,192)", "rgb(192,192,192)"]
     }
 
 

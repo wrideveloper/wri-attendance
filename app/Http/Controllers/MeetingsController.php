@@ -48,7 +48,9 @@ class MeetingsController extends Controller {
      */
     public function store(MeetingsRequest $request) {
         $data = $request->validated();
+        $data['token'] = strtolower($data['token']);
         $checking = Meetings::where('token', $data['token'])->first();
+
         if($checking) {
             return redirect()->back()->with('error', 'Token sudah digunakan');
         } else {

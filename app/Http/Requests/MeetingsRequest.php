@@ -40,7 +40,7 @@ class MeetingsRequest extends FormRequest {
                     'tanggal' => 'required|date',
                     'start_time' => 'required',
                     'end_time' => 'required',
-                    'token' => 'required|string|max:10|unique:meetings,token'
+                    'token' => 'required|string|max:10|'
                 ];
             } break;
         }

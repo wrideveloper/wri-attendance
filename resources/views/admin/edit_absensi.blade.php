@@ -76,7 +76,9 @@
                             </div>
                             <div class="row justify-content-end">
                                 <a href="{{ (Route::currentRouteName() == 'meetings.show') ? route('meetings.index', $presence->meetings->token) : route('presence.index') }}" type="button" class="btn btn-light" id="backbutton">Back</a>
-                                <button {{ (Route::currentRouteName() == 'detail-presence') ? '' : 'hidden' }} type="submit" class="btn btn-warning" id="updatebutton">Update</button>
+                                @if (Route::currentRouteName() == 'detail-presence')
+                                    <button type="submit" class="btn btn-warning" id="updatebutton">Update</button>
+                                @endif
                             </div>
                         </div>
                     </form>

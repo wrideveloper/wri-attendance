@@ -64,8 +64,10 @@
                     </div>
                 </div>
                 <div class="col-12 d-flex justify-content-end px-0">
-                    <a href="{{ route('meetings.index') }}" class="btn btn-outline-secondary px-md-5 px-2 me-4"><b>{{ (Route::currentRouteName() == 'meetings.show') ? 'Kembali' : 'Batal' }}</b></a>
-                    <button type="submit" {{ (Route::currentRouteName() == 'meetings.show') ? 'hidden' : '' }} class="btn btn-warning text-light px-md-5 px-2"><b>Update</b></button>
+                        <a href="{{ route('meetings.index') }}" class="btn btn-outline-secondary px-md-5 px-2 me-4"><b>{{ (Route::currentRouteName() == 'meetings.show') ? 'Kembali' : 'Batal' }}</b></a>
+                    @if (Route::currentRouteName() == 'meetings.edit')
+                        <button type="submit" class="btn btn-warning text-light px-md-5 px-2"><b>Update</b></button>
+                    @endif
                 </div>
             </form>
         </div>

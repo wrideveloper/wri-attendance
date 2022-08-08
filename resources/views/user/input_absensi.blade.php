@@ -5,7 +5,8 @@
 
 @section('content')
     <div class="container-fluid pb-5 px-4">
-        <h1 class="h5 mb-4">Absen</h1>
+        <h1 class="h5 mb-4">Presensi - Miniclass - Pertemuan ke</h1>
+        <p class="h5 mb-4">Topik - </p>
         <form action="{{ route('presence.store') }}" method="POST">
             @csrf
             <div class="card card-rounded">
