@@ -5,7 +5,7 @@
         <div class="row g-3 align-items-center mt-5 justify-content-between">
             <span class="row col-auto">
                 <div class="col-auto">
-                    <a href="/dashboard" class="badge border-0 bg-white px-2 rounded-3 shadow-cs"><i
+                    <a href="{{ route('meetings.index') }}" class="badge border-0 bg-white px-2 rounded-3 shadow-cs"><i
                             class="fa-solid fa-2x fa-angle-left text-muted"></i></a>
                 </div>
                 <div class="col-auto">

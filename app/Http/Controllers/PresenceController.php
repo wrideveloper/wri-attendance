@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Meetings;
 use App\Models\Presence;
@@ -43,13 +44,14 @@ class PresenceController extends Controller {
      */
     public function store(PresenceRequest $request) {
         $presence = $request->validated();
-        $cekToken = Meetings::where('token', $request->token)->firstOrFail();
+        $cekToken = Meetings::where('token', $presence['token'])->first();
+        $checkUSer = Presence::where('nim', Auth::user()->nim)->where('token', $presence['token'])->first();
 
-        if($cekToken && $cekToken->end_time <= now()) {
+        if($cekToken && $cekToken->end_time >= now() && !$checkUSer){
             Presence::create($presence);
-            return redirect()->route('presence.index')->with('success', 'Presensi berhasil');
+            return redirect()->route('dashboard')->with('success', 'Presensi berhasil');
         } else {
-            return redirect()->back()->with('error', 'Presensi gagal, cek kembali token atau waktu sudah habis');
+            return redirect()->back()->with('PresenceError', 'Presensi gagal, cek kembali token atau waktu sudah habis');
         }
     }
 

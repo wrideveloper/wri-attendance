@@ -12,9 +12,10 @@ function showPresent() {
                             placeholder="Input Your Text in here" />
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-teal text-white px-5">Simpan</button>
+                        <button type="submit" class="btn btn-teal text-white px-5">Simpan</button>
                     </div>`);
 }
+
 function showPermit() {
     $('#present').empty();
     $('#sick').empty();
@@ -24,18 +25,19 @@ function showPermit() {
                             placeholder="Input Your Text in here"></textarea>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-teal text-white px-5">Simpan</button>
+                        <button type="submit" class="btn btn-teal text-white px-5">Simpan</button>
                     </div>`);
 }
+
 function showSick() {
     $('#permit').empty();
     $('#present').empty();
-    $('#sick').html(`<div class="card card-rounded">
+    $("#sick").html(`<div class="card card-rounded">
                         <h1 class="h5 mb-4">Keterangan Sakit</h1>
                         <textarea class="form-control" name="ket" rows="10"
                             placeholder="Input Your Text in here"></textarea>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-teal text-white px-5">Simpan</button>
+                        <button type="submit" class="btn btn-teal text-white px-5">Simpan</button>
                     </div>`);
 }

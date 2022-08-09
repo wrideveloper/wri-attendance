@@ -64,7 +64,7 @@
                     @foreach ($timeline as $item)
                         <div class="col-12 d-flex p-0">
                             <div class="col-8 d-flex flex-column p-0">
-                                <a href="/dashboard/presence/{{ $item->miniclass->miniclass_name }}/pertemuan-{{$item->pertemuan}}" class="fw-bold text-dark text-decoration-none mb-3">
+                                <a href="{{ route('input.presence', [$item->miniclass->miniclass_name, $item->pertemuan, $item->topik]) }}" class="fw-bold text-dark text-decoration-none mb-3">
                                     Pertemuan {{$item->pertemuan}}
                                 </a>
                                 <p class="text-truncate">{{$item->topik}}</p>
@@ -79,7 +79,7 @@
                     @endforeach
                 @else
                     <div class="col-12 d-flex p-0 justify-content-center">
-                            <p class="text-center text-danger">Belum ada presensi terbuka</p>
+                        <p class="text-center text-danger">Belum ada presensi terbuka</p>
                     </div>
                 @endif
             </div>
@@ -100,9 +100,9 @@
                         @foreach ($presensi as $item)
                             @php
                                 $statusColor = "";
-                                if($item->status === "Hadir") $statusColor = "text-success";
+                                if($item->status === "Hadir") $statusColor = "text-teal";
                                 elseif($item->status === "Izin") $statusColor = "text-primary";
-                                elseif($item->status === "Sakit") $statusColor = "text-info";
+                                elseif($item->status === "Sakit") $statusColor = "text-warning";
                                 elseif($item->status === "Alpha") $statusColor = "text-danger";
                             @endphp
                             <tr class="align-middle">

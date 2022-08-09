@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Meetings;
 use App\Models\Presence;
@@ -63,16 +64,20 @@ class DashboardController extends Controller {
             ));
         } else if($user->roles->roles_name === 'Members') {
             $title = 'Dashboard';
-
             $currentTime = Carbon::now()->format('H:i:s');
             $currentDate = Carbon::now()->format('Y-m-d');
 
             // MEMBER
             $presensi = Presence::where('nim', Auth::user()->nim)->skip(0)->take(5)->get(); // limit 5
+
+            // Menampilkan timeline, ada pengkondisian apabila sudah melakukan presensi maka timeline tidak muncul
             $timeline = Meetings::where('miniclass_id', Auth::user()->miniclass_id)
                         ->whereDate('tanggal', '=', $currentDate)
-                        ->where('end_time', '>=', $currentTime)
+                        ->whereHas('presence', function($query) {
+                            $query->where('nim', '!=', Auth::user()->nim);
+                        })->where('end_time', '>=', $currentTime)
                         ->orderBy('tanggal', 'asc')->take(3)->get(); // limit 3
+                        
             $jumlah_hadir = $user->hadir->count();
             $jumlah_izin = $user->izin->count();
             $jumlah_sakit = $user->sakit->count();
@@ -91,6 +96,8 @@ class DashboardController extends Controller {
                 $prosentase_sakit = round($jumlah_sakit / $jumlah_kehadiran * 100, 1);
                 $prosentase_alpha = round($jumlah_alpha / $jumlah_kehadiran * 100, 1);
             }
+            $currentYear = Carbon::now()->year;
+            $nextYear = Carbon::now()->addYear()->year;
             //dd($presensi);
             return view('user.dashboard', compact(
                 'presensi',
@@ -100,7 +107,9 @@ class DashboardController extends Controller {
                 'prosentase_izin',
                 'prosentase_sakit',
                 'prosentase_alpha',
-                'title'
+                'title',
+                'currentYear',
+                'nextYear'
             ));
         } else {
             return redirect()->route('login')->with('loginError', 'Anda belum login');
