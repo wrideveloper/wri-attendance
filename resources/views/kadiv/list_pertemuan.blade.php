@@ -50,6 +50,10 @@
                                     </a>
                                     <a class="btn btn-primary text-light fw-bold rounded w-50"
                                         href="{{ route('meetings.show', $meetings->token) }}">Detail</a>
+                                    <a class="btn btn-teal bg-teal text-white"
+                                        href="{{ route('list-presence', $meetings->token) }}">
+                                        Rekapitulasi
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

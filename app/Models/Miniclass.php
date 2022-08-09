@@ -15,7 +15,7 @@ class Miniclass extends Model
         return $this->hasMany(User::class);
     }
 
-    public function meeting()
+    public function meetings()
     {
         return $this->hasMany(Meetings::class);
     }

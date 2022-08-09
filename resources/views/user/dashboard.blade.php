@@ -59,23 +59,31 @@
                 </div>
             </div>
             <div class="col-12 col-md-12 col-lg-4 shadow-cs bg-white rounded-cs p-4 mt-4 mt-md-0">
-                <p class="text-secondary">Timeline</p>
-                @foreach ($timeline as $item)
-                <div class="col-12 d-flex p-0">
-                    <div class="col-8 d-flex flex-column p-0">
-                        <a href="{{ url('/') }}" class="fw-bold text-dark text-decoration-none mb-3">
-                            Pertemuan {{$item->pertemuan}}
-                        </a>
-                        <p class="text-truncate">{{$item->topik}}</p>
+                <p class="text-secondary fw-bold">Timeline</p>
+                @if ($timeline->count() > 0)
+                    @foreach ($timeline as $item)
+                        <div class="col-12 d-flex p-0">
+                            <div class="col-8 d-flex flex-column p-0">
+                                <a href="{{ route('input.presence', [$item->miniclass->miniclass_name, $item->pertemuan, $item->topik]) }}" class="fw-bold text-dark text-decoration-none mb-3">
+                                    Pertemuan {{$item->pertemuan}}
+                                </a>
+                                <p class="text-truncate">{{$item->topik}}</p>
+                            </div>
+                            <div class="col-4 d-flex flex-column p-0 text-end">
+                                <p class="text-secondary">{{date('d F Y', strtotime($item->tanggal)) }}</p>
+                                <p class="text-secondary">{{date('H:i', strtotime($item->start_time))}} -
+                                    {{date('H:i', strtotime($item->end_time))}}
+                                </p>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="col-12 d-flex p-0 justify-content-center">
+                        <p class="text-center text-danger">Belum ada presensi terbuka</p>
                     </div>
-                    <div class="col-4 d-flex flex-column p-0 text-end">
-                        <p class="text-secondary">{{date('d F Y', strtotime($item->tanggal)) }}</p>
-                        <p class="text-secondary">{{date('H:i', strtotime($item->start_time))}} -
-                            {{date('H:i', strtotime($item->end_time))}}
-                        </p>
-                    </div>
-                </div>
-                @endforeach
+                @endif
+            </div>
+
             </div>
         </div>
         <div class="row mt-4 md-mt-5">
@@ -94,9 +102,9 @@
                         @foreach ($presensi as $item)
                             @php
                                 $statusColor = "";
-                                if($item->status === "Hadir") $statusColor = "text-success";
+                                if($item->status === "Hadir") $statusColor = "text-teal";
                                 elseif($item->status === "Izin") $statusColor = "text-primary";
-                                elseif($item->status === "Sakit") $statusColor = "text-info";
+                                elseif($item->status === "Sakit") $statusColor = "text-warning";
                                 elseif($item->status === "Alpha") $statusColor = "text-danger";
                             @endphp
                             <tr class="align-middle">

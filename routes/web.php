@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use App\Models\Meetings;
 use App\Models\Presence;
 use Illuminate\Support\Facades\DB;
@@ -50,24 +51,30 @@ Route::post('/send-forpas-mail', [ForPasController::class, 'forpas']);
 Route::post('/ganti-pass', [ForPasController::class, 'reset']);
 Route::get('/reset-password/{token}', [ForPasController::class, 'halaman_reset'])->name('reset-password');
 
-// 
-Route::get('/post-absensi', function () {
-    return view('user.input_absensi', [
-        'title' => 'Sistem Absensi Miniclass',
-    ]);
-})->name('post-absensi');
+
+//
+// Route::get('/post-absensi', function () {
+//     return view('user.input_absensi', [
+//         'title' => 'Sistem Absensi Miniclass',
+//     ]);
+// })->name('post-absensi');
+
+//
+Route::get('/presence/{miniclass:miniclass_name}/pertemuan-{meetings:pertemuan}/{meetings:topik}',
+[ConfigMeetingController::class, 'inputPresence'] )->name('input.presence')->middleware('auth');
+
 
 // home route after login
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
-Route::resource('/user', UserController::class)->middleware('user');
+Route::resource('/user', UserController::class);
 Route::get('/user/input_absensi', fn () => view('user.input_absensi'));
 
 Route::get('/kadiv/edit-profil', fn () => view('kadiv.edit_profil'));
 Route::get('/kadiv/attendance-list', fn () => view('kadiv.attendance_list'));
 
 Route::get('/admin/add-user', fn () => view('admin.add_user', ['generations' => DB::table('generations')->get(), 'miniclasses' => DB::table('miniclasses')->get()]));
-Route::post('/admin/add-user', [UserController::class, 'store'])->name('adminAddUser');
+// Route::post('/admin/add-user', [UserController::class, 'store'])->name('adminAddUser');
 Route::get('/admin/dashboard', fn () => view('admin.dashboard', [
     'title' => 'Dashboard',
 ]));

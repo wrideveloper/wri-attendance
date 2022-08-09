@@ -5,7 +5,7 @@
             <div class="row align-items-center" id="atas">
                 <div class="col-1" >
                     <div class="container" id="bgback" style="padding-right: 18px;">
-                    <a href="{{ (Route::currentRouteName() == 'meetings.show') ? route('meetings.index', $presence->meetings->token) : route('presence.index') }}" id="back"><i class="fa-solid fa-angle-left"></i></a>
+                    <a href="{{ (Route::currentRouteName() == 'presence.show') ? route('presence.index') : route('meetings.index') }}" id="back"><i class="fa-solid fa-angle-left"></i></a>
                     </div>
                 </div>
                 <div class="col-4 col-sm-4 col-md-4 col-lg-3 col-xl-3" style="width: auto;">
@@ -75,7 +75,7 @@
                                 <p>{{ $presence->meetings->topik }}</p>
                             </div>
                             <div class="row justify-content-end">
-                                <a href="{{ (Route::currentRouteName() == 'meetings.show') ? route('meetings.index', $presence->meetings->token) : route('presence.index') }}" type="button" class="btn btn-light" id="backbutton">Back</a>
+                                <a href="{{ (Route::currentRouteName() == 'presence.show') ? route('presence.index') : route('meetings.index') }}" type="button" class="btn btn-light" id="backbutton">Back</a>
                                 @if (Route::currentRouteName() == 'detail-presence')
                                     <button type="submit" class="btn btn-warning" id="updatebutton">Update</button>
                                 @endif

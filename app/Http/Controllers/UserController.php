@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Generation;
-use App\Models\Miniclass;
 use App\Models\User;
+use App\Models\Miniclass;
+use App\Models\Generation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('presence.index');
+
     }
 
     /**
@@ -27,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('presence.create');
+
     }
 
     /**
@@ -39,9 +39,9 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = $request->validate([
-            'miniclass_id' => 'required|exists:miniclasses,id',
-            'roles_id' => 'required|exists:roles,id',
-            'generations_id' => 'required|exists:generations,id',
+            'miniclass_id' => 'required|exists:miniclasses,id|integer',
+            'roles_id' => 'required|exists:roles,id|integer',
+            'generations_id' => 'required|exists:generations,id|integer',
             'name' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
@@ -49,9 +49,9 @@ class UserController extends Controller
             'password' => 'required'
         ]);
         $user['password'] = Hash::make($user['password']);
-        $user['miniclass_id'] = (int)$user['miniclass_id'];
-        $user['roles_id'] = (int)$user['roles_id'];
-        $user['generations_id'] = (int)$user['generations_id'];
+        // $user['miniclass_id'] = (int)$user['miniclass_id'];
+        // $user['roles_id'] = (int)$user['roles_id'];
+        // $user['generations_id'] = (int)$user['generations_id'];
         User::create($user);
         return redirect("/admin/add-user")->with('success', 'Presensi data Tersimpan');
     }
@@ -118,7 +118,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        user::destroy($user->nim);
+        User::destroy($user->nim);
         return redirect()->route('user.index')->with('User deleted.');
     }
 }
