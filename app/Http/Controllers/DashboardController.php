@@ -8,6 +8,7 @@ use App\Models\Meetings;
 use App\Models\Presence;
 use App\Models\Miniclass;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class DashboardController extends Controller {
 
@@ -76,7 +77,7 @@ class DashboardController extends Controller {
                             $query->where('nim', '!=', Auth::user()->nim);
                         })->where('end_time', '>=', $currentTime)
                         ->orderBy('tanggal', 'asc')->take(3)->get(); // limit 3
-
+                        
             $jumlah_hadir = $user->hadir->count();
             $jumlah_izin = $user->izin->count();
             $jumlah_sakit = $user->sakit->count();

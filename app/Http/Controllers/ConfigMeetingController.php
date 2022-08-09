@@ -32,8 +32,7 @@ class ConfigMeetingController extends Controller {
     }
 
     public function inputPresence(Miniclass $miniclass, Meetings $meetings){
-        $meeting = Meetings::where('pertemuan', $meetings->pertemuan)
-                ->where('topik', $meetings->topik)
+        $meeting = Meetings::where('pertemuan', $meetings->token)
                 ->whereHas('miniclass', function($query) use ($miniclass) {
                     $query->where('miniclass_name', $miniclass->miniclass_name);
                 })->first();

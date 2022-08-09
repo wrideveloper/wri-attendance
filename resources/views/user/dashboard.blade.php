@@ -83,11 +83,9 @@
                     </div>
                 @endif
             </div>
-
-            </div>
         </div>
         <div class="row mt-4 md-mt-5">
-            <h4 class="fw-normal mb-4">Absensi</h4>
+            <h4 class="fw-normal mb-4">Riwayat Presensi</h4>
             <div class="table-responsive shadow-cs rounded-cs bg-white px-5 py-3">
                 <table class="table mt-3 table-borderless">
                     <tr class="border-bottom border-dark mb-3">

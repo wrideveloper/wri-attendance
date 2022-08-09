@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ForPasController;
 use App\Http\Controllers\MeetingsController;
 use App\Http\Controllers\PresenceController;
 use App\Http\Controllers\RegisterController;
@@ -14,7 +15,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MiniclassController;
 use App\Http\Controllers\GenerationController;
 use App\Http\Controllers\ConfigMeetingController;
-use App\Http\Controllers\ForPasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +50,6 @@ Route::get('/forgot-password', function () {
 Route::post('/send-forpas-mail', [ForPasController::class, 'forpas']);
 Route::post('/ganti-pass', [ForPasController::class, 'reset']);
 Route::get('/reset-password/{token}', [ForPasController::class, 'halaman_reset'])->name('reset-password');
-
 
 //
 // Route::get('/post-absensi', function () {
