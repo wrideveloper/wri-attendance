@@ -14,7 +14,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('presence.index');
+        return response()->json([
+            'response' => User::all()
+        ]);
     }
 
     /**
@@ -25,7 +27,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = $request->validate([
+        $request->validate([
             'miniclass_id' => 'required|exists:miniclasses,id',
             'roles_id' => 'required|exists:roles,id',
             'generations_id' => 'required|exists:generations,id',
@@ -35,12 +37,10 @@ class UserController extends Controller
             'nim' => 'required',
             'password' => 'required'
         ]);
-        $user['password'] = Hash::make($user['password']);
-        $user['miniclass_id'] = (int)$user['miniclass_id'];
-        $user['roles_id'] = (int)$user['roles_id'];
-        $user['generations_id'] = (int)$user['generations_id'];
-        User::create($user);
-        return redirect("/admin/add-user")->with('success', 'Presensi data Tersimpan');    }
+        $user = User::create($request->all());
+        return response()->json([
+            'response' => $user
+        ]);
 
     /**
      * Display the specified resource.
@@ -48,11 +48,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        return view('user.show', [
-            'user' => $user
-        ]);    }
+    public function show(User $id) {
+        return response()->json([
+            'response' => $user,
+        ]);
+        }
 
     /**
      * Update the specified resource in storage.
@@ -71,9 +71,12 @@ class UserController extends Controller
             'password' => 'sometimes'
         ]);
         $validated['password'] = Hash::make($validated['password']);
-        User::where('nim', $user->nim)->update($validated);
-        return redirect('/dashboard')->with('success', 'Profil berhasil diubah');
-        }
+        $rule = $request->validated();
+        $updatedUser = User::where('nim', $user->nim)->update($rule);
+        return response()->json([
+            'response' => $updatedUser
+        ]);
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -83,7 +86,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        user::destroy($user->nim);
-        return redirect()->route('user.index')->with('User deleted.');
-        }
+        User::where('nim', $user->nim)->delete();
+        return response()->json([
+            'response' => 'User deleted.'
+        ]);
+
+    }
 }
