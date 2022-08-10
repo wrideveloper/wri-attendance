@@ -32,6 +32,9 @@
                     <tr class="border-custom-bottom">
                         <th>Pertemuan</th>
                         <th>Tanggal</th>
+                        @if(Auth::user()->roles_id == 1)
+                            <th>Miniclass</th>
+                        @endif
                         <th>Topik</th>
                         <th class="text-center">Aksi</th>
                     </tr>
@@ -41,6 +44,9 @@
                                 <td class="align-middle">{{ $meetings->pertemuan }}</td>
                                 <td class="align-middle">{{ \Carbon\Carbon::parse($meetings->tanggal)->format('d M Y') }}
                                 </td>
+                                @if(Auth::user()->roles_id == 1)
+                                    <td class="align-middle">{{ $meetings->miniclass->miniclass_name }}</td>
+                                @endif
                                 <td class="align-middle">{{ $meetings->topik }}</td>
 
                                 <td class="d-flex gap-3 justify-content-center">

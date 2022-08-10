@@ -59,7 +59,7 @@ Route::get('/reset-password/{token}', [ForPasController::class, 'halaman_reset']
 // })->name('post-absensi');
 
 //
-Route::get('/presence/{miniclass:miniclass_name}/pertemuan-{meetings:pertemuan}/{meetings:topik}',
+Route::get('/presence/{miniclass:miniclass_name}/pertemuan-{meetings:pertemuan}',
 [ConfigMeetingController::class, 'inputPresence'] )->name('input.presence')->middleware('auth');
 
 
@@ -99,6 +99,7 @@ Route::group(['prefix' => 'kadiv', 'middleware' => ['auth']], function () {
 
 // Sisi User
 Route::resource('/presence', PresenceController::class)->middleware('auth');
+Route::get('/presence/{presence:nim}/{topik}', [ConfigMeetingController::class, 'showDetails'])->middleware('auth')->name('show-details');
 // Configurasi Meetings dan Presence dari sisi Admin
 Route::controller(ConfigMeetingController::class)->group(function () {
     Route::get('/presence/detail/{presence}', [ConfigMeetingController::class, 'detailPresence'])->name('presence-members');

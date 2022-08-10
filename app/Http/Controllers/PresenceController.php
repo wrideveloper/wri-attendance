@@ -62,9 +62,10 @@ class PresenceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show(Presence $presence){
-        $presences = $presence->where('token', $presence->token)
-                    ->where('nim', Auth::user()->nim)
-                    ->first();
+        $presences = Presence::where('nim', Auth::user()->nim)
+                    ->whereHas('meetings', function($query) use ($presence){
+                        $query->where('topik', $presence->meetings->topik);
+                    })->first();
         return view('admin.edit_absensi', [
             'presence' => $presences,
             'title' => 'Presensi',
