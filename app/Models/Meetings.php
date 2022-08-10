@@ -28,7 +28,8 @@ class Meetings extends Model
         'pertemuan',
         'token'
     ];
-    //protected $with = 'presence';
+
+    protected $with = 'miniclass';
 
     public function getRouteKeyName() {
         return 'token';

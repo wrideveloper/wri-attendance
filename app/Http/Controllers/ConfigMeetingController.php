@@ -8,6 +8,7 @@ use App\Models\Presence;
 use App\Models\Miniclass;
 use App\Models\Generation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ConfigMeetingController extends Controller {
 
@@ -120,5 +121,17 @@ class ConfigMeetingController extends Controller {
     public function deletePresence(Presence $presence) {
         Presence::where('id', $presence->id)->delete();
         return redirect()->route('dashboard.check-presence')->with('success', 'Presence deleted successfully.');
+    }
+
+    // Lihat detail presensi dari sisi user
+    public function showDetails(Presence $presence, $topik){
+        $presences = Presence::where('nim', $presence->nim)
+                    ->whereHas('meetings', function($query) use ($topik){
+                        $query->where('topik', $topik);
+                    })->first();
+        return view('admin.edit_absensi', [
+            'presence' => $presences,
+            'title' => 'Presensi',
+        ]);
     }
 }

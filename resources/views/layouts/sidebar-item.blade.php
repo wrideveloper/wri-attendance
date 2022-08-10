@@ -2,7 +2,7 @@
     <i class="fa-solid fa-border-all" style="padding-right: 12px;"></i>
     <span>Dashboard</span></a>
 @if (Auth::user()->roles_id == 1)
-    <a class="list-group-item d-inline-block text-truncate {{ $title === 'Edit User' ? 'active' : '' }}" href="">
+    <a class="list-group-item d-inline-block text-truncate {{ $title === 'Edit User' ? 'active' : '' }}" href="{{ route('user.index') }}">
         <i class="fa-solid fa-user" style="padding-right: 12px;"></i>
         <span>Edit User</span>
     </a>

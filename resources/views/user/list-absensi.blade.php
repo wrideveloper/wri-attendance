@@ -51,7 +51,7 @@
                                 @else
                                     <td class="text-center text-truncate">{{ substr_replace($presences->ket, "...", 25) }}</td>
                                 @endif
-                                <td><a class="btn w-100 btn-warning text-light fw-bold" href="{{ route('presence.show', $presences->nim) }}">Pilih</a></td>
+                                <td><a class="btn w-100 btn-warning text-light fw-bold" href="{{ route('show-details', [$presences->nim, $presences->meetings->topik]) }}">Pilih</a></td>
                             </tr>
                         @endforeach
                     @else

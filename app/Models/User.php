@@ -43,6 +43,16 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
+
+    protected $with = ['generations', 'miniclass', 'roles'];
+
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, function ($query, $search){
+            return $query->Where('nim', 'like', "%{$search}%")
+                ->orWhere('name', 'like', "%{$search}%");
+        });
+    }
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];

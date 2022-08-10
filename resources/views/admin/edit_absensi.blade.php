@@ -5,7 +5,11 @@
             <div class="row align-items-center" id="atas">
                 <div class="col-1" >
                     <div class="container" id="bgback" style="padding-right: 18px;">
-                    <a href="{{ (Route::currentRouteName() == 'presence.show') ? route('presence.index') : route('meetings.index') }}" id="back"><i class="fa-solid fa-angle-left"></i></a>
+                        @if (Auth::user()->roles_id == 1 || Auth::user()->roles_id == 2)
+                            <a href="{{ route('list-presence', $presence->meetings->token) }}" id="back"><i class="fa-solid fa-angle-left"></i></a>
+                        @else
+                            <a href="{{ (Route::currentRouteName() == 'show-details') ? route('presence.index') : route('meetings.index') }}" id="back"><i class="fa-solid fa-angle-left"></i></a>
+                        @endif
                     </div>
                 </div>
                 <div class="col-4 col-sm-4 col-md-4 col-lg-3 col-xl-3" style="width: auto;">
@@ -60,12 +64,20 @@
                                 <p>Topik</p>
                             </div>
                             <div class="col-6 col-sm-6 col-md-7" id="isiabsen">
+                                @php
+                                    $statusColor = "";
+                                    if($presence->status === "Hadir") $statusColor = "text-teal";
+                                    elseif($presence->status === "Izin") $statusColor = "text-primary";
+                                    elseif($presence->status === "Sakit") $statusColor = "text-warning";
+                                    elseif($presence->status === "Alpha") $statusColor = "text-danger";
+                                @endphp
                                 <p id="WaktuAbsen">{{ $presence->created_at->format('H:i:s') }} WIB</p>
-                                <select {{ (Route::currentRouteName() == 'detail-presence') ? '' : 'disabled' }} class="form-select" aria-label="Default select example" id="status">
-                                    <option value="Hadir" id="hadir">Hadir</option>
-                                    <option value="Izin" id="izin">Izin</option>
-                                    <option value="Sakit" id="sakit">Sakit</option>
-                                    <option value="Alpha" id="alpha">Alpha</option>
+                                <select name="status" {{ (Route::currentRouteName() == 'detail-presence') ? '' : 'disabled' }} class="form-select" aria-label="Default select example" id="status">
+                                    <option class="{{ $statusColor }}" value="{{ $presence->status }}" id="{{$presence->status }}" selected>{{ $presence->status }}</option>
+                                    <option value="Hadir" id="Hadir">Hadir</option>
+                                    <option value="Izin" id="Izin">Izin</option>
+                                    <option value="Sakit" id="Sakit">Sakit</option>
+                                    <option value="Alpha" id="Alpha">Alpha</option>
                                 </select>
                                 @if ($presence->status != 'Hadir')
                                     <p id="Keterangan">{{ $presence->ket }}</p>
@@ -75,7 +87,11 @@
                                 <p>{{ $presence->meetings->topik }}</p>
                             </div>
                             <div class="row justify-content-end">
-                                <a href="{{ (Route::currentRouteName() == 'presence.show') ? route('presence.index') : route('meetings.index') }}" type="button" class="btn btn-light" id="backbutton">Back</a>
+                                @if (Auth::user()->roles_id == 1 || Auth::user()->roles_id == 2)
+                                    <a href="{{ route('list-presence', $presence->meetings->token) }}" type="button" class="btn btn-light" id="backbutton">Back</a>
+                                @else
+                                    <a href="{{ (Route::currentRouteName() == 'presence.show') ? route('presence.index') : route('meetings.index') }}" type="button" class="btn btn-light" id="backbutton">Back</a>
+                                @endif
                                 @if (Route::currentRouteName() == 'detail-presence')
                                     <button type="submit" class="btn btn-warning" id="updatebutton">Update</button>
                                 @endif

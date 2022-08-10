@@ -14,15 +14,22 @@ class MeetingsController extends Controller {
      *
      *
      */
-    public function index()
-    {
-        $datas = Meetings::where('miniclass_id', Auth::user()->miniclass_id)
-        ->filter(request(['search']))
-        ->orderBy('tanggal', 'asc')
-        ->paginate(5)->withQueryString();
+    public function index() {
+        if(Auth::user()->roles_id == 1) {
+            $datas = Meetings::filter(request(['search']))
+                ->orderBy('tanggal', 'asc')
+                ->paginate(5)->withQueryString();
         $title = 'List Pertemuan';
-        return view('kadiv.list_pertemuan', compact('datas', 'title'));
+            return view('kadiv.list_pertemuan', compact('datas', 'title'));
+        } else if(Auth::user()->roles_id == 2) {
 
+            $datas = Meetings::where('miniclass_id', Auth::user()->miniclass_id)
+                ->filter(request(['search']))
+                ->orderBy('tanggal', 'asc')
+                ->paginate(5)->withQueryString();
+                $title = 'List Pertemuan';
+            return view('kadiv.list_pertemuan', compact('datas', 'title'));
+        }
     }
 
     public function create() {
