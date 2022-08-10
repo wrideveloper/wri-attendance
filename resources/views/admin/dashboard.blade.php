@@ -1,6 +1,12 @@
 @extends('layouts.master')
 @section('content')
-    <div class="container pe-0">
+    @if(session()->has('success'))
+        <div class="container-fluid alert alert-success alert-dismissible col-lg-11 fade show mb-2 pe-0 d-flex justify-content-start" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    <div class="container-fluid pe-0">
         <div class="container-fluid pt-3 d-flex justify-content-start pe-0">
             <div class="col-12 row clearfix gy-3 pe-0">
                 <div class="col-lg-4 col-md-6 col-sm-12 ps-0">
@@ -57,8 +63,6 @@
             </div>
         </div>
     </div>
-    </div>
-
 @section('overrideScript')
     <script>
         controlBodyBackgroundColor()

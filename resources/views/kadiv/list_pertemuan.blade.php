@@ -54,12 +54,8 @@
                                         href="{{ route('meetings.edit', $meetings->token) }}">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
-                                    <a class="btn btn-primary text-light fw-bold rounded w-50"
-                                        href="{{ route('meetings.show', $meetings->token) }}">Detail</a>
-                                    <a class="btn btn-teal bg-teal text-white"
-                                        href="{{ route('list-presence', $meetings->token) }}">
-                                        Rekapitulasi
-                                    </a>
+                                    <a class="btn btn-primary text-light fw-bold rounded w-100"
+                                        href="{{ route('list-presence', $meetings->token) }}">Detail</a>
                                 </td>
                             </tr>
                         @endforeach

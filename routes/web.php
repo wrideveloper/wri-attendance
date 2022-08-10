@@ -66,13 +66,13 @@ Route::get('/presence/{miniclass:miniclass_name}/pertemuan-{meetings:pertemuan}'
 // home route after login
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
-Route::resource('/user', UserController::class);
+Route::resource('/user', UserController::class)->middleware('auth');
 Route::get('/user/input_absensi', fn () => view('user.input_absensi'));
 
 Route::get('/kadiv/edit-profil', fn () => view('kadiv.edit_profil'));
 Route::get('/kadiv/attendance-list', fn () => view('kadiv.attendance_list'));
 
-Route::get('/admin/add-user', fn () => view('admin.add_user', ['generations' => DB::table('generations')->get(), 'miniclasses' => DB::table('miniclasses')->get()]));
+// Route::get('/admin/add-user', fn () => view('admin.add_user', []));
 // Route::post('/admin/add-user', [UserController::class, 'store'])->name('adminAddUser');
 Route::get('/admin/dashboard', fn () => view('admin.dashboard', [
     'title' => 'Dashboard',
