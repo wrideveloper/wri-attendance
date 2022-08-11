@@ -71,7 +71,7 @@ class UserController extends Controller
             'password' => 'sometimes'
         ]);
         $validated['password'] = Hash::make($validated['password']);
-        $rule = $request->validated();
+        // $rule = $request->validated();
         $updatedUser = User::where('nim', $user->nim)->update($rule);
         return response()->json([
             'response' => $updatedUser
