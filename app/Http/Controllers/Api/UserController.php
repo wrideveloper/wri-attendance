@@ -76,8 +76,7 @@ class UserController extends Controller
         $updatedUser = User::where('nim', $user->nim)->update($validated);
         return response()->json([
             'response' => $updatedUser
-        ]);
-    }
+        ]);}
 
     /**
      * Remove the specified resource from storage.
