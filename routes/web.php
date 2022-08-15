@@ -59,7 +59,7 @@ Route::get('/reset-password/{token}', [ForPasController::class, 'halaman_reset']
 // })->name('post-absensi');
 
 //
-Route::get('/presence/{miniclass:miniclass_name}/pertemuan-{meetings:pertemuan}',
+Route::get('/presence/{miniclass_name}/pertemuan-{pertemuan}/{topik}',
 [ConfigMeetingController::class, 'inputPresence'] )->name('input.presence')->middleware('auth');
 
 

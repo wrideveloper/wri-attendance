@@ -111,7 +111,7 @@
                                 <td>{{date('H:i:s', strtotime($item->meetings->start_time))}} WIB</td>
                                 <td class="col-1 text-truncate">{{$item->meetings->topik}}</td>
                                 <td class="{{ $statusColor }}">{{$item->status}}</td>
-                                <td><a class="btn w-100 btn-warning text-light" href="{{ route('presence.show', $item->nim) }}">Pilih</a></td>
+                                <td><a class="btn w-100 btn-warning text-light" href="{{ route('show-details', [$item->nim, $item->meetings->topik]) }}">Pilih</a></td>
                             </tr>
                         @endforeach
                     @else
