@@ -53,7 +53,7 @@
                         @csrf
                         @method('PUT')
                         <div class="row justify-content-start">
-                            <div class="col-6 col-sm-6 col-md-5">
+                            <div class="col-5 col-sm-5 col-md-5">
                                 <p>Waktu Absen</p>
                                 <p>Status</p>
                                 @if ($presence->status != 'Hadir')
@@ -61,9 +61,8 @@
                                 @else
                                     <p>Feedback</p>
                                 @endif
-                                <p>Topik</p>
                             </div>
-                            <div class="col-6 col-sm-6 col-md-7" id="isiabsen">
+                            <div class="col-7 col-sm-7 col-md-7" id="isiabsen">
                                 @php
                                     $statusColor = "";
                                     if($presence->status === "Hadir") $statusColor = "text-teal";
@@ -84,7 +83,12 @@
                                 @else
                                     <p id="Feedback">{{ $presence->feedback }}</p>
                                 @endif
-                                <p>{{ $presence->meetings->topik }}</p>
+                            </div>
+                            <div class="col-5 col-sm-5 col-md-5">
+                                <p>Topik</p>
+                            </div>
+                            <div class="col-7 col-sm-7 col-md-7" id="isitopik">
+                                <p style="margin-bottom: 85px">{{ $presence->meetings->topik }}</p>
                             </div>
                             <div class="row justify-content-end">
                                 @if (Auth::user()->roles_id == 1 || Auth::user()->roles_id == 2)
