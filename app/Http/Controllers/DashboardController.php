@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Meetings;
@@ -12,10 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller {
 
     public function index() {
-        // next menggunakan Auth::user()
-        $user = User::find(auth()->user()->id);
-        $role = $user->roles->roles_name;
-        if ($user->roles->roles_name === 'Admin') {
+        if (auth()->user()->roles->roles_name === 'Admin') {
             $title = 'Dashboard';
             // ADMIN
             $users = User::count();
@@ -28,7 +26,9 @@ class DashboardController extends Controller {
                 'miniclass',
                 'title'
             ));
-        } else if ($user->roles->roles_name === 'Kadiv') {
+        } else if (auth()->user()->roles->roles_name === 'Kadiv') {
+            $user = User::find(auth()->user()->id);
+            $role = $user->roles->roles_name;
             $title = 'Dashboard';
             // KADIV
             $miniclass = $user->miniclass_id;
@@ -61,7 +61,9 @@ class DashboardController extends Controller {
                 'prosentase_alpha',
                 'title'
             ));
-        } else if($user->roles->roles_name === 'Members') {
+        } else if(auth()->user()->roles->roles_name === 'Members') {
+            $user = User::find(auth()->user()->id);
+            $role = $user->roles->roles_name;
             $title = 'Dashboard';
             $currentTime = Carbon::now()->format('H:i:s');
             $currentDate = Carbon::now()->format('Y-m-d');
@@ -72,9 +74,14 @@ class DashboardController extends Controller {
             // Menampilkan timeline, ada pengkondisian apabila sudah melakukan presensi maka timeline tidak muncul
             $timeline = Meetings::where('miniclass_id', Auth::user()->miniclass_id)
                         ->whereDate('tanggal', '=', $currentDate)
-                        ->whereHas('presence', function($query) {
-                            $query->where('nim', '!=', Auth::user()->nim);
-                        })->where('end_time', '>=', $currentTime)
+                        ->where('end_time', '>=', $currentTime)
+                        // Menampilkan timeline yang nim tersebut belum pernah melakukan presensi di meetings tersebut
+                        ->whereNotExists(function ($query) {
+                            $query->select(DB::raw(1))
+                                  ->from('presences')
+                                  ->whereRaw('presences.meetings_id = meetings.id')
+                                  ->where('presences.nim', Auth::user()->nim);
+                        })
                         ->orderBy('tanggal', 'asc')->take(3)->get(); // limit 3
 
             $jumlah_hadir = $user->hadir->count();
