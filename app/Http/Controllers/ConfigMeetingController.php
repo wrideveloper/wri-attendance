@@ -8,6 +8,7 @@ use App\Models\Presence;
 use App\Models\Miniclass;
 use App\Models\Generation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ConfigMeetingController extends Controller {
 
@@ -29,6 +30,19 @@ class ConfigMeetingController extends Controller {
 
     public function createMeetings() {
         return view('dashboard.create-meetings');
+    }
+
+    public function inputPresence($miniclass_name, $pertemuan, $topik){
+        $meeting = Meetings::where('pertemuan', $pertemuan)
+                ->where('topik', $topik)
+                ->whereHas('miniclass', function($query) use ($miniclass_name) {
+                    $query->where('miniclass_name', $miniclass_name);
+                })->first();
+        //dd($meeting);
+        return view('user.input_absensi',[
+            'meetings'=> $meeting,
+            'title' => 'Presensi'
+        ]);
     }
 
     // Untuk melakukan updatepresence
@@ -90,7 +104,8 @@ class ConfigMeetingController extends Controller {
     public function show(Meetings $meeting) {
         $meetings = Meetings::where('token', $meeting->token)->firstOrFail();
         return view('kadiv.config-presensi', [
-            'meetings' => $meetings
+            'meetings' => $meetings,
+            'title' => 'List Pertemuan'
         ]);
     }
 
@@ -108,5 +123,17 @@ class ConfigMeetingController extends Controller {
     public function deletePresence(Presence $presence) {
         Presence::where('id', $presence->id)->delete();
         return redirect()->route('dashboard.check-presence')->with('success', 'Presence deleted successfully.');
+    }
+
+    // Lihat detail presensi dari sisi user
+    public function showDetails(Presence $presence, $topik){
+        $presences = Presence::where('nim', $presence->nim)
+                    ->whereHas('meetings', function($query) use ($topik){
+                        $query->where('topik', $topik);
+                    })->first();
+        return view('admin.edit_absensi', [
+            'presence' => $presences,
+            'title' => 'Presensi',
+        ]);
     }
 }

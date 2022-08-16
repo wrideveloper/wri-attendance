@@ -28,24 +28,31 @@ class Meetings extends Model
         'pertemuan',
         'token'
     ];
-    protected $with = 'presence';
+
+    protected $with = 'miniclass';
 
     public function getRouteKeyName() {
         return 'token';
     }
 
-    public function presence()
-    {
-        return $this->belongsTo(Presence::class);
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, function ($query, $search){
+            return $query->Where('topik', 'like', "%{$search}%")
+                ->orWhere('pertemuan', 'like', "%{$search}%")
+                ->orWhere('tanggal', 'like', "%{$search}%");
+        });
     }
 
-    public function presences()
-    {
+    // public function presence()
+    // {
+    //     return $this->belongsTo(Presence::class);
+    // }
+
+    public function presence() {
         return $this->hasMany(Presence::class);
     }
 
-    public function miniclass()
-    {
+    public function miniclass() {
         return $this->belongsTo(Miniclass::class);
     }
 }

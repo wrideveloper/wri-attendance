@@ -7,13 +7,17 @@
                 <h5 class="fw-normal ">Absensi</h5>
             </div>
             <div class="row col-auto">
-                <div class="col-auto">
-                    <input type="search" id="search" class="form-control" name="search">
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary px-4">Cari</button>
-                </div>
-            </div>
+                <form class="d-flex" action="{{ route('presence.index') }}">
+                    <span class="row col-auto">
+                        <div class="col-auto">
+                            <input value="{{ request('search') }}" type="search" id="search" class="form-control" name="search">
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary">Cari</button>
+                        </div>
+                    </span>
+                </form>
+            </d>
         </div>
         <div class="my-4 bg-white rounded-3 px-4 py-4">
             <div class="table-responsive">
@@ -25,28 +29,40 @@
                         <th>Topik</th>
                         <th class="text-center">Status</th>
                         <th class="text-center">Keterangan / Feedback</th>
+                        <th class="text-center">Action</th>
                     </tr>
                     @if ($presence->count() > 0)
                         @foreach ($presence as $presences)
+                            @php
+                                $statusColor = "";
+                                if($presences->status === "Hadir") $statusColor = "text-success";
+                                elseif($presences->status === "Izin") $statusColor = "text-primary";
+                                elseif($presences->status === "Sakit") $statusColor = "text-info";
+                                elseif($presences->status === "Alpha") $statusColor = "text-danger";
+                            @endphp
                             <tr class="align-middle border-custom-none">
-                                <td>{{ $presences->meeting->pertemuan }}</td>
+                                <td>{{ $presences->meetings->pertemuan }}</td>
                                 <td class="text-center">{{ $presences->created_at->format('d M Y') }}</td>
-                                <td class="text-center">{{ $presences->created_at->format('H:i:s') }}</td>
-                                <td class="text-truncate">{{ $presences->meeting->topik }}</td>
-                                <td class="text-truncate">{{ $presences->status }}</td>
+                                <td class="text-center">{{ $presences->created_at->format('H:i:s') }} WIB</td>
+                                <td class="text-truncate">{{ $presences->meetings->topik }}</td>
+                                <td class="{{ $statusColor }} text-truncate">{{ $presences->status }}</td>
                                 @if ($presences->status != 'Hadir')
-                                    <td class="text-center">{{ $presences->feedback }}</td>
+                                    <td class="text-center text-truncate">{{ substr_replace($presences->feedback, "...", 25) }}</td>
                                 @else
-                                    <td class="text-center">{{ $presences->ket }}</td>
+                                    <td class="text-center text-truncate">{{ substr_replace($presences->ket, "...", 25) }}</td>
                                 @endif
-                                <td><a class="btn w-100 btn-warning text-light fw-bold" href="{{ route('presence.edit', $presences->nim) }}">Pilih</a></td>
+                                <td><a class="btn w-100 btn-warning text-light fw-bold" href="{{ route('show-details', [$presences->nim, $presences->meetings->topik]) }}">Pilih</a></td>
                             </tr>
                         @endforeach
                     @else
-                    <tr class="align-middle border-custom-none">
-                        <td colspan="6" class="text-center text-danger">Tidak ada data</td>
+                        <tr class="align-middle border-custom-none">
+                            <td colspan="6" class="text-center text-danger">Tidak ada data</td>
+                        </tr>
                     @endif
                 </table>
+            </div>
+            <div class="d-flex justify-content-end mt-2">
+                {{ $presence->links() }}
             </div>
         </div>
     </div>

@@ -31,10 +31,10 @@ class PresenceRequest extends FormRequest
                     'nim' => 'required|exists:users,nim',
                     'meetings_id' => 'required|exists:meetings,id',
                     'presence_date' => 'required|date',
-                    'status' => 'required|in:hadir,izin,sakit,alfa',
+                    'status' => 'required|in:Hadir,Izin,Sakit,Alpha',
                     'ket' => 'nullable|string|max:255',
                     'feedback' => 'nullable|string|max:1000',
-                    'token' => 'sometimes|string|max:10|exists:meetings,token'
+                    'token' => 'nullable|string|max:10|exists:meetings,token'
                 ];
             } break;
             case 'PUT' : {
@@ -42,25 +42,12 @@ class PresenceRequest extends FormRequest
                     'nim' => 'required|exists:users,nim',
                     'meetings_id' => 'required|exists:meetings,id',
                     'presence_date' => 'sometimes|date',
-                    'status' => 'sometimes|in:hadir,izin,sakit,alfa',
+                    'status' => 'sometimes|in:Hadir,Izin,Sakit,Alpha',
                     'ket' => 'sometimes|string|max:255',
                     'feedback' => 'sometimes|string|max:1000',
                     'token' => 'sometimes|string|max:10|exists:meetings,token'
                 ];
             } break;
         }
-    }
-
-    protected function failedValidation(ValidationValidator $validator) {
-        throw new HttpResponseException(
-            response()->json(
-                [
-                    'status' => 'error',
-                    'message' => $validator->errors()->first(),
-                    'data' => $validator->errors()
-                ],
-                422
-            )
-        );
     }
 }

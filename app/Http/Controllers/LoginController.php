@@ -2,41 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
-{
+class LoginController extends Controller {
+
     public function index() {
         return view('auth.login');
     }
 
-    public function authenticate(Request $request)
-    {
-        $credential = $request->validate([
-            'nim' => 'required|exists:users,nim|string',
-            'password' => 'required'
-        ]);
+    public function authenticate(LoginRequest $request) {
+        $credential = $request->validated();
 
         if (Auth::attempt($credential)) {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/dashboard')->with(
+                'success', 'Login berhasil, Selamat datang ' . Auth::user()->name . '!'
+            );
         }
-
-        return response()->json([
-            'success' => false,
-            'message' => 'Invalid Email or Password',
-        ], 401);
+        return back()->with('LoginErrors', 'Login gagal! tolong cek kembali NIM atau Password Anda');
     }
 
-    public function logout()
-    {
+    public function logout() {
         Auth::logout();
 
         request()->session()->invalidate();
         request()->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/')->with('LogoutSuccess', 'Logout berhasil, sampai jumpa lagi!');;
     }
 }

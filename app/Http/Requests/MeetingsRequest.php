@@ -36,11 +36,11 @@ class MeetingsRequest extends FormRequest {
             case 'PUT' : {
                 return [
                     'miniclass_id' => 'required|exists:miniclasses,id',
-                    'topik' => 'sometimes|string|max:255',
-                    'tanggal' => 'sometimes|date',
-                    'start_time' => 'sometimes',
-                    'end_time' => 'sometimes',
-                    'token' => 'required|string|max:10|unique:meetings,token'
+                    'topik' => 'required|string|max:255',
+                    'tanggal' => 'required|date',
+                    'start_time' => 'required',
+                    'end_time' => 'required',
+                    'token' => 'required|string|max:10|'
                 ];
             } break;
         }

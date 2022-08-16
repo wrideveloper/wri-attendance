@@ -43,6 +43,16 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
+
+    protected $with = ['generations', 'miniclass', 'roles'];
+
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, function ($query, $search){
+            return $query->Where('nim', 'like', "%{$search}%")
+                ->orWhere('name', 'like', "%{$search}%");
+        });
+    }
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -50,6 +60,16 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsTo(Roles::class);
+    }
+
+    public function miniclass()
+    {
+        return $this->belongsTo(Miniclass::class);
+    }
+
+    public function generations()
+    {
+        return $this->belongsTo(Generation::class);
     }
 
     public function presence()
@@ -77,7 +97,7 @@ class User extends Authenticatable
         return $this->presence()->where('status', 'Alpha')->orderBy('id', 'desc');
     }
 
-    public function getRouteKeyName() 
+    public function getRouteKeyName()
     {
         return 'nim';
     }

@@ -22,7 +22,7 @@ class MiniclassSeeder extends Seeder
         ]);
 
         Miniclass::create([
-            'miniclass_name' => 'UI/UX'
+            'miniclass_name' => 'UI-UX'
         ]);
 
         Miniclass::create([

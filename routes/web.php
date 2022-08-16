@@ -1,11 +1,13 @@
 <?php
 
+use Carbon\Carbon;
 use App\Models\Meetings;
 use App\Models\Presence;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ForPasController;
 use App\Http\Controllers\MeetingsController;
 use App\Http\Controllers\PresenceController;
 use App\Http\Controllers\RegisterController;
@@ -33,40 +35,45 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/login-page', function () {
-    return view('auth.login');
-});
+// Route::get('/login-page', function () {
+//     return view('auth.login');
+// });
 
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
-
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+// Forgot Password
 Route::get('/forgot-password', function () {
     return view('auth.forgotpassword');
 })->name('forgot-password');
+Route::post('/send-forpas-mail', [ForPasController::class, 'forpas']);
+Route::post('/ganti-pass', [ForPasController::class, 'reset']);
+Route::get('/reset-password/{token}', [ForPasController::class, 'halaman_reset'])->name('reset-password');
 
-Route::get('/reset-password', function () {
-    return view('auth.gantipass');
-})->name('reset-password');
+//
+// Route::get('/post-absensi', function () {
+//     return view('user.input_absensi', [
+//         'title' => 'Sistem Absensi Miniclass',
+//     ]);
+// })->name('post-absensi');
 
-Route::get('/post-absensi', function () {
-    return view('user.input_absensi', [
-        'title' => 'Sistem Absensi Miniclass',
-    ]);
-})->name('post-absensi');
+//
+Route::get('/presence/{miniclass_name}/pertemuan-{pertemuan}/{topik}',
+[ConfigMeetingController::class, 'inputPresence'] )->name('input.presence')->middleware('auth');
+
 
 // home route after login
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
-Route::resource('/user', UserController::class)->middleware('user');
+Route::resource('/user', UserController::class)->middleware('auth');
 Route::get('/user/input_absensi', fn () => view('user.input_absensi'));
 
 Route::get('/kadiv/edit-profil', fn () => view('kadiv.edit_profil'));
 Route::get('/kadiv/attendance-list', fn () => view('kadiv.attendance_list'));
 
-Route::get('/admin/add-user', fn () => view('admin.add_user', ['generations' => DB::table('generations')->get(), 'miniclasses' => DB::table('miniclasses')->get()]));
-Route::post('/admin/add-user', [UserController::class, 'store'])->name('adminAddUser');
+// Route::get('/admin/add-user', fn () => view('admin.add_user', []));
+// Route::post('/admin/add-user', [UserController::class, 'store'])->name('adminAddUser');
 Route::get('/admin/dashboard', fn () => view('admin.dashboard', [
     'title' => 'Dashboard',
 ]));
@@ -74,10 +81,6 @@ Route::get('/admin/edit-absensi', fn () => view('admin.edit_absensi', [
     'title' => 'Edit Absensi',
 ]));
 Route::get('/admin/edit-profil', fn () => view('admin.edit_profil'));
-
-//  Route::get('/edit-meetings', fn () => view('kadiv.config-presensi', [
-//         'title' => 'Config Presensi',
-//     ]));
 
 Route::resource('/miniclass', MiniclassController::class);
 
@@ -90,16 +93,16 @@ Route::group(['prefix' => 'kadiv', 'middleware' => ['auth']], function () {
 
     // Delete Meetings
     Route::delete('/delete-meetings/{meetings}', [ConfigMeetingController::class, 'deleteMeetings'])->name('delete-meetings');
-    Route::get('/list-pertemuan', fn () => view('kadiv.list_pertemuan', [
-        'title' => 'List Pertemuan'
-    ]))->name('list-pertemuan');
+    // Route::get('/list-pertemuan', [Meeti])->name('list-pertemuan');
     // Route::get('/check-presence/{presence}', 'checkPresence')->name('check-presence');
 });
 
 // Sisi User
-Route::resource('/presence', PresenceController::class);
+Route::resource('/presence', PresenceController::class)->middleware('auth');
+Route::get('/presence/{presence:nim}/{topik}', [ConfigMeetingController::class, 'showDetails'])->middleware('auth')->name('show-details');
 // Configurasi Meetings dan Presence dari sisi Admin
 Route::controller(ConfigMeetingController::class)->group(function () {
+    Route::get('/presence/detail/{presence}', [ConfigMeetingController::class, 'detailPresence'])->name('presence-members');
     Route::prefix('/dashboard')->group(function () {
         Route::get('/config-meeting', 'listMeetings')->name('list-meetings');
         // Route::get('/check-presence/{presence}', 'checkPresence')->name('check-presence');

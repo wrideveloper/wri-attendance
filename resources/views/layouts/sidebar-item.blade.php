@@ -2,21 +2,22 @@
     <i class="fa-solid fa-border-all" style="padding-right: 12px;"></i>
     <span>Dashboard</span></a>
 @if (Auth::user()->roles_id == 1)
-    <a class="list-group-item d-inline-block text-truncate {{ $title === 'Edit User' ? 'active' : '' }}" href="">
+    <a class="list-group-item d-inline-block text-truncate {{ $title === 'Edit User' ? 'active' : '' }}" href="{{ route('user.index') }}">
         <i class="fa-solid fa-user" style="padding-right: 12px;"></i>
         <span>Edit User</span>
     </a>
     <a class="list-group-item d-inline-block text-truncate {{ $title === 'List Pertemuan' ? 'active' : '' }}"
-        href="{{ route('list-pertemuan') }}">
+        href="{{ route('meetings.index') }}">
         <i class="fa-solid fa-clipboard-check" style="padding-right: 14px;"></i>
         <span>List Pertemuan</span></a>
 @elseif(Auth::user()->roles_id == 2)
     <a class="list-group-item d-inline-block text-truncate {{ $title === 'List Pertemuan' ? 'active' : '' }}"
-        href="{{ route('list-pertemuan') }}">
+        href="{{ route('meetings.index') }}">
         <i class="fa-solid fa-clipboard-check" style="padding-right: 14px;"></i>
         <span>List Pertemuan</span></a>
 @elseif(Auth::user()->roles_id == 3)
-    <a href="{{ route('presence.show', Auth::user()->nim) }}" class="list-group-item d-inline-block text-truncate {{ $title === 'Presensi' ? 'active' : '' }}">
+    <a href="{{ route('presence.index') }}"
+        class="list-group-item d-inline-block text-truncate {{ $title === 'Presensi' ? 'active' : '' }}">
         <i class="fa-solid fa-clipboard-user" style="padding-right: 14px;"></i>
         <span>Presensi</span>
     </a>
@@ -25,12 +26,7 @@
     href="/user/{{ auth()->user()->nim }}/edit">
     <i class="fa-solid fa-user-pen" style="padding-right: 14px;"></i>
     <span>Edit Profile</span></a>
-<a class="list-group-item d-inline-block text-truncate text-hover-red" href="{{ route('logout') }}"
-    onclick="event.preventDefault();
-document.getElementById('logout-form').submit();"><i
-        class="fa-solid fa-arrow-right-from-bracket" style="padding-right: 10px;"></i>
+<a class="list-group-item d-inline-block text-truncate text-hover-red" href="#" data-bs-toggle="modal"
+    data-bs-target="#logoutConfirm"><i class="fa-solid fa-arrow-right-from-bracket" style="padding-right: 10px;"></i>
     <span>Log
         Out</span></a>
-<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-    @csrf
-</form>

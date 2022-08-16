@@ -30,6 +30,7 @@
                 @include('layouts.sidebar-item')
             </div>
         </div>
+
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg bg-light flex-column">
                 <div class="container-fluid py-3 px-4">
@@ -44,20 +45,16 @@
                             <ul class="dropdown-menu dropdown-menu-end my-2 position-absolute"
                                 aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a class="dropdown-item text-hover-red" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();"><i
+                                    <a href="#" class="dropdown-item text-hover-red" data-bs-toggle="modal"
+                                        data-bs-target="#logoutConfirm"><i
                                             class="fa-solid fa-arrow-right-from-bracket text-red"
                                             style="padding-right: 10px;"></i>Logout</a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        style="display: none;">
-                                        @csrf
-                                    </form>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </div>
+
                 @isset($sectionHeader)
                     <div class="col-md-12 px-4">
                         <h5>{{ $sectionHeader }}</h5>
@@ -69,6 +66,10 @@
             {{-- end page content --}}
         </div>
     </div>
+
+    {{-- component logout confirm --}}
+    @include('components.logout_confirm')
+    {{-- end component logout confirm --}}
 </body>
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>

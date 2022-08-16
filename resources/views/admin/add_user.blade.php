@@ -54,7 +54,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body px-5 pt-3">
-                <form method="POST" accept="{{ route('adminAddUser') }}">
+                <form method="POST" action="{{ route('user.store') }}">
                     @csrf
                     <input type="hidden" name="roles_id" value="3">
                     <div class="form-group mb-3">
