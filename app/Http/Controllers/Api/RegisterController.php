@@ -34,9 +34,9 @@ class RegisterController extends Controller
         $response = User::create($data);
         // $response->header('Content-Type', 'application/json');
         return $response;
-            
-        // return redirect('/login')->with('success', 'Register successfull! Please login'); 
+
+        // return redirect('/login')->with('success', 'Register successfull! Please login');
     }
 
-    
+
 }
