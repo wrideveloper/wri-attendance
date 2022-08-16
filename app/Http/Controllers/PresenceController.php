@@ -43,15 +43,29 @@ class PresenceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(PresenceRequest $request) {
-        $presence = $request->validated();
-        $cekToken = Meetings::where('token', $presence['token'])->first();
-        $checkUSer = Presence::where('nim', Auth::user()->nim)->where('token', $presence['token'])->first();
 
-        if($cekToken && $cekToken->end_time >= now() && !$checkUSer){
+        $presence = $request->validated();
+        $cekMeetings = Meetings::firstWhere('topik', request('topik'));
+
+        $presence_date = Carbon::now()->format('Y-m-d');
+
+        $presence['nim'] = Auth::user()->nim;
+        $presence['presence_date'] = $presence_date;
+        $presence['meetings_id'] = $cekMeetings->id;
+
+        if($presence['status'] === 'Hadir') {
+            $checkUser = Presence::where('nim', Auth::user()->nim)->where('token', $presence['token'])->first();
+            if($presence['token'] == $cekMeetings->token && $cekMeetings->end_time >= now() && !$checkUser && $cekMeetings->tanggal === $presence_date) {
+                Presence::create($presence);
+                return redirect()->route('dashboard')->with('success', 'Presensi berhasil');
+            } else {
+                return redirect()->back()->with('PresenceError', 'Presensi error, silahkan cek kembali form anda');
+            }
+        } else if($cekMeetings->end_time >= now() && $presence['status'] !== 'Hadir' && $cekMeetings->tanggal === $presence_date) {
             Presence::create($presence);
             return redirect()->route('dashboard')->with('success', 'Presensi berhasil');
         } else {
-            return redirect()->back()->with('PresenceError', 'Presensi gagal, cek kembali token atau waktu sudah habis');
+            return redirect()->back()->with('PresenceError', 'Presensi error, silahkan cek kembali form anda');
         }
     }
 

@@ -9,19 +9,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Presence extends Model {
     use HasFactory;
 
-    //protected $table = 'presences';
-    protected $guarded = [];
-    protected $fillable = [
-        'meetings_id',
-        'nim',
-        'presence_date',
-        'status',
-        'ket',
-        'token',
-        'feedback',
-        'created_at',
-        'updated_at'
-    ];
+    protected $table = 'presences';
+    protected $guarded = ['id'];
+    // protected $fillable = [
+    //     'meetings_id',
+    //     'nim',
+    //     'presence_date',
+    //     'status',
+    //     'ket',
+    //     'token',
+    //     'feedback',
+    //     'created_at',
+    //     'updated_at'
+    // ];
 
     protected $with = ['meetings', 'user'];
 

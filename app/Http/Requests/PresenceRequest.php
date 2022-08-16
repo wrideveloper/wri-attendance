@@ -32,7 +32,7 @@ class PresenceRequest extends FormRequest
                     'meetings_id' => 'required|exists:meetings,id',
                     'presence_date' => 'required|date',
                     'status' => 'required|in:Hadir,Izin,Sakit,Alpha',
-                    'ket' => 'nullable|string|max:255',
+                    'ket' => 'nullable|string|max:1000',
                     'feedback' => 'nullable|string|max:1000',
                     'token' => 'nullable|string|max:10|exists:meetings,token'
                 ];
@@ -45,7 +45,7 @@ class PresenceRequest extends FormRequest
                     'status' => 'sometimes|in:Hadir,Izin,Sakit,Alpha',
                     'ket' => 'sometimes|string|max:255',
                     'feedback' => 'sometimes|string|max:1000',
-                    'token' => 'sometimes|string|max:10|exists:meetings,token'
+                    'token' => 'nullable|string|max:10|exists:meetings,token'
                 ];
             } break;
         }
