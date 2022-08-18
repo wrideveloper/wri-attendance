@@ -9,7 +9,7 @@ function showPresent() {
                     </div>
                     <div class="card card-rounded">
                         <h1 class="h5 mb-4">Masukkan Token</h1>
-                        <input type="text" class="form-control" id="token" name="token"
+                        <input type="text" class="form-control" id="token" name="token" maxlength = "10"
                             placeholder="Input Your Text in here" />
                     </div>
                     <div class="d-flex justify-content-end">
@@ -43,7 +43,7 @@ function showSick() {
                             placeholder="Input Your Text in here"></textarea>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-teal text-white px-5">Simpan</button>
+                        <button class="btn btn-teal text-white px-5" type="submit">Simpan</button>
                     </div>
     `);
 }

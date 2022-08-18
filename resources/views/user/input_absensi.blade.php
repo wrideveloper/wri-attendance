@@ -20,6 +20,9 @@
         <form method="POST" action="{{ route('presence.store') }}">
             @csrf
             <input type="hidden" id="topik" name="topik" value="{{ $meetings->topik }}">
+            <input type="hidden" id="nim" name="nim" value="">
+            <input type="hidden" id="meetings_id" name="meetings_id" value="">
+            <input type="hidden" id="presence_date" name="presence_date" value="">
             <div class="card card-rounded">
                 <h1 class="h5">Status</h1>
                 <div class="row justify-content-between text-md-center align-items-center">
@@ -38,11 +41,6 @@
                         <label for="sakit" class="color-warning-bold"><i class="fa-solid fa-briefcase-medical mx-3"></i>
                             <span>Sakit</span></label>
                     </div>
-                    @error('status')
-                        <div class="invalid-feedback" role="alert">
-                            {{ $message }}
-                        </div>
-                    @enderror
                 </div>
             </div>
             <div id="present"></div>

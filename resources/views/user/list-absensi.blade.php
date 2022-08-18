@@ -46,7 +46,7 @@
                                 <td class="text-center">{{ $presences->created_at->format('H:i:s') }} WIB</td>
                                 <td class="text-truncate">{{ substr_replace($presences->meetings->topik, "...", 25) }}</td>
                                 <td class="{{ $statusColor }} text-truncate">{{ $presences->status }}</td>
-                                @if ($presences->status != 'Hadir')
+                                @if ($presences->status === 'Hadir')
                                     <td class="text-center text-truncate">{{ substr_replace($presences->feedback, "...", 25) }}</td>
                                 @else
                                     <td class="text-center text-truncate">{{ substr_replace($presences->ket, "...", 25) }}</td>
