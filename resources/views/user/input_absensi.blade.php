@@ -12,17 +12,17 @@
             </div>
         @endif
         @php
-            $presence_date = Carbon\Carbon::now()->format('Y-m-d');
             $dates = Carbon\Carbon::now()->format('d M Y');
         @endphp
         <h1 class="h3 mb-4">Presensi Miniclass {{ $meetings->miniclass->miniclass_name }} - Pertemuan {{ $meetings->pertemuan }}</h1>
         <p class="mb-2"><strong>Tanggal</strong> : {{ $dates }}</p>
         <p class="mb-3"><strong>Topik</strong> : {{ $meetings->topik }}</p>
-        <form action="{{ route('presence.store') }}" method="POST">
+        <form method="POST" action="{{ route('presence.store') }}">
             @csrf
-            <input type="hidden" id="nim" name="nim" value="{{ Auth::user()->nim }}">
-            <input type="hidden" id="meetings_id" name="meetings_id" value="{{ $meetings->id }}">
-            <input type="hidden" id="presence_date" name="presence_date" value="{{ $presence_date }}">
+            <input type="hidden" id="topik" name="topik" value="{{ $meetings->topik }}">
+            <input type="hidden" id="nim" name="nim" value="">
+            <input type="hidden" id="meetings_id" name="meetings_id" value="">
+            <input type="hidden" id="presence_date" name="presence_date" value="">
             <div class="card card-rounded">
                 <h1 class="h5">Status</h1>
                 <div class="row justify-content-between text-md-center align-items-center">

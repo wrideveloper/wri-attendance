@@ -2,20 +2,16 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator as ValidationValidator;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
-class PresenceRequest extends FormRequest
-{
+class PresenceRequest extends FormRequest {
+
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -28,13 +24,13 @@ class PresenceRequest extends FormRequest
         switch($this->method()){
             case 'POST': {
                 return [
-                    'nim' => 'required|exists:users,nim',
-                    'meetings_id' => 'required|exists:meetings,id',
-                    'presence_date' => 'required|date',
+                    'nim' => 'nullable|exists:users,nim',
+                    'meetings_id' => 'nullable|exists:meetings,id',
+                    'presence_date' => 'nullable|date',
                     'status' => 'required|in:Hadir,Izin,Sakit,Alpha',
-                    'ket' => 'nullable|string|max:255',
-                    'feedback' => 'nullable|string|max:1000',
-                    'token' => 'nullable|string|max:10|exists:meetings,token'
+                    'ket' => 'nullable|string',
+                    'feedback' => 'nullable|string',
+                    'token' => 'nullable|string|max:10'
                 ];
             } break;
             case 'PUT' : {
@@ -43,9 +39,9 @@ class PresenceRequest extends FormRequest
                     'meetings_id' => 'required|exists:meetings,id',
                     'presence_date' => 'sometimes|date',
                     'status' => 'sometimes|in:Hadir,Izin,Sakit,Alpha',
-                    'ket' => 'sometimes|string|max:255',
-                    'feedback' => 'sometimes|string|max:1000',
-                    'token' => 'sometimes|string|max:10|exists:meetings,token'
+                    'ket' => 'nullable|string',
+                    'feedback' => 'nullable|string',
+                    'token' => 'nullable|string|max:10|exists:meetings,token'
                 ];
             } break;
         }

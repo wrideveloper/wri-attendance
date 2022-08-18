@@ -100,6 +100,7 @@ Route::group(['prefix' => 'kadiv', 'middleware' => ['auth']], function () {
 // Sisi User
 Route::resource('/presence', PresenceController::class)->middleware('auth');
 Route::get('/presence/{presence:nim}/{topik}', [ConfigMeetingController::class, 'showDetails'])->middleware('auth')->name('show-details');
+
 // Configurasi Meetings dan Presence dari sisi Admin
 Route::controller(ConfigMeetingController::class)->group(function () {
     Route::get('/presence/detail/{presence}', [ConfigMeetingController::class, 'detailPresence'])->name('presence-members');
