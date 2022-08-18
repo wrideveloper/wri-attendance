@@ -3,7 +3,7 @@
 @section('login-content')
     <div class="d-flex justify-content-center align-items-center vh-100 vw-100 position-relative">
         <div id="box" class="rounded-4" style="width: 36rem;">
-            <form action="/send-forpas-mail" method="post">
+            <form action="{{ route('send-forpas-email') }}" method="post">
                 @csrf
                 <div class="container">
                     <div class="col-12">

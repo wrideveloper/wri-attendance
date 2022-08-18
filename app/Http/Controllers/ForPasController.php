@@ -31,6 +31,7 @@ class ForPasController extends Controller
                 ]);
             }
             \Mail::to($user->email)->send(new \App\Mail\ForgotPasswordMail($user->name, $token));
+            return redirect('/')->with('ResetPassword', 'Permintaan ubah password berhasil, silahkan cek email anda');
         } else {
             return redirect('/');
         }
@@ -60,12 +61,9 @@ class ForPasController extends Controller
             DB::table('password_resets')->where('email', '=', $email)->update([
                 'token' => Str::random(16),
             ]);
-            return redirect('/');
-        }
-        else{
-            $request->validate([
-                'error' => 'required',
-            ]);
+            return redirect('/')->with('ResetPassword', 'Password berhasil diubah');
+        } else{
+            return redirect()->back()->with('ResetErrors', 'Password tidak sama');
         }
     }
 }

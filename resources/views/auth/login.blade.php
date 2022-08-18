@@ -49,6 +49,12 @@
             </div>
         </div>
     </div>
+    @if(session()->has('ResetPassword'))
+        <div class="alert alert-success alert-dismissible fade show py-3 px-3 position-fixed-alert" role="alert">
+            {{ session('ResetPassword') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
 
     @if (session()->has('LoginErrors'))
         <div class="alert alert-danger alert-dismissible fade show py-3 px-3 position-fixed-alert" role="alert">
