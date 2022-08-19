@@ -47,8 +47,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/forgot-password', function () {
     return view('auth.forgotpassword');
 })->name('forgot-password');
-Route::post('/send-forpas-mail', [ForPasController::class, 'forpas']);
-Route::post('/ganti-pass', [ForPasController::class, 'reset']);
+Route::post('/send-forpas-mail', [ForPasController::class, 'forpas'])->name('send-forpas-email');
+Route::post('/ganti-pass', [ForPasController::class, 'reset'])->name('post-reset-password');
 Route::get('/reset-password/{token}', [ForPasController::class, 'halaman_reset'])->name('reset-password');
 
 //
