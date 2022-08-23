@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Presence extends Model {
+class Presence extends Model
+{
     use HasFactory;
 
     protected $table = 'presences';
@@ -25,25 +25,28 @@ class Presence extends Model {
 
     protected $with = ['meetings', 'user'];
 
-    public function scopeFilter($query, array $filters){
-        $query->when($filters['search'] ?? false, function ($query, $search){
-            return $query->whereHas('user', function ($query) use ($search){
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            return $query->whereHas('user', function ($query) use ($search) {
                 $query->where('nim', 'like', "%{$search}%")
                     ->orWhere('name', 'like', "%{$search}%");
             })
-            ->orWhereHas('meetings', function ($query) use ($search){
-                $query->where('topik', 'like', "%{$search}%")
-                    ->orWhere('pertemuan', 'like', "%{$search}%")
-                    ->orWhere('tanggal', 'like', "%{$search}%");
-            });
+                ->orWhereHas('meetings', function ($query) use ($search) {
+                    $query->where('topik', 'like', "%{$search}%")
+                        ->orWhere('pertemuan', 'like', "%{$search}%")
+                        ->orWhere('tanggal', 'like', "%{$search}%");
+                });
         });
     }
 
-    public function getRouteKeyName() {
+    public function getRouteKeyName()
+    {
         return 'nim';
     }
 
-    public function meetings() {
+    public function meetings()
+    {
         return $this->belongsTo(Meetings::class);
     }
 
@@ -51,7 +54,8 @@ class Presence extends Model {
     //     return $this->belongsTo(Meetings::class);
     // }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class, 'nim', 'nim');
     }
 }
