@@ -3,23 +3,20 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use App\Models\User;
 use App\Models\Meetings;
 use App\Models\Presence;
-use App\Models\Miniclass;
-use App\Models\Generation;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PresenceRequest;
-use Illuminate\Http\Request;
-use App\Http\Requests\UpdatePresenceRequest;
 
-class PresenceController extends Controller {
+class PresenceController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         $presence = Presence::where('nim', Auth::user()->nim)->filter(request(['search']))->paginate(5)->withQueryString();
         return view('user.list-absensi', [
             'presence' => $presence,
@@ -32,7 +29,8 @@ class PresenceController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         return view('presence.create');
     }
 
@@ -42,7 +40,8 @@ class PresenceController extends Controller {
      * @param  \App\Http\Requests\StorePresenceRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PresenceRequest $request) {
+    public function store(PresenceRequest $request)
+    {
         $cekMeetings = Meetings::firstWhere('topik', request('topik'));
 
         $presence_date = Carbon::now()->format('Y-m-d');
@@ -53,19 +52,19 @@ class PresenceController extends Controller {
         $presence['presence_date'] = $presence_date;
         $presence['meetings_id'] = $cekMeetings->id;
 
-        if($presence['nim'] == null || $presence['meetings_id'] == null || $presence['presence_date'] == null) {
+        if ($presence['nim'] == null || $presence['meetings_id'] == null || $presence['presence_date'] == null) {
             return redirect()->back()->with('PresenceError', 'Data tidak boleh kosong');
         } else {
-            if($presence['status'] === 'Hadir') {
+            if ($presence['status'] === 'Hadir') {
                 $checkUser = Presence::where('nim', Auth::user()->nim)->where('token', $presence['token'])->first();
 
-                if($presence['token'] == $cekMeetings->token && $cekMeetings->end_time >= now() && !$checkUser && $cekMeetings->tanggal === $presence_date) {
+                if ($presence['token'] == $cekMeetings->token && $cekMeetings->end_time >= now() && !$checkUser && $cekMeetings->tanggal === $presence_date) {
                     Presence::create($presence);
                     return redirect()->route('dashboard')->with('success', 'Presensi berhasil');
                 } else {
                     return redirect()->with('PresenceError', 'Presensi error, silahkan cek kembali form anda');
                 }
-            } else if($cekMeetings->end_time >= now() && $presence['status'] !== 'Hadir' && $cekMeetings->tanggal === $presence_date) {
+            } else if ($cekMeetings->end_time >= now() && $presence['status'] !== 'Hadir' && $cekMeetings->tanggal === $presence_date) {
                 Presence::create($presence);
                 return redirect()->route('dashboard')->with('success', 'Presensi berhasil');
             } else {
@@ -80,11 +79,12 @@ class PresenceController extends Controller {
      * @param  \App\Models\Presence  $presence
      * @return \Illuminate\Http\Response
      */
-    public function show(Presence $presence){
+    public function show(Presence $presence)
+    {
         $presences = Presence::where('nim', Auth::user()->nim)
-                    ->whereHas('meetings', function($query) use ($presence){
-                        $query->where('topik', $presence->meetings->topik);
-                    })->first();
+            ->whereHas('meetings', function ($query) use ($presence) {
+                $query->where('topik', $presence->meetings->topik);
+            })->first();
         return view('admin.edit_absensi', [
             'presence' => $presences,
             'title' => 'Presensi',
@@ -97,7 +97,8 @@ class PresenceController extends Controller {
      * @param  \App\Models\Presence  $presence
      * @return \Illuminate\Http\Response
      */
-    public function edit(Presence $presence){
+    public function edit(Presence $presence)
+    {
         return view('admin.edit_absensi', [
             'presence' => $presence,
             'title' => 'Presensi'
@@ -111,7 +112,8 @@ class PresenceController extends Controller {
      * @param  \App\Models\Presence  $presence
      * @return \Illuminate\Http\Response
      */
-    public function update(PresenceRequest $request, Presence $presence) {
+    public function update(PresenceRequest $request, Presence $presence)
+    {
         $validated = $request->validated();
         Presence::where('nim', $presence->nim)->update($validated);
         return redirect()->route('presence.index')->with('success', 'Presence updated successfully.');
@@ -123,7 +125,8 @@ class PresenceController extends Controller {
      * @param  \App\Models\Presence  $presence
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Presence $presence) {
+    public function destroy(Presence $presence)
+    {
         Presence::destroy($presence->user->nim);
         return redirect()->route('presence.index')->with('success', 'Presence deleted successfully.');
     }

@@ -8,12 +8,13 @@ use App\Models\Presence;
 use App\Models\Miniclass;
 use App\Models\Generation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class ConfigMeetingController extends Controller {
+class ConfigMeetingController extends Controller
+{
 
     // Untuk melakukan post presence
-    public function postPresence(Request $request){
+    public function postPresence(Request $request)
+    {
         $validated = $request->validate([
             'miniclasses_id' => 'required|exists:miniclasses,id',
             'topik' => 'required|string|max:255',
@@ -28,25 +29,28 @@ class ConfigMeetingController extends Controller {
         return redirect()->route('dashboard.list-meetings')->with('success', 'Post Presensi berhasil');
     }
 
-    public function createMeetings() {
+    public function createMeetings()
+    {
         return view('dashboard.create-meetings');
     }
 
-    public function inputPresence($miniclass_name, $pertemuan, $topik){
+    public function inputPresence($miniclass_name, $pertemuan, $topik)
+    {
         $meeting = Meetings::where('pertemuan', $pertemuan)
-                ->where('topik', $topik)
-                ->whereHas('miniclass', function($query) use ($miniclass_name) {
-                    $query->where('miniclass_name', $miniclass_name);
-                })->first();
+            ->where('topik', $topik)
+            ->whereHas('miniclass', function ($query) use ($miniclass_name) {
+                $query->where('miniclass_name', $miniclass_name);
+            })->first();
         //dd($meeting);
-        return view('user.input_absensi',[
-            'meetings'=> $meeting,
+        return view('user.input_absensi', [
+            'meetings' => $meeting,
             'title' => 'Presensi'
         ]);
     }
 
     // Untuk melakukan updatepresence
-    public function updateMeetings(Request $request, Meetings $meetings) {
+    public function updateMeetings(Request $request, Meetings $meetings)
+    {
         $rule = [
             'miniclasses_id' => 'required|exists:miniclasses,id',
             'topik' => 'required|string|max:255',
@@ -62,7 +66,8 @@ class ConfigMeetingController extends Controller {
         return redirect()->route('dashboard.list-meetings')->with('success', 'Update Meeting berhasil');
     }
 
-    public function listPresence(Meetings $meetings){
+    public function listPresence(Meetings $meetings)
+    {
         $meeting = Meetings::where('token', $meetings->token)->first();
         $presence = Presence::where('meetings_id', $meeting->id)->filter(request(['search']))->paginate(5)->withQueryString();
         return view('kadiv.attendance_list', [
@@ -73,20 +78,23 @@ class ConfigMeetingController extends Controller {
     }
 
     // Hapus pertemuan
-    public function deleteMeetings(Meetings $meetings) {
+    public function deleteMeetings(Meetings $meetings)
+    {
         Meetings::where('token', $meetings->token)->delete();
         return redirect()->back()->with('success', 'Meetings berhasil dihapus!');
     }
 
     // Berisi list presence dari mahasiswa pada miniclass yang dipilih
-    public function checkPresence(Presence $presence) {
+    public function checkPresence(Presence $presence)
+    {
         return view('dashboard.check-presence', [
             'presence' => $presence,
         ]);
     }
 
     // Detail per anggota
-    public function detailPresence(Presence $presence) {
+    public function detailPresence(Presence $presence)
+    {
         $user = User::where('nim', $presence->nim)->first();
         $gen = Generation::where('id', $user->generations_id)->first();
         $mc = Miniclass::where('id', $user->miniclass_id)->first();
@@ -101,7 +109,8 @@ class ConfigMeetingController extends Controller {
         ]);
     }
 
-    public function show(Meetings $meeting) {
+    public function show(Meetings $meeting)
+    {
         $meetings = Meetings::where('token', $meeting->token)->firstOrFail();
         return view('kadiv.config-presensi', [
             'meetings' => $meetings,
@@ -110,7 +119,8 @@ class ConfigMeetingController extends Controller {
     }
 
     // Update dari masing-masing anggota
-    public function updatePresence(Request $request, Presence $presence) {
+    public function updatePresence(Request $request, Presence $presence)
+    {
         $rule = [
             'status' => 'required|',
         ];
@@ -120,17 +130,19 @@ class ConfigMeetingController extends Controller {
     }
 
     // Hapus Presesnce
-    public function deletePresence(Presence $presence) {
+    public function deletePresence(Presence $presence)
+    {
         Presence::where('id', $presence->id)->delete();
         return redirect()->route('dashboard.check-presence')->with('success', 'Presence deleted successfully.');
     }
 
     // Lihat detail presensi dari sisi user
-    public function showDetails(Presence $presence, $topik){
+    public function showDetails(Presence $presence, $topik)
+    {
         $presences = Presence::where('nim', $presence->nim)
-                    ->whereHas('meetings', function($query) use ($topik){
-                        $query->where('topik', $topik);
-                    })->first();
+            ->whereHas('meetings', function ($query) use ($topik) {
+                $query->where('topik', $topik);
+            })->first();
         return view('admin.edit_absensi', [
             'presence' => $presences,
             'title' => 'Presensi',

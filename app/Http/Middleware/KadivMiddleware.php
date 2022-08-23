@@ -16,12 +16,11 @@ class KadivMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $id=$request->route('id');
-        if(auth()->user()->roles_id!==2){
+        $id = $request->route('id');
+        if (auth()->user()->roles_id !== 2) {
             abort(403);
             return redirect('/user');
-        }
-        else if($id!==auth()->user()->id){
+        } else if ($id !== auth()->user()->id) {
             abort(403);
         }
         return $next($request);

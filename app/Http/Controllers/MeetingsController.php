@@ -4,35 +4,37 @@ namespace App\Http\Controllers;
 
 use \App\Models\Meetings;
 use App\Models\Miniclass;
-use \Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use \App\Http\Requests\MeetingsRequest;
 
-class MeetingsController extends Controller {
-        /**
+class MeetingsController extends Controller
+{
+    /**
      * Display a listing of the resource.
      *
      *
      */
-    public function index() {
-        if(Auth::user()->roles_id == 1) {
+    public function index()
+    {
+        if (Auth::user()->roles_id == 1) {
             $datas = Meetings::filter(request(['search']))
                 ->orderBy('tanggal', 'asc')
                 ->paginate(5)->withQueryString();
-        $title = 'List Pertemuan';
+            $title = 'List Pertemuan';
             return view('kadiv.list_pertemuan', compact('datas', 'title'));
-        } else if(Auth::user()->roles_id == 2) {
+        } else if (Auth::user()->roles_id == 2) {
 
             $datas = Meetings::where('miniclass_id', Auth::user()->miniclass_id)
                 ->filter(request(['search']))
                 ->orderBy('tanggal', 'asc')
                 ->paginate(5)->withQueryString();
-                $title = 'List Pertemuan';
+            $title = 'List Pertemuan';
             return view('kadiv.list_pertemuan', compact('datas', 'title'));
         }
     }
 
-    public function create() {
+    public function create()
+    {
         $miniclass = Miniclass::where('id', Auth::user()->miniclass_id)->first();
         return view('meetings.create', [
             'miniclass' => $miniclass,
@@ -40,10 +42,11 @@ class MeetingsController extends Controller {
         ]);
     }
 
-    public function edit(Meetings $meeting) {
+    public function edit(Meetings $meeting)
+    {
         $meetings = $meeting::where('token', $meeting->token)->first();
-        return view('kadiv.config-presensi',[
-            'meetings'=> $meetings,
+        return view('kadiv.config-presensi', [
+            'meetings' => $meetings,
             'title' => 'List Pertemuan'
         ]);
     }
@@ -53,12 +56,13 @@ class MeetingsController extends Controller {
      *
      *
      */
-    public function store(MeetingsRequest $request) {
+    public function store(MeetingsRequest $request)
+    {
         $data = $request->validated();
         $data['token'] = strtolower($data['token']);
         $checking = Meetings::where('token', $data['token'])->first();
 
-        if($checking) {
+        if ($checking) {
             return redirect()->back()->with('error', 'Token sudah digunakan');
         } else {
             Meetings::create($data);
@@ -76,7 +80,7 @@ class MeetingsController extends Controller {
     public function show(Meetings $meeting)
     {
         return view('kadiv.config-presensi', [
-            'meetings'=> $meeting,
+            'meetings' => $meeting,
             'title' => 'List Pertemuan'
         ]);
     }
