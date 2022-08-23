@@ -113,4 +113,5 @@ Route::controller(ConfigMeetingController::class)->group(function () {
 });
 
 // useless
+
 // Route::resource('/miniclass', MiniclassController::class);
