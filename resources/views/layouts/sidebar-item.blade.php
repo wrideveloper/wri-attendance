@@ -23,7 +23,7 @@
     </a>
 @endif
 <a class="list-group-item d-inline-block text-truncate {{ $title === 'Edit Profile' ? 'active' : '' }}"
-    href="/user/{{ auth()->user()->nim }}/edit">
+    href="{{ (Auth::user()->roles_id != 3) ? route('users.edit', auth()->user()->nim) : route('user.edit', auth()->user()->nim) }}">
     <i class="fa-solid fa-user-pen" style="padding-right: 14px;"></i>
     <span>Edit Profile</span></a>
 <a class="list-group-item d-inline-block text-truncate text-hover-red" href="#" data-bs-toggle="modal"

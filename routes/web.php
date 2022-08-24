@@ -53,8 +53,8 @@ Route::get(
 // end general route
 
 // User
-Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
-    Route::resource('/presence', PresenceController::class);
+Route::group(['prefix' => '', 'middleware' => ['auth', 'user']], function () {
+    Route::resource('/presence', PresenceController::class)->only(['index', 'show']);
     Route::get(
         '/presence/{miniclass_name}/pertemuan-{pertemuan}/{topik}',
         [ConfigMeetingController::class, 'inputPresence']
@@ -64,7 +64,7 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
 // end user
 
 // kadiv
-Route::group(['prefix' => 'kadiv', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'kadiv', 'middleware' => ['auth', 'kadiv']], function () {
     // meetings
     Route::resource('/meetings', MeetingsController::class);
     Route::get('/rekap-meeting/{meetings}', [ConfigMeetingController::class, 'listPresence'])->name('list-presence');
@@ -75,8 +75,13 @@ Route::group(['prefix' => 'kadiv', 'middleware' => ['auth']], function () {
 // end kadiv
 
 // admin
-Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
-    Route::resource('/user', UserController::class);
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
+    Route::resource('/user', UserController::class, [
+        'names' => [
+            'edit' => 'users.edit',
+            'update' => 'users.update',
+        ]
+    ]);
 
     // meetings
     Route::resource('/meetings', MeetingsController::class);
