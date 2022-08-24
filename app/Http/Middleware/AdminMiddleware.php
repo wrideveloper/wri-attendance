@@ -16,13 +16,12 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $id=$request->route('id');
-        if(auth()->user()->roles_id!==1){
-            abort(403);
-            return redirect('/user');
-        }
-        else if($id!==auth()->user()->id){
-            abort(403);
+        if ($request->expectsJson()) {
+            if (auth()->user()->roles_id !== 1) {
+                abort(401);
+                return redirect()->back()->with('AccessError', 'You are not authorized to access this page');
+            }
+            return redirect()->back()->with('AccessError', 'You are not authorized to access this page');
         }
         return $next($request);
     }

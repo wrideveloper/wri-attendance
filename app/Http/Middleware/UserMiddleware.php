@@ -17,16 +17,13 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!auth()->user()->roles_id >= 1 && !auth()->user()->roles_id <= 3) {
-            abort(403);
-            return redirect('/');
-        } else if(Route::currentRouteName()=='user.edit'){
-            $Uri =  request()->getRequestUri();
-            if($Uri !== '/user/'.auth()->user()->nim.'/edit') {
-                abort(403);
+        if ($request->expectsJson()) {
+            if (auth()->user()->roles_id !== 3) {
+                abort(401);
+                return redirect()->back()->with('AccessError', 'You are not authorized to access this page');
             }
+            return redirect()->back()->with('AccessError', 'You are not authorized to access this page');
         }
-
         return $next($request);
     }
 }
