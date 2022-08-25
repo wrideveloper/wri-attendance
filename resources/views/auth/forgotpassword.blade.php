@@ -8,7 +8,7 @@
                 <div class="container">
                     <div class="col-12">
                         <div class="row d-flex justify-content-center ">
-                            <img style="width: 50%;" src="{{ asset('img/image 1.png') }}" alt="">
+                            <img style="width: 50%;" src="{{ asset('img/image 1.png') }}" alt="wri polinema">
                         </div>
                         <div class="row">
                             <h5 class="align-content-center mt-2 d-flex justify-content-center">
@@ -22,8 +22,8 @@
                             </p>
                         </div>
                         <div class="row">
-                            <input type="email" class="pt-4 pb-4 px-6 input-login form-control p-2" id="email" name="email"
-                                placeholder="Email">
+                            <input type="email" class="pt-4 pb-4 px-6 input-login form-control p-2" id="email"
+                                name="email" placeholder="Email">
                         </div>
 
                         <div class="row">

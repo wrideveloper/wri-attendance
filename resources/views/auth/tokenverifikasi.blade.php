@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="col-12">
                     <div class="row d-flex justify-content-center ">
-                        <img style="width: 50%;" src="../../../public/img/image 1.png" alt="">
+                        <img style="width: 50%;" src="{{ asset('img/image 1.png') }}" alt="wri polinema">
                     </div>
                     <div class="row">
                         <p class="text-monospace align-content-center text-center justify-content-center">
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div id="garisVector" class="position-absolute">
-            <img src="../../../public/svg/line.svg" alt="">
+            <img src="{{ asset('svg/line.svg') }}" alt="wri polinema">
         </div>
     </div>
 @endsection

@@ -1,14 +1,16 @@
 @extends('layouts.master')
 @section('content')
     <div class="container-fluid pb-5 px-4">
-    <div class="container-fluid text-center" style="padding-right: 0px;padding-left: 0px;">
+        <div class="container-fluid text-center" style="padding-right: 0px;padding-left: 0px;">
             <div class="row align-items-center" id="atas">
-                <div class="col-1" >
+                <div class="col-1">
                     <div class="container" id="bgback" style="padding-right: 18px;">
                         @if (Auth::user()->roles_id == 1 || Auth::user()->roles_id == 2)
-                            <a href="{{ route('list-presence', $presence->meetings->token) }}" id="back"><i class="fa-solid fa-angle-left"></i></a>
+                            <a href="{{ route('list-presence', $presence->meetings->token) }}" id="back"><i
+                                    class="fa-solid fa-angle-left"></i></a>
                         @else
-                            <a href="{{ (Route::currentRouteName() == 'show-details') ? route('presence.index') : route('meetings.index') }}" id="back"><i class="fa-solid fa-angle-left"></i></a>
+                            <a href="{{ Route::currentRouteName() == 'show-details' ? route('presence.index') : route('meetings.index') }}"
+                                id="back"><i class="fa-solid fa-angle-left"></i></a>
                         @endif
                     </div>
                 </div>
@@ -16,9 +18,10 @@
                     <p id="pertemuan">Pertemuan {{ $presence->meetings->pertemuan }}</p>
                 </div>
                 <div class="col-1" style="width: auto;">
-                    <img src="{{ asset('img/Ellipse 30.png') }}" />
+                    <img src="{{ asset('img/Ellipse 30.png') }}" alt="wri polinema" />
                 </div>
-                <div class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4" style="padding-left: 0px;padding-right: 0px;padding-top:10px;">
+                <div class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4"
+                    style="padding-left: 0px;padding-right: 0px;padding-top:10px;">
                     <p id="nama">{{ $presence->user->name }}</p>
                 </div>
             </div>
@@ -26,7 +29,7 @@
 
         <div class="container-fluid p-5" id="content">
             <h1 id="nama">{{ $presence->user->name }}</h1>
-            <img src="{{ asset('img/Line 28.png') }}" id="line" />
+            <img src="{{ asset('img/Line 28.png') }}" id="line" alt="wri polinema" />
             <div class="row justify-content-between">
                 <div class="col-sm-12 col-md-12 col-lg-6">
                     <h5>DATA ANGGOTA</h5>
@@ -64,15 +67,23 @@
                             </div>
                             <div class="col-7 col-sm-7 col-md-7" id="isiabsen">
                                 @php
-                                    $statusColor = "";
-                                    if($presence->status === "Hadir") $statusColor = "text-teal";
-                                    elseif($presence->status === "Izin") $statusColor = "text-primary";
-                                    elseif($presence->status === "Sakit") $statusColor = "text-warning";
-                                    elseif($presence->status === "Alpha") $statusColor = "text-danger";
+                                    $statusColor = '';
+                                    if ($presence->status === 'Hadir') {
+                                        $statusColor = 'text-teal';
+                                    } elseif ($presence->status === 'Izin') {
+                                        $statusColor = 'text-primary';
+                                    } elseif ($presence->status === 'Sakit') {
+                                        $statusColor = 'text-warning';
+                                    } elseif ($presence->status === 'Alpha') {
+                                        $statusColor = 'text-danger';
+                                    }
                                 @endphp
                                 <p id="WaktuAbsen">{{ $presence->created_at->format('H:i:s') }} WIB</p>
-                                <select name="status" {{ (Route::currentRouteName() == 'detail-presence') ? '' : 'disabled' }} class="form-select" aria-label="Default select example" id="status">
-                                    <option class="{{ $statusColor }}" value="{{ $presence->status }}" id="{{$presence->status }}" selected>{{ $presence->status }}</option>
+                                <select name="status"
+                                    {{ Route::currentRouteName() == 'detail-presence' ? '' : 'disabled' }}
+                                    class="form-select" aria-label="Default select example" id="status">
+                                    <option class="{{ $statusColor }}" value="{{ $presence->status }}"
+                                        id="{{ $presence->status }}" selected>{{ $presence->status }}</option>
                                     <option value="Hadir" id="Hadir">Hadir</option>
                                     <option value="Izin" id="Izin">Izin</option>
                                     <option value="Sakit" id="Sakit">Sakit</option>
@@ -92,9 +103,11 @@
                             </div>
                             <div class="row justify-content-end">
                                 @if (Auth::user()->roles_id == 1 || Auth::user()->roles_id == 2)
-                                    <a href="{{ route('list-presence', $presence->meetings->token) }}" type="button" class="btn btn-light" id="backbutton">Back</a>
+                                    <a href="{{ route('list-presence', $presence->meetings->token) }}" type="button"
+                                        class="btn btn-light" id="backbutton">Back</a>
                                 @else
-                                    <a href="{{ (Route::currentRouteName() == 'show-details') ? route('presence.index') : route('meetings.index') }}" type="button" class="btn btn-light" id="backbutton">Back</a>
+                                    <a href="{{ Route::currentRouteName() == 'show-details' ? route('presence.index') : route('meetings.index') }}"
+                                        type="button" class="btn btn-light" id="backbutton">Back</a>
                                 @endif
                                 @if (Route::currentRouteName() == 'detail-presence')
                                     <button type="submit" class="btn btn-warning" id="updatebutton">Update</button>
