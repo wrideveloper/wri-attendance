@@ -21,14 +21,14 @@
                 <div class="d-flex justify-content-between">
                     <div>
                         <div class="position-fixed" style="width: 50%;">
-                            <img src="{{ asset('svg/Circle 6.svg') }}">
+                            <img src="{{ asset('svg/Circle 6.svg') }}" alt="wri polinema">
                         </div>
                         <div class="position-fixed">
-                            <img src="{{ asset('svg/Line 10 (Stroke).svg') }}" alt="">
+                            <img src="{{ asset('svg/Line 10 (Stroke).svg') }}" alt="wri polinema">
                         </div>
                     </div>
                     <div>
-                        <img src="{{ asset('svg/Circle 7.svg') }}">
+                        <img src="{{ asset('svg/Circle 7.svg') }}" alt="wri polinema">
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
 
                 </div>
                 <div>
-                    <img src="{{ asset('svg/Circle 8.svg') }}" alt="">
+                    <img src="{{ asset('svg/Circle 8.svg') }}" alt="wri polinema">
                 </div>
             </div>
         </div>
@@ -49,10 +49,10 @@
                     <div class="d-flex justify-content-between">
                         <div>
                             <div id="desainBawah" class="position-fixed" style="width: 10px;">
-                                <img id="ml_left" src="{{ asset('svg/titik estetik.svg') }}">
+                                <img id="ml_left" src="{{ asset('svg/titik estetik.svg') }}" alt="wri polinema">
                             </div>
                             <div class="position-fixed">
-                                <img id="circle3" src="{{ asset('svg/Circle 3.svg') }}" alt="">
+                                <img id="circle3" src="{{ asset('svg/Circle 3.svg') }}" alt="wri polinema">
                             </div>
                         </div>
                         <div>

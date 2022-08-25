@@ -15,7 +15,7 @@
                     <div class="col-12">
                         <input type="hidden" id="token" name="token" value="{{ $token }}">
                         <div class="row d-flex justify-content-center mb-2">
-                            <img style="width: 50%;" src="{{ asset('img/image 1.png') }}" alt="">
+                            <img style="width: 50%;" src="{{ asset('img/image 1.png') }}" alt="wri polinema">
                         </div>
                         <div class="row">
                             <h5 class=" align-content-center d-flex justify-content-center">
@@ -43,7 +43,7 @@
             </form>
         </div>
         <div id="garisVector" class="position-absolute">
-            <img src="{{ asset('svg/line.svg') }}" alt="">
+            <img src="{{ asset('svg/line.svg') }}" alt="wri polinema">
         </div>
     </div>
 @endsection
