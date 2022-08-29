@@ -73,7 +73,7 @@ class DashboardController extends Controller {
 
             // Menampilkan timeline, ada pengkondisian apabila sudah melakukan presensi maka timeline tidak muncul
             $timeline = Meetings::where('miniclass_id', Auth::user()->miniclass_id)
-                        ->whereDate('tanggal', '=', $currentDate)
+                        // ->whereDate('tanggal', '=', $currentDate)
                         ->where('end_time', '>=', $currentTime)
                         // Menampilkan timeline yang nim tersebut belum pernah melakukan presensi di meetings tersebut
                         ->whereNotExists(function ($query) {

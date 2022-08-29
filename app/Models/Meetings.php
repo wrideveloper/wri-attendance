@@ -22,6 +22,7 @@ class Meetings extends Model
     protected $fillable = [
         'miniclass_id',
         'topik',
+        'slug',
         'tanggal',
         'start_time',
         'end_time',

@@ -64,7 +64,7 @@
                     @foreach ($timeline as $item)
                         <div class="col-12 d-flex p-0">
                             <div class="col-8 d-flex flex-column p-0">
-                                <a href="{{ route('input.presence', [$item->miniclass->miniclass_name, $item->pertemuan, $item->topik]) }}" class="fw-bold text-dark text-decoration-none mb-3">
+                                <a href="{{ route('input.presence', [$item->miniclass->miniclass_name, $item->pertemuan, $item->slug]) }}" class="fw-bold text-dark text-decoration-none mb-3">
                                     Pertemuan {{$item->pertemuan}}
                                 </a>
                                 <p class="text-truncate">{{$item->topik}}</p>

@@ -15,6 +15,7 @@ class CreateMeetingsTable extends Migration {
             $table->id();
             $table->foreignId('miniclass_id')->constrained();
             $table->string('topik');
+            $table->string('slug');
             $table->date('tanggal');
             $table->time('start_time');
             $table->time('end_time');
