@@ -7,6 +7,7 @@ use App\Models\Meetings;
 use App\Models\Presence;
 use App\Models\Miniclass;
 use App\Models\Generation;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class ConfigMeetingController extends Controller
@@ -18,13 +19,14 @@ class ConfigMeetingController extends Controller
         $validated = $request->validate([
             'miniclasses_id' => 'required|exists:miniclasses,id',
             'topik' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255',
             'tanggal' => 'required|date',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i',
             'pertemuan' => 'required|integer',
             'token' => 'required|string|max:10',
         ]);
-
+        $validated['slug'] = Str::slug($validated['topik']);
         Meetings::create($validated);
         return redirect()->route('dashboard.list-meetings')->with('success', 'Post Presensi berhasil');
     }
@@ -34,10 +36,10 @@ class ConfigMeetingController extends Controller
         return view('dashboard.create-meetings');
     }
 
-    public function inputPresence($miniclass_name, $pertemuan, $topik)
+    public function inputPresence($miniclass_name, $pertemuan, $slug)
     {
         $meeting = Meetings::where('pertemuan', $pertemuan)
-            ->where('topik', $topik)
+            ->where('slug', $slug)
             ->whereHas('miniclass', function ($query) use ($miniclass_name) {
                 $query->where('miniclass_name', $miniclass_name);
             })->first();
@@ -54,6 +56,7 @@ class ConfigMeetingController extends Controller
         $rule = [
             'miniclasses_id' => 'required|exists:miniclasses,id',
             'topik' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255',
             'tanggal' => 'required|date',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i',
@@ -62,6 +65,7 @@ class ConfigMeetingController extends Controller
         ];
 
         $validated = $request->validate($rule);
+        $validated['slug'] = Str::slug($validated['topik']);
         Meetings::where('id', $meetings->id)->update($validated);
         return redirect()->route('dashboard.list-meetings')->with('success', 'Update Meeting berhasil');
     }
@@ -93,13 +97,17 @@ class ConfigMeetingController extends Controller
     }
 
     // Detail per anggota
-    public function detailPresence(Presence $presence)
-    {
-        $user = User::where('nim', $presence->nim)->first();
+    public function detailPresence($nim, $slug) {
+        $presences = Presence::where('nim', $nim)
+                    ->whereHas('meetings', function ($query) use ($slug) {
+                        $query->where('slug', $slug);
+                    })
+                    ->first();
+        $user = User::where('nim', $nim)->first();
         $gen = Generation::where('id', $user->generations_id)->first();
         $mc = Miniclass::where('id', $user->miniclass_id)->first();
         return view('admin.edit_absensi', [
-            'presence' => $presence,
+            'presence' => $presences,
             'user' => $user,
             'gen' => $gen,
             'mc' => $mc,

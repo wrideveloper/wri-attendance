@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use \App\Models\Meetings;
 use App\Models\Miniclass;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use \App\Http\Requests\MeetingsRequest;
 
@@ -60,6 +61,7 @@ class MeetingsController extends Controller
     {
         $data = $request->validated();
         $data['token'] = strtolower($data['token']);
+        $data['slug'] = Str::slug($data['topik']);
         $checking = Meetings::where('token', $data['token'])->first();
 
         if ($checking) {
@@ -92,8 +94,9 @@ class MeetingsController extends Controller
      */
     public function update(MeetingsRequest $request, Meetings $meeting)
     {
-        $newData = $request->validated();
-        $datas = Meetings::where('token', $meeting->token)->update($newData);
+        $data = $request->validated();
+        $data['slug'] = Str::slug($data['topik']);
+        $datas = Meetings::where('token', $meeting->token)->update($data);
         //ddd($datas);
         return redirect()->route('dashboard')->with('success', 'Data meetings berhasil diubah');
     }

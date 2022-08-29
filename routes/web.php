@@ -45,9 +45,9 @@ Route::get('/reset-password/{token}', [ForPasController::class, 'halaman_reset']
 // general route
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 Route::resource('/presence', PresenceController::class)->middleware('auth');
-Route::get('/presence/{presence:nim}/{topik}', [ConfigMeetingController::class, 'showDetails'])->middleware('auth')->name('show-details');
+Route::get('/presence/{presence:nim}/{slug}', [ConfigMeetingController::class, 'showDetails'])->middleware('auth')->name('show-details');
 Route::get(
-    '/presence/{miniclass_name}/pertemuan-{pertemuan}/{topik}',
+    '/presence/{miniclass_name}/pertemuan-{pertemuan}/{slug}',
     [ConfigMeetingController::class, 'inputPresence']
 )->name('input.presence')->middleware('auth');
 // end general route
@@ -56,7 +56,7 @@ Route::get(
 Route::group(['prefix' => '', 'middleware' => ['auth', 'user']], function () {
     Route::resource('/presence', PresenceController::class)->only(['index', 'show']);
     Route::get(
-        '/presence/{miniclass_name}/pertemuan-{pertemuan}/{topik}',
+        '/presence/{miniclass_name}/pertemuan-{pertemuan}/{slug}',
         [ConfigMeetingController::class, 'inputPresence']
     )->name('input.presence');
     Route::resource('/user', UserController::class)->only(['edit', 'update']);
@@ -64,18 +64,18 @@ Route::group(['prefix' => '', 'middleware' => ['auth', 'user']], function () {
 // end user
 
 // kadiv
-Route::group(['prefix' => 'kadiv', 'middleware' => ['auth', 'kadiv']], function () {
+Route::group(['prefix' => 'administrator', 'middleware' => ['admin', 'kadiv']], function () {
     // meetings
     Route::resource('/meetings', MeetingsController::class);
     Route::get('/rekap-meeting/{meetings}', [ConfigMeetingController::class, 'listPresence'])->name('list-presence');
     Route::get('/check-meetings/detail/{meetings}', [ConfigMeetingController::class, 'show'])->name('detail-meetings');
-    Route::get('/check-presence/detail/{presence}', [ConfigMeetingController::class, 'detailPresence'])->name('detail-presence');
+    Route::get('/check-presence/detail/{nim}/{slug}', [ConfigMeetingController::class, 'detailPresence'])->name('detail-presence');
     Route::delete('/delete-meetings/{meetings}', [ConfigMeetingController::class, 'deleteMeetings'])->name('delete-meetings');
 });
 // end kadiv
 
 // admin
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::resource('/user', UserController::class, [
         'names' => [
             'edit' => 'users.edit',
@@ -83,12 +83,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         ]
     ]);
 
-    // meetings
-    Route::resource('/meetings', MeetingsController::class);
-    Route::get('/rekap-meeting/{meetings}', [ConfigMeetingController::class, 'listPresence'])->name('list-presence');
-    Route::get('/check-meetings/detail/{meetings}', [ConfigMeetingController::class, 'show'])->name('detail-meetings');
-    Route::get('/check-presence/detail/{presence}', [ConfigMeetingController::class, 'detailPresence'])->name('detail-presence');
-    Route::delete('/delete-meetings/{meetings}', [ConfigMeetingController::class, 'deleteMeetings'])->name('delete-meetings');
+    // // meetings
+    // Route::resource('/meetings', MeetingsController::class);
+    // Route::get('/rekap-meeting/{meetings}', [ConfigMeetingController::class, 'listPresence'])->name('list-presence');
+    // Route::get('/check-meetings/detail/{meetings}', [ConfigMeetingController::class, 'show'])->name('detail-meetings');
+    // Route::get('/check-presence/detail/{presence}', [ConfigMeetingController::class, 'detailPresence'])->name('detail-presence');
+    // Route::delete('/delete-meetings/{meetings}', [ConfigMeetingController::class, 'deleteMeetings'])->name('delete-meetings');
 });
 // end admin
 

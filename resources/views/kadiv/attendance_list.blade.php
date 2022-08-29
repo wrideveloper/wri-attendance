@@ -56,7 +56,7 @@
                                             class="badge bg-danger">{{ $presences->status }}</span></td>
                                 @endif
                                 <td class="d-flex justify-content-center">
-                                    <a href="{{ route('detail-presence', $presences->nim) }}"
+                                    <a href="{{ route('detail-presence', [$presences->nim, $presences->meetings->slug]) }}"
                                         class="ms-3 col-md-8 btn btn-primary text-light my-2">Detail</a>
                                 </td>
                             </tr>

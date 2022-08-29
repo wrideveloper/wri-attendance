@@ -26,6 +26,7 @@ class MeetingsRequest extends FormRequest {
                 return [
                     'miniclass_id' => 'required|exists:miniclasses,id',
                     'topik' => 'required|string|max:255',
+                    'slug' => 'nullable|string|max:255',
                     'tanggal' => 'required|date',
                     'start_time' => 'required',
                     'end_time' => 'required',
@@ -37,6 +38,7 @@ class MeetingsRequest extends FormRequest {
                 return [
                     'miniclass_id' => 'required|exists:miniclasses,id',
                     'topik' => 'required|string|max:255',
+                    'slug' => 'nullable|string|max:255',
                     'tanggal' => 'required|date',
                     'start_time' => 'required',
                     'end_time' => 'required',
