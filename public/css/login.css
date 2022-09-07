@@ -51,14 +51,25 @@ a {
     right: 10px;
     z-index: 2;
 }
+@media (max-width: 767.98px) {
+    #circle3 {
+        width: 60%;
+    }
 
-@media (min-width: 375px) and (max-width: 812px) {
+    #ml_left {
+        margin-left: 40px;
+    }
+
+    #box {
+        padding: 2rem;
+        max-width: 24rem;
+    }
     #garisVector {
         display: none;
     }
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
     #circle3 {
         width: 60%;
     }
@@ -73,7 +84,22 @@ a {
     }
 }
 
-@media (min-width: 768px) and (max-width: 1920px) {
+@media (min-width: 1200px) {
+    #circle3 {
+        width: 100%;
+    }
+
+    #ml_left {
+        margin-left: 120px;
+    }
+
+    #box {
+        padding: 4rem 8rem;
+        max-width: 36rem;
+    }
+}
+
+@media (min-width: 1400px) {
     #circle3 {
         width: 100%;
     }
