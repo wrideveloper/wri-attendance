@@ -5,18 +5,17 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Meetings;
 use App\Models\Presence;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PresenceRequest;
 
-class PresenceController extends Controller
-{
+class PresenceController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         $presence = Presence::where('nim', Auth::user()->nim)->filter(request(['search']))->paginate(5)->withQueryString();
         return view('user.list-absensi', [
             'presence' => $presence,
@@ -29,8 +28,7 @@ class PresenceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         return view('presence.create');
     }
 
@@ -40,8 +38,7 @@ class PresenceController extends Controller
      * @param  \App\Http\Requests\StorePresenceRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PresenceRequest $request)
-    {
+    public function store(PresenceRequest $request) {
         $cekMeetings = Meetings::firstWhere('topik', request('topik'));
 
         $presence_date = Carbon::now()->format('Y-m-d');
@@ -62,13 +59,13 @@ class PresenceController extends Controller
                     Presence::create($presence);
                     return redirect()->route('dashboard')->with('success', 'Presensi berhasil');
                 } else {
-                    return redirect()->with('PresenceError', 'Presensi error, silahkan cek kembali form anda');
+                    return redirect()->back()->with('PresenceError', 'Presensi error, silahkan cek kembali form anda');
                 }
             } else if ($cekMeetings->end_time >= now() && $presence['status'] !== 'Hadir' && $cekMeetings->tanggal === $presence_date) {
                 Presence::create($presence);
                 return redirect()->route('dashboard')->with('success', 'Presensi berhasil');
             } else {
-                return redirect()->with('PresenceError', 'Presensi error, silahkan cek kembali form anda');
+                return redirect()->back()->with('PresenceError', 'Presensi error, silahkan cek kembali form anda');
             }
         }
     }
@@ -79,8 +76,7 @@ class PresenceController extends Controller
      * @param  \App\Models\Presence  $presence
      * @return \Illuminate\Http\Response
      */
-    public function show(Presence $presence)
-    {
+    public function show(Presence $presence) {
         $presences = Presence::where('nim', Auth::user()->nim)
             ->whereHas('meetings', function ($query) use ($presence) {
                 $query->where('topik', $presence->meetings->topik);
@@ -97,8 +93,7 @@ class PresenceController extends Controller
      * @param  \App\Models\Presence  $presence
      * @return \Illuminate\Http\Response
      */
-    public function edit(Presence $presence)
-    {
+    public function edit(Presence $presence) {
         return view('admin.edit_absensi', [
             'presence' => $presence,
             'title' => 'Presensi'
@@ -112,11 +107,15 @@ class PresenceController extends Controller
      * @param  \App\Models\Presence  $presence
      * @return \Illuminate\Http\Response
      */
-    public function update(PresenceRequest $request, Presence $presence)
-    {
+    public function update(PresenceRequest $request, $presence) {
         $validated = $request->validated();
-        Presence::where('nim', $presence->nim)->update($validated);
-        return redirect()->route('presence.index')->with('success', 'Presence updated successfully.');
+        $updated = Presence::where('id', $presence)->update($validated);
+        if($updated){
+            return redirect()->back()->with('meetings.index')->with('UpdateSuccess', 'Presensi berhasil diupdate!');
+        } else {
+            return redirect()->back()->with('UpdateFailed', 'Presensi error, silahkan cek kembali form anda');
+        }
+
     }
 
     /**
@@ -125,9 +124,9 @@ class PresenceController extends Controller
      * @param  \App\Models\Presence  $presence
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Presence $presence)
-    {
+    public function destroy(Presence $presence) {
         Presence::destroy($presence->user->nim);
         return redirect()->route('presence.index')->with('success', 'Presence deleted successfully.');
     }
 }
+

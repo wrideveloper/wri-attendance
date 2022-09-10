@@ -35,13 +35,7 @@ class PresenceRequest extends FormRequest {
             } break;
             case 'PUT' : {
                 return [
-                    'nim' => 'required|exists:users,nim',
-                    'meetings_id' => 'required|exists:meetings,id',
-                    'presence_date' => 'sometimes|date',
-                    'status' => 'sometimes|in:Hadir,Izin,Sakit,Alpha',
-                    'ket' => 'nullable|string',
-                    'feedback' => 'nullable|string',
-                    'token' => 'nullable|string|max:10|exists:meetings,token'
+                    'status' => 'required',
                 ];
             } break;
         }
