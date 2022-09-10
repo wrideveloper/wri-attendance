@@ -1,5 +1,17 @@
 @extends('layouts.master')
 @section('content')
+    @if (session()->has('UpdateSuccess'))
+        <div class="alert alert-success alert-dismissible fade show py-3 px-3 position-fixed-alert mx-3" role="alert">
+            {{ session('UpdateSuccess') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    @if (session()->has('UpdateFailed'))
+        <div class="alert alert-danger alert-dismissible fade show py-3 px-3 position-fixed-alert mx-3" role="alert">
+            {{ session('UpdateFailed') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="container-fluid pb-5 px-4">
         <div class="container-fluid text-center" style="padding-right: 0px;padding-left: 0px;">
             <div class="row align-items-center" id="atas">
@@ -20,8 +32,8 @@
                 <div class="col-1" style="width: auto;">
                     <img src="{{ asset('img/Ellipse 30.png') }}" alt="wri polinema" />
                 </div>
-                <div class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4"
-                    style="padding-left: 0px;padding-right: 0px;padding-top:10px;">
+                <div class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4 mx-2"
+                    style="padding-left: 0px;padding-right: 0px;padding-top:10px; width: auto;">
                     <p id="nama">{{ $presence->user->name }}</p>
                 </div>
             </div>
@@ -51,15 +63,19 @@
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-6">
-                    <h5>DATA ABSEN</h5>
-                    <form method="POST" action="{{ route('presence.update', $presence->nim) }}">
-                        @csrf
+                    <h5>DATA PRESENSI</h5>
+                    @if (Auth::user()->roles_id == 1 || Auth::user()->roles_id == 2)
+                        <form method="POST" action="{{ route('presences.update', $presence->id) }}">
                         @method('PUT')
+                        @csrf
+                    @else
+                        <form method="POST" action="#">
+                    @endif
                         <div class="row justify-content-start">
                             <div class="col-5 col-sm-5 col-md-5">
-                                <p>Waktu Absen</p>
+                                <p>Waktu Presensi</p>
                                 <p>Status</p>
-                                @if ($presence->status != 'Hadir')
+                                @if ($presence->status !== 'Hadir')
                                     <p>Keterangan</p>
                                 @else
                                     <p>Feedback</p>
@@ -109,7 +125,7 @@
                                     <a href="{{ Route::currentRouteName() == 'show-details' ? route('presence.index') : route('meetings.index') }}"
                                         type="button" class="btn btn-light" id="backbutton">Back</a>
                                 @endif
-                                @if (Route::currentRouteName() == 'detail-presence')
+                                @if (Route::currentRouteName() === 'detail-presence')
                                     <button type="submit" class="btn btn-warning" id="updatebutton">Update</button>
                                 @endif
                             </div>

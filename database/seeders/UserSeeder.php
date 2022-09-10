@@ -19,20 +19,6 @@ class UserSeeder extends Seeder
         $user = [
             [
                 'miniclass_id' => 1,
-                'roles_id' => 3,
-                'generations_id' => 2,
-                'name' => 'Ilham Sinatrio Gumelar',
-                'email' => 'sgumelar20@gmail.com',
-                'phone' => '081234567890',
-                'nim' => '2031710031',
-                'email_verified_at' => now(),
-                'password' => Hash::make('2031710031'),
-                'remember_token' => Str::random(10),
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'miniclass_id' => 1,
                 'roles_id' => 1,
                 'generations_id' => 2,
                 'name' => 'User Admin',

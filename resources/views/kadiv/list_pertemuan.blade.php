@@ -1,5 +1,11 @@
 @extends('layouts.master')
 @section('content')
+    @if (session()->has('UpdateSuccess'))
+        <div class="alert alert-success alert-dismissible fade show py-3 px-3 position-fixed-alert mx-3" role="alert">
+            {{ session('UpdateSuccess') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="container-fluid px-5">
         <div class="row align-items-center mt-3 justify-content-between gap-5">
             <div class="col-auto row gap-3">

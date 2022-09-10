@@ -118,8 +118,8 @@
             </form>
         </div>
 
-        <div id="garisVector" class="position-absolute">
+        {{-- <div id="garisVector" class="position-absolute">
             <img src="{{ asset('svg/line.svg') }}" alt="wri polinema">
-        </div>
+        </div> --}}
     </div>
 @endsection

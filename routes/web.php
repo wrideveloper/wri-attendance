@@ -67,6 +67,11 @@ Route::group(['prefix' => '', 'middleware' => ['auth', 'user']], function () {
 Route::group(['prefix' => 'administrator', 'middleware' => ['admin', 'kadiv']], function () {
     // meetings
     Route::resource('/meetings', MeetingsController::class);
+    Route::resource('/presence', PresenceController::class, [
+        'names' => [
+            'update' => 'presences.update'
+        ]
+    ]);
     Route::get('/rekap-meeting/{meetings}', [ConfigMeetingController::class, 'listPresence'])->name('list-presence');
     Route::get('/check-meetings/detail/{meetings}', [ConfigMeetingController::class, 'show'])->name('detail-meetings');
     Route::get('/check-presence/detail/{nim}/{slug}', [ConfigMeetingController::class, 'detailPresence'])->name('detail-presence');
@@ -75,7 +80,7 @@ Route::group(['prefix' => 'administrator', 'middleware' => ['admin', 'kadiv']], 
 // end kadiv
 
 // admin
-Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
+Route::group(['prefix' => 'administrator/admin', 'middleware' => ['admin']], function () {
     Route::resource('/user', UserController::class, [
         'names' => [
             'edit' => 'users.edit',
