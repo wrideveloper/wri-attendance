@@ -9,6 +9,8 @@ use App\Models\Miniclass;
 use App\Models\Generation;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ConfigMeetingController extends Controller
 {
@@ -72,11 +74,24 @@ class ConfigMeetingController extends Controller
 
     public function listPresence(Meetings $meetings)
     {
-        $meeting = Meetings::where('token', $meetings->token)->first();
-        $presence = Presence::where('meetings_id', $meeting->id)->filter(request(['search']))->paginate(5)->withQueryString();
+        // $presence = Presence::where('meetings_id', $meeting->id)->filter(request(['search']))->paginate(5)->withQueryString();
+        $presence = DB::table('users')
+                    ->select('users.name AS name', 'presences.status AS status', 'meetings.topik AS topik',
+                    'presences.created_at AS created_at', 'presences.nim AS nim', 'meetings.slug AS slug')
+                    ->leftJoin('presences', function($join) use ($meetings){
+                        $join->on('users.nim', 'presences.nim')
+                                ->where('presences.meetings_id', $meetings->id);
+                    })
+                    ->leftJoin('meetings', function($join) use ($meetings){
+                        $join->on('meetings.miniclass_id', 'presences.meetings_id')
+                        ->where('meetings.miniclass_id', $meetings->miniclass_id);
+                    })
+                    ->where('users.miniclass_id', $meetings->miniclass_id)
+                    ->where('users.roles_id', 3)
+                    ->orderBy('presences.created_at','DESC')->paginate(5);
         return view('kadiv.attendance_list', [
             'presence' => $presence,
-            'meeting' => $meeting,
+            'meeting' => $meetings,
             'title' => 'List Pertemuan'
         ]);
     }

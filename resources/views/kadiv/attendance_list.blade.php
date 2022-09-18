@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid px-4">
-        <div class="row g-3 align-items-center mt-5 justify-content-between">
+        <div class="row g-3 align-items-center mt-3 justify-content-between">
             <span class="row col-auto">
                 <div class="col-auto">
                     <a href="{{ route('meetings.index') }}" class="badge border-0 bg-white px-2 rounded-3 shadow-cs"><i
@@ -17,7 +17,7 @@
                     <span class="row col-auto">
                         <div class="col-auto">
                             <input type="search" value="{{ request('search') }}" id="search" class="form-control"
-                                name="search" placeholder="Cari">
+                                name="search" placeholder="Cari Anggota">
                         </div>
                         <div class="col-auto">
                             <button type="submit" class="btn btn-primary px-4">Cari</button>
@@ -39,9 +39,16 @@
                     @if ($presence->count() > 0)
                         @foreach ($presence as $presences)
                             <tr class="align-middle">
-                                <td class="align-middle">{{ $loop->iteration }}</td>
-                                <td class="align-middle">{{ $presences->user->name }}</td>
-                                <td class="align-middle">{{ $presences->created_at->format('H:i:s') }} WIB</td>
+                                <td class="align-middle">{{ $presence->firstItem() + $loop->index }}</td>
+                                <td class="align-middle">{{ $presences->name }}</td>
+                                @php
+                                    $time = Carbon\Carbon::parse($presences->created_at)->format('H:i:s', 'Asia/Jakarta');
+                                @endphp
+                                @if(is_null($presences->created_at))
+                                    <td class="align-middle">-</td>
+                                @else
+                                    <td class="align-middle">{{ $time }} WIB</td>
+                                @endif
                                 @if ($presences->status === 'Hadir')
                                     <td class="text-truncate align-middle"><span
                                             class="badge bg-success">{{ $presences->status }}</span></td>
@@ -51,13 +58,19 @@
                                 @elseif ($presences->status === 'Sakit')
                                     <td class="text-truncate align-middle"><span
                                             class="badge bg-info text-dark">{{ $presences->status }}</span></td>
+                                @elseif (is_null($presences->status))
+                                    <td class="text-truncate align-middle"><span
+                                            class="badge bg-secondary">Belum Hadir</span></td>
                                 @elseif ($presences->status === 'Alpha')
                                     <td class="text-truncate align-middle"><span
-                                            class="badge bg-danger">{{ $presences->status }}</span></td>
+                                            class="badge bg-danger">Alpha</span></td>
                                 @endif
                                 <td class="d-flex justify-content-center">
-                                    <a href="{{ route('detail-presence', [$presences->nim, $presences->meetings->slug]) }}"
-                                        class="ms-3 col-md-8 btn btn-primary text-light my-2">Detail</a>
+                                    @if(is_null($presences->nim) || is_null($presences->slug))
+                                        <a href="#" class="ms-3 col-md-8 btn btn-primary text-light my-2 disabled">Detail</a>
+                                    @else
+                                        <a href="{{ route('detail-presence', [$presences->nim, $presences->slug]) }}" class="ms-3 col-md-8 btn btn-primary text-light my-2">Detail</a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
