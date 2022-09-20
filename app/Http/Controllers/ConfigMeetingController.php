@@ -89,6 +89,26 @@ class ConfigMeetingController extends Controller
                     ->where('users.miniclass_id', $meetings->miniclass_id)
                     ->where('users.roles_id', 3)
                     ->orderBy('presences.created_at','DESC')->paginate(5);
+
+        if(request('search')){
+            $presence = DB::table('users')
+                    ->select('users.name AS name', 'presences.status AS status', 'meetings.topik AS topik',
+                    'presences.created_at AS created_at', 'presences.nim AS nim', 'meetings.slug AS slug')
+                    ->leftJoin('presences', function($join) use ($meetings){
+                        $join->on('users.nim', 'presences.nim')
+                                ->where('presences.meetings_id', $meetings->id);
+                    })
+                    ->leftJoin('meetings', function($join) use ($meetings){
+                        $join->on('meetings.miniclass_id', 'presences.meetings_id')
+                        ->where('meetings.miniclass_id', $meetings->miniclass_id);
+                    })
+                    ->where('users.miniclass_id', $meetings->miniclass_id)
+                    ->where('users.roles_id', 3)
+                    ->where('presences.nim', 'like', "%". request('search') ."%")
+                    ->orWhere('users.name', 'like', "%". request('search') ."%")
+                    ->orderBy('presences.created_at','DESC')->paginate(5);
+        }
+
         return view('kadiv.attendance_list', [
             'presence' => $presence,
             'meeting' => $meetings,

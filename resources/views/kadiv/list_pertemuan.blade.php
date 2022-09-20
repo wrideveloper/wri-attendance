@@ -23,7 +23,7 @@
                     <span class="row col-auto">
                         <div class="col-auto">
                             <input value="{{ request('search') }}" type="search" id="search" class="form-control"
-                                name="search" placeholder="Search">
+                                name="search" placeholder="Cari Pertemuan Miniclass">
                         </div>
                         <div class="col-auto">
                             <button type="submit" class="btn btn-primary">Cari</button>
