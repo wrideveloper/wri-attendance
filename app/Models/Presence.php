@@ -22,7 +22,10 @@ class Presence extends Model
         'created_at',
         'updated_at'
     ];
-
+    protected $dates = [
+        'created_at',
+        'updated_at'
+    ];
     protected $with = ['meetings', 'user'];
 
     public function scopeFilter($query, array $filters)
