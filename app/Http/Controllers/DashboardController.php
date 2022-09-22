@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller {
 
     public function index() {
-        if (auth()->user()->roles->roles_name === 'Admin') {
+        if (auth()->user()->roles_id == 1) {
             $title = 'Dashboard';
             // ADMIN
             $users = User::count();
@@ -26,7 +26,7 @@ class DashboardController extends Controller {
                 'miniclass',
                 'title'
             ));
-        } else if (auth()->user()->roles->roles_name === 'Kadiv') {
+        } else if (auth()->user()->roles_id == 2) {
             $user = User::find(auth()->user()->id);
             $role = $user->roles->roles_name;
             $title = 'Dashboard';
@@ -61,7 +61,7 @@ class DashboardController extends Controller {
                 'prosentase_alpha',
                 'title'
             ));
-        } else if(auth()->user()->roles->roles_name === 'Members') {
+        } else if(auth()->user()->roles_id == 3) {
             $user = User::find(auth()->user()->id);
             $role = $user->roles->roles_name;
             $title = 'Dashboard';

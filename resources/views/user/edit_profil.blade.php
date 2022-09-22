@@ -54,13 +54,15 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group mb-3 position-relative">
-                <label for="password" class="form-label fs-5">Password</label>
-                <input id="password" name="password" type="password" class="form-control"
-                    placeholder="Input your password" autocomplete="">
-                <button type="button" class="btn border-0 position-absolute bottom-0 end-0"
-                    cs-show-password="password"><i class="fa-solid fa-eye-slash"></i></button>
-            </div>
+            @if(Auth::user()->email === $user->email)
+                <div class="form-group mb-3 position-relative">
+                    <label for="password" class="form-label fs-5">Password</label>
+                    <input id="password" name="password" type="password" class="form-control"
+                        placeholder="Input your password" autocomplete="">
+                    <button type="button" class="btn border-0 position-absolute bottom-0 end-0"
+                        cs-show-password="password"><i class="fa-solid fa-eye-slash"></i></button>
+                </div>
+            @endif
             <div class="row justify-content-end">
                 <a type="button" href="{{ ((Auth::user()->roles_id == 1) && ($user->nim != Auth::user()->nim)) ? route('user.index') : route('dashboard') }}" class="btn btn-light" id="backbutton">Kembali</a>
                 <button class="btn btn-teal text-light px-5" type="submit" id="updatebutton">Simpan</button>

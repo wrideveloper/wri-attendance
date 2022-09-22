@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Meetings;
 use App\Models\Presence;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PresenceRequest;
 
@@ -16,7 +17,39 @@ class PresenceController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $presence = Presence::where('nim', Auth::user()->nim)->filter(request(['search']))->paginate(5)->withQueryString();
+        // $presence = Presence::where('nim', Auth::user()->nim)->filter(request(['search']))->paginate(5)->withQueryString();
+        $presence = DB::table('meetings')
+                    ->select('meetings.miniclass_id', 'meetings.pertemuan AS pertemuan', 'meetings.slug AS slug',
+                    'meetings.topik AS topik', 'meetings.tanggal AS tanggal', 'meetings.token', 'presences.token',
+                    'presences.nim AS nim', 'presences.status AS status', 'presences.created_at AS created_at',
+                    'presences.ket AS ket', 'presences.feedback AS feedback')
+                    ->leftJoin('presences', function($join){
+                        $join->on('meetings.token', 'presences.token');
+                    })
+                    ->leftJoin('users', function($Join) {
+                        $Join->on('meetings.miniclass_id', 'users.miniclass_id');
+                    })
+                    ->where('meetings.miniclass_id', Auth::user()->miniclass_id)
+                    ->where('users.nim', Auth::user()->nim)
+                    ->orderBy('presences.created_at','DESC')->paginate(5);
+
+            if(request('search')){
+                $presence = DB::table('meetings')
+                    ->select('meetings.miniclass_id', 'meetings.pertemuan AS pertemuan', 'meetings.slug AS slug',
+                    'meetings.topik AS topik', 'meetings.tanggal AS tanggal', 'meetings.token', 'presences.token',
+                    'presences.nim AS nim', 'presences.status AS status', 'presences.created_at AS created_at',
+                    'presences.ket AS ket', 'presences.feedback AS feedback')
+                    ->leftJoin('presences', function($join){
+                        $join->on('meetings.token', 'presences.token');
+                    })
+                    ->leftJoin('users', function($Join) {
+                        $Join->on('meetings.miniclass_id', 'users.miniclass_id');
+                    })
+                    ->where('meetings.miniclass_id', Auth::user()->miniclass_id)
+                    ->where('users.nim', Auth::user()->nim)
+                    ->where('meetings.topik', 'like', '%'.request('search').'%')
+                    ->orderBy('presences.created_at','DESC')->paginate(5);
+            }
         return view('user.list-absensi', [
             'presence' => $presence,
             'title' => 'Presensi'
