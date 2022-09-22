@@ -180,11 +180,11 @@ class ConfigMeetingController extends Controller
     }
 
     // Lihat detail presensi dari sisi user
-    public function showDetails(Presence $presence, $topik)
+    public function showDetails(Presence $presence, $slug)
     {
         $presences = Presence::where('nim', $presence->nim)
-            ->whereHas('meetings', function ($query) use ($topik) {
-                $query->where('topik', $topik);
+            ->whereHas('meetings', function ($query) use ($slug) {
+                $query->where('slug', $slug);
             })->first();
         return view('admin.edit_absensi', [
             'presence' => $presences,

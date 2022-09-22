@@ -10,7 +10,7 @@
                 <form class="d-flex" action="{{ route('presence.index') }}">
                     <span class="row col-auto">
                         <div class="col-auto">
-                            <input value="{{ request('search') }}" type="search" id="search" class="form-control" name="search">
+                            <input value="{{ request('search') }}" placeholder="Cari Miniclass Meetings" type="search" id="search" class="form-control" name="search">
                         </div>
                         <div class="col-auto">
                             <button type="submit" class="btn btn-primary">Cari</button>
@@ -41,17 +41,25 @@
                                 elseif($presences->status === "Alpha") $statusColor = "text-danger";
                             @endphp
                             <tr class="align-middle border-custom-none">
-                                <td>{{ $presences->meetings->pertemuan }}</td>
-                                <td class="text-center">{{ $presences->created_at->format('d M Y') }}</td>
-                                <td class="text-center">{{ $presences->created_at->format('H:i:s') }} WIB</td>
-                                <td class="text-truncate">{{ substr_replace($presences->meetings->topik, "...", 25) }}</td>
-                                <td class="{{ $statusColor }} text-truncate">{{ $presences->status }}</td>
+                                <td>{{ $presences->pertemuan }}</td>
+                                <td class="text-center">{{ Carbon\Carbon::parse($presences->created_at)->format('d M Y') }}</td>
+                                <td class="text-center">{{ Carbon\Carbon::parse($presences->created_at)->format('H:i:s') }} WIB</td>
+                                <td class="text-truncate">{{ substr_replace($presences->topik, "...", 25) }}</td>
+                                @if(is_null($presences->status) || $presences->status === "Alpha")
+                                    <td class="text-danger text-truncate">Tidak Hadir / Alpha</td>
+                                @else
+                                    <td class="{{ $statusColor }} text-truncate">{{ $presences->status }}</td>
+                                @endif
                                 @if ($presences->status === 'Hadir')
                                     <td class="text-center text-truncate">{{ substr_replace($presences->feedback, "...", 25) }}</td>
                                 @else
                                     <td class="text-center text-truncate">{{ substr_replace($presences->ket, "...", 25) }}</td>
                                 @endif
-                                <td><a class="btn w-100 btn-warning text-light fw-bold" href="{{ route('show-details', [$presences->nim, $presences->meetings->topik]) }}">Pilih</a></td>
+                                @if(is_null($presences->nim) || is_null($presences->slug))
+                                    <td><a class="btn w-100 btn-warning text-light fw-bold disabled" href="#">Pilih</a></td>
+                                @else
+                                    <td><a class="btn w-100 btn-warning text-light fw-bold" href="{{ route('show-details', [$presences->nim, $presences->slug]) }}">Pilih</a></td>
+                                @endif
                             </tr>
                         @endforeach
                     @else

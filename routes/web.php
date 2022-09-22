@@ -69,7 +69,8 @@ Route::group(['prefix' => 'administrator', 'middleware' => ['admin', 'kadiv']], 
     Route::resource('/meetings', MeetingsController::class);
     Route::resource('/presence', PresenceController::class, [
         'names' => [
-            'update' => 'presences.update'
+            'update' => 'presences.update',
+            'index' => 'presences.index'
         ]
     ]);
     Route::get('/rekap-meeting/{meetings}', [ConfigMeetingController::class, 'listPresence'])->name('list-presence');

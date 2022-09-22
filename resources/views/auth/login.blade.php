@@ -82,7 +82,7 @@
                     <div class="row">
                         <h5 style="font-size: 24px; margin-top: 27px;"
                             class=" align-content-center d-flex justify-content-center">
-                            Sistem Absensi WRI
+                            Sistem Presensi WRI
                         </h5>
                     </div>
                     <div class="row">
