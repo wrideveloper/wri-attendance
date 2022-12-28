@@ -17,7 +17,7 @@
             <div class="form-group mb-3">
                 <label for="email" class="form-label fs-5">Email</label>
                 <input name="email" id="email" type="email" class="form-control" placeholder="Input your email"
-                    value="{{ old('name', $user->email) }}" required>
+                    value="{{ old('email', $user->email) }}" required>
             </div>
             @if (Auth::user()->roles_id == 1)
                 <div class="form-group mb-3">
