@@ -112,8 +112,6 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $validated = $request->validate([
-            'miniclass_id' => 'required',
-            'generations_id' => 'required',
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'sometimes',
