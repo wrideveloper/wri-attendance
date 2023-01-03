@@ -4,9 +4,9 @@
     <div class="row p-md-4 p-1">
         <div class="col-md-12">
             <div class="title d-flex align-items-center mb-2">
-                <div class="back rounded p-2 d-flex justify-content-center align-items-center me-3">
-                    <a href="{{ route('meetings.index') }}" class="text-decoration-none fas fa-chevron-left text-muted"></a>
-                </div>
+                <a href="{{ route('meetings.index') }}" class="text-decoration-none text-muted back rounded p-2 d-flex justify-content-center align-items-center me-3">
+                    <span  class=" fas fa-chevron-left "></span>
+                </a>
                 <h5>Pertemuan ke {{ $meetings->pertemuan }} - Miniclass {{ $meetings->miniclass->miniclass_name }}</h5>
             </div>
             <form class="update-jadwal form rounded p-5" action="{{ route('meetings.update', $meetings->token) }}" method="POST">
