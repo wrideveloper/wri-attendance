@@ -17,7 +17,7 @@
                     <div class="form-group mb-md-5 mb-4">
                         <label for="topik" class="form-label fs-6">Topik</label>
                         <input value="{{ old('topik') }}" type="text"
-                            class="form-control @error('topik') is-invalid @enderror" placeholder="Input Your Text in here"
+                            class="form-control @error('topik') is-invalid @enderror" placeholder=" Mau membahas apa hari ini?"
                             name="topik">
                         @error('topik')
                             <span class="invalid-feedback" role="alert">
@@ -81,7 +81,7 @@
                                 <label for="token" class="form-label fs-6">Token</label>
                                 <input value="{{ old('token') }}" type="text"
                                     class="@error('token') is-invalid @enderror form-control"
-                                    placeholder="Input Your Text in here" name="token">
+                                    placeholder="Masukkan kode token" name="token">
                                 <button type="button" class="btn btn-outline-secondary mt-2" id="generateToken"> <i
                                         class="fas fa-sync-alt"></i> Generate Token</button>
                                 @error('token')
@@ -109,7 +109,7 @@
         const generateToken = document.getElementById('generateToken')
         generateToken.addEventListener('click', () => {
             const topik = document.querySelector('input[name="topik"]').value || 'topik'
-            const token = Math.random().toString(36).substring(2, 8) + topik.substring(0, 3) + Math.random().toString(36).substring(2, 6);
+            const token = Math.random().toString(36).substring(2, 6) + topik.substring(0, 2) + Math.random().toString(36).substring(2, 6);
             document.querySelector('input[name="token"]').value = token
         })
         controlBodyBackgroundColor()
