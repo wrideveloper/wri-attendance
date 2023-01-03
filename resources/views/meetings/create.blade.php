@@ -82,6 +82,8 @@
                                 <input value="{{ old('token') }}" type="text"
                                     class="@error('token') is-invalid @enderror form-control"
                                     placeholder="Input Your Text in here" name="token">
+                                <button type="button" class="btn btn-outline-secondary mt-2" id="generateToken"> <i
+                                        class="fas fa-sync-alt"></i> Generate Token</button>
                                 @error('token')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -104,9 +106,16 @@
 
 @section('overrideScript')
     <script>
+        const generateToken = document.getElementById('generateToken')
+        generateToken.addEventListener('click', () => {
+            const topik = document.querySelector('input[name="topik"]').value || 'topik'
+            const token = Math.random().toString(36).substring(2, 8) + topik.substring(0, 3) + Math.random().toString(36).substring(2, 6);
+            document.querySelector('input[name="token"]').value = token
+        })
         controlBodyBackgroundColor()
         controlPasswordVisibility()
         controlConfirmationModal()
+
     </script>
 @endsection
 @endsection
