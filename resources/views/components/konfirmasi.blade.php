@@ -13,7 +13,8 @@
     </div>
 </div>
 
-@if ($errors->isEmpty())
+{{-- sebenere kode di bawah ini ngga bakal kepake soalnya kalo berhasil langsung diredirect, cc mas ilham sama mas dani mungkin bisa dibantu debugging --}}
+@if ($errors->isEmpty() && session('success'))
     <div id="terkonfirmasi" class="modal fade" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content py-5">
