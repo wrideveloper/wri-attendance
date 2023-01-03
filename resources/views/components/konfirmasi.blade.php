@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body p-5">
-                <h6 class="text-secondary fw-light text-center">{{$text}}</h6>
+                <h6 class="text-secondary fw-light text-center">{{ $text }}</h6>
                 <div class="d-flex justify-content-around mt-4">
                     <button id="batal" type="button" class="btn btn-outline-secondary"
                         data-bs-dismiss="modal">Tidak</button>
@@ -12,15 +12,18 @@
         </div>
     </div>
 </div>
-<div id="terkonfirmasi" class="modal fade" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content py-5">
-            <div class="modal-body">
-                <div class="d-flex flex-column justify-content between align-items-center">
-                    <h1><i class="fa-solid fa-circle-check text-teal"></i></h1>
-                    <h6 class="mt-3 text-secondary fw-normal">Data berhasil disimpan!</h6>
+
+@if ($errors->isEmpty())
+    <div id="terkonfirmasi" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content py-5">
+                <div class="modal-body">
+                    <div class="d-flex flex-column justify-content between align-items-center">
+                        <h1><i class="fa-solid fa-circle-check text-teal"></i></h1>
+                        <h6 class="mt-3 text-secondary fw-normal"> {{ $text }} </h6>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+@endif

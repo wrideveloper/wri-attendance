@@ -19,7 +19,9 @@ class MeetingsController extends Controller
     {
         if (Auth::user()->roles_id == 1) {
             $datas = Meetings::filter(request(['search']))
-                ->orderBy('tanggal', 'asc')
+                ->orderBy('tanggal', 'desc')
+                // alasannya diganti ke desc karena di halaman kadiv, pertemuan yang paling baru akan muncul di atas
+                // kalo asc nanti bingung kalo ada pertemuan yang baru
                 ->paginate(5)->withQueryString();
             $title = 'List Pertemuan';
             return view('kadiv.list_pertemuan', compact('datas', 'title'));
@@ -70,6 +72,7 @@ class MeetingsController extends Controller
             Meetings::create($data);
             return redirect()->route('dashboard')->with('success', 'Pertemuan berhasil ditambahkan');
         }
+
     }
 
 
