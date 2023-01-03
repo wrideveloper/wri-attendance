@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-auto">
                     <a class="btn btn-teal text-light w-sm-100" href="{{ route('meetings.create') }}">
-                        Tambah
+                        <i class="fa-regular fa-plus"></i> Pertemuan Baru
                     </a>
                 </div>
             </div>
