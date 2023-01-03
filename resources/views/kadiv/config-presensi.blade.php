@@ -54,7 +54,8 @@
                         </div>
                         <div class="form-group mb-md-5 mb-4 col-lg-4 col-md-12 col-12">
                             <label for="token" class="form-label fs-6">Token</label>
-                            <input value="{{ $meetings->token }}" {{ (Route::currentRouteName() == 'meetings.show') ? 'disabled' : '' }} type="text" class="@error('token') is-invalid @enderror form-control" placeholder="Input Your Text in here" name="token">
+                            <input value="{{ $meetings->token }}" {{ (Route::currentRouteName() == 'meetings.show') ? 'disabled' : '' }} type="text" class="@error('token') is-invalid @enderror form-control" placeholder="Input Your Text in here" name="token" readonly>
+                            {{-- Token diberi readonly agar tidak bisa diubah + aman --}}
                             @error('token')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
